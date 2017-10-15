@@ -1,0 +1,8 @@
+C:\Users\Ignacio\Desktop\ExamenProgramacion\TraductorJerga\TraductorJerga\bin\Debug\TraductorJerga.exe.config
+C:\Users\Ignacio\Desktop\ExamenProgramacion\TraductorJerga\TraductorJerga\bin\Debug\jerga.txt
+C:\Users\Ignacio\Desktop\ExamenProgramacion\TraductorJerga\TraductorJerga\bin\Debug\texto.txt
+C:\Users\Ignacio\Desktop\ExamenProgramacion\TraductorJerga\TraductorJerga\bin\Debug\TraductorJerga.exe
+C:\Users\Ignacio\Desktop\ExamenProgramacion\TraductorJerga\TraductorJerga\bin\Debug\TraductorJerga.pdb
+C:\Users\Ignacio\Desktop\ExamenProgramacion\TraductorJerga\TraductorJerga\obj\Debug\TraductorJerga.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\ExamenProgramacion\TraductorJerga\TraductorJerga\obj\Debug\TraductorJerga.exe
+C:\Users\Ignacio\Desktop\ExamenProgramacion\TraductorJerga\TraductorJerga\obj\Debug\TraductorJerga.pdb

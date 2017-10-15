@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ftpmanager.FXMLDocumentController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="42.0" prefWidth="600.0" spacing="10.0">
+         <children>
+            <Label text="Server:" />
+            <TextField fx:id="tfServer" prefHeight="25.0" prefWidth="130.0" />
+            <Label text="User:" />
+            <TextField fx:id="tfUser" prefHeight="25.0" prefWidth="117.0" />
+            <Label text="Pass:" />
+            <TextField fx:id="tfPass" prefHeight="25.0" prefWidth="116.0" />
+            <Button fx:id="bConnect" mnemonicParsing="false" onAction="#onClick_Connect" text="Connect" />
+         </children>
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </HBox>
+      <Label fx:id="lInfo" text="-">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <HBox prefHeight="337.0" prefWidth="600.0">
+         <children>
+            <ListView fx:id="lwContent" onMouseClicked="#onMouseClick" prefHeight="100.0" prefWidth="419.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" top="5.0" />
+               </HBox.margin>
+            </ListView>
+            <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="162.0" spacing="20.0">
+               <children>
+                  <Button fx:id="bUpload" mnemonicParsing="false" onAction="#onClick_Upload" text="Upload" />
+                  <Button fx:id="bDownloadEnter" mnemonicParsing="false" onAction="#onClick_DownloadEnter" text="Download / Enter" />
+                  <Button fx:id="bGoUp" mnemonicParsing="false" onAction="#onClick_goUp" text="Go up" />
+                  <Button fx:id="bDelete" mnemonicParsing="false" onAction="#onClick_Delete" text="Delete" />
+                  <Button fx:id="bDisconnect" mnemonicParsing="false" onAction="#onClick_bDisconnect" text="Disconnect" />
+               </children>
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

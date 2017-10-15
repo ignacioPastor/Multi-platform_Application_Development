@@ -1,0 +1,6 @@
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\SaludoColor\SaludoColor\bin\Debug\SaludoColor.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\SaludoColor\SaludoColor\bin\Debug\SaludoColor.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\SaludoColor\SaludoColor\bin\Debug\SaludoColor.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\SaludoColor\SaludoColor\obj\Debug\SaludoColor.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\SaludoColor\SaludoColor\obj\Debug\SaludoColor.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\SaludoColor\SaludoColor\obj\Debug\SaludoColor.pdb

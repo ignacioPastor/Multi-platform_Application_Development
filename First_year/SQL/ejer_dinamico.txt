@@ -1,0 +1,71 @@
+ejer dinamico
+
+
+declare
+cadena varchar2(10000);
+emple empleados%rowtype;
+BEGIN
+/*
+cadena := 'select * into emple.dni, empmle.nombre, emple.antiguedad, 
+            emple.experiencia, emple.dni_supervisor 
+            from empleados where dni = '||'001';
+*/
+cadena := 'select 2 from dual';
+    execute immediate cadena;
+  --  dbms_output.put_line(emple.dni||emple.nombre||emple.antiguedad||
+    --emple.experiencia||emple.dni_supervisor);
+end;
+
+--------------------------------------------------------------------------
+
+
+/*
+Muestra los empleados cuyo nombre no empiece por M, o que tengan una 
+antiguedad de más de tres años y su supervisor sea 001. Pero no queremos
+que se muestren bajo ningún concepto los empleados cuyo nombre
+tenga menos de 15 caracteres (si nombre es doble contamos el espacio
+entre palabras también como carácter
+*/
+empleados
+create or replace procedure dinamico (vDni varchar2, vNombre varchar2,
+            vAntiguedad number, vExperiencia varchar2,
+            vDniSupervisor varchar2) is
+cadena varchar2(1000);
+conector varchar2(10) := '';
+emple empleados%rowtype;
+BEGIN
+cadena := 'select * into emple.dni, empmle.nombre, emple.antiguedad, 
+            emple.experiencia, emple.dni_supervisor 
+            from empleados where ';
+    IF vDni is null and vNombre is null and vAntiguedad is null
+        and vExperiencia is null and vDniSupervisor is null THEN
+        raise_application_error(-20200, 'Todos los parámetros son nulos');
+    END IF;
+    IF vDni is not null THEN
+        cadena := cadena||' dni = '||vDni||' ';
+        conector := ' and ';
+    END IF;
+    IF vNombre is not null THEN
+        cadena := cadena||conector||' nombre = '||vNombre||' ';
+        conector := ' and ';
+    END IF;
+    IF vAntiguedad is not null THEN
+        cadena := cadena||conector||' antiguedad = '||vAntiguedad||' ';
+        conector := ' and ';
+    END IF;
+    IF vExperiencia is not null THEN
+        cadena := cadena||conector||' experiencia = '||vExperiencia||' ';
+        conector := ' and  ';
+    END IF;
+    IF vDniSupervisor is not null THEN
+        cadena := cadena||conector||' dni_supervisor = '||vDniSupervisor||' ';
+    END IF;
+    
+    execute immediate cadena;
+    dbms_output.put_line(emple.dni||emple.nombre||emple.antiguedad||
+        emple.experiencia||emple.dni_supervisor);
+END;
+
+begin
+   dinamico('001', null, null, null, null); 
+end;

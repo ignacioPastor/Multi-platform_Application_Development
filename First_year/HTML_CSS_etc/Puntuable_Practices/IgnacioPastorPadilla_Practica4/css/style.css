@@ -1,0 +1,48 @@
+/* Ignacio Pastor Padilla - Practica 4 Lenguaje de Marcas */
+
+body{
+	width: 1028px;
+	margin: 10px auto;
+	background: url(../img/fondo.png);
+	background-size:cover;
+}
+
+form{
+	/* width: 100px; */
+	/* height: 100px; */
+	margin : 100px 400px;
+	
+}
+
+label{
+	display: block;
+	font-weight: bold;
+	font-size: 15pt;
+	margin: 10px;
+}
+div input{
+	height: 25px;
+	width: 200px;
+	border: 1px solid black;
+}
+
+#enviar{
+	margin-top: 60px;
+	margin-left: 10px;
+}
+fieldset{
+	border-color: black;
+	padding: 50px;
+	background: url(../img/textura.jpeg) repeat;
+}
+.error{
+	color: black;
+	padding: 12px;
+	border: 5px solid #D81714;
+	background-color: white;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	background: url(../img/tex2.jpeg) repeat;
+}

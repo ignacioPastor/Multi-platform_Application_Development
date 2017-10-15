@@ -1,0 +1,84 @@
+P5, Parte 2. Ignacio Pastor Padilla
+
+Test 01_1. BubbleSort con lista aleatoria: 3.027792
+Se ha ordenado correctamente
+Se han contado 13560 Swaps y 499500 comparaciones
+Test 01_2. BubbleSort con lista ordenada: 2.167351
+Se ha ordenado correctamente
+Se han contado 0 Swaps y 499500 comparaciones
+Test 01_3. BubbleSort con lista de todos inversamente ordenada: 2.065997
+Se ha ordenado correctamente
+Se han contado 1498500 Swaps y 499500 comparaciones
+Test 01_4. BubbleSort con lista de todos los elementos iguales: 1.677259
+Se ha ordenado correctamente
+Se han contado 0 Swaps y 499500 comparaciones
+
+Test 02_1. SelectionSort con lista aleatoria: 1.800852
+Se ha ordenado correctamente
+Se han contado 4480 Swaps y 499500 comparaciones
+Test 02_2. SelectionSort con lista ordenada: 2.057444
+Se ha ordenado correctamente
+Se han contado 0 Swaps y 499500 comparaciones
+Test 02_3. SelectionSort con lista inversamente ordenada: 3.623941
+Se ha ordenado correctamente
+Se han contado 251500 Swaps y 499500 comparaciones
+Test 02_4. SelectionSort con lista de todos los elementos iguales: 3.555516
+Se ha ordenado correctamente
+Se han contado 0 Swaps y 499500 comparaciones
+
+Test 03_1. InsertionSort con lista aleatoria: 0.24804
+Se ha ordenado correctamente
+Se han contado 233507 Swaps y 231509 comparaciones
+Test 03_2. InsertionSort con lista ordenada: 0.086386
+Se ha ordenado correctamente
+Se han contado 1998 Swaps y 0 comparaciones
+Test 03_3. InsertionSort con lista inversamente ordenada: 0.024377
+Se ha ordenado correctamente
+Se han contado 501498 Swaps y 499500 comparaciones
+Test 03_4. InsertionSort con lista de todos los elementos iguales: 0.017534
+Se ha ordenado correctamente
+Se han contado 1998 Swaps y 0 comparaciones
+
+Test 04_1. QuickSort con lista aleatoria: 8.56E-4
+Se ha ordenado correctamente
+Se han contado 11499 Swaps, 11566 comparaciones y 690 llamadas a función
+Test 04_2. QuickSort con lista ordenada: 8.56E-4
+Se ha ordenado correctamente
+Se han contado 1533 Swaps, 10031 comparaciones y 510 llamadas a función
+Test 04_3. QuickSort con lista inversamente ordenada: 8.56E-4
+Se ha ordenado correctamente
+Se han contado 3030 Swaps, 10038 comparaciones y 510 llamadas a función
+Test 04_4. QuickSort con lista de todos los elementos iguales: 0.001283
+Se ha ordenado correctamente
+Se han contado 13644 Swaps, 10118 comparaciones y 510 llamadas a función
+
+Test 05_1. MergeSort con lista aleatoria: 1.856446
+Se ha ordenado correctamente
+Se han contado 0 Swaps, 11975 comparaciones y 2997 llamadas a función
+Test 05_2. MergeSort con lista ordenada: 1.946254
+Se ha ordenado correctamente
+Se han contado 0 Swaps, 11975 comparaciones y 2997 llamadas a función
+Test 05_3. MergeSort con lista inversamente ordenada: 1.882961
+Se ha ordenado correctamente
+Se han contado 0 Swaps, 11975 comparaciones y 2997 llamadas a función
+Test 05_4. MergeSort con lista de todos los elementos iguales: 1.969348
+Se ha ordenado correctamente
+Se han contado 0 Swaps, 11975 comparaciones y 2997 llamadas a función
+
+Test 06_1. BinarySearch con lista aleatoria: 0.002566
+Se han contado 20 Swaps y 20 comparaciones
+Test 06_2. BinarySearch con lista ordenada: 0.002139
+Se han contado 19 Swaps y 20 comparaciones
+Test 06_3. BinarySearch con lista inversamente: 0.002566
+Se han contado 19 Swaps y 20 comparaciones
+Test 06_4. BinarySearch con lista de todos los elementos iguales: 0.002994
+Se han contado 20 Swaps y 20 comparaciones
+
+Test 07_1. SecuencialSearch con lista aleatoria: 0.455024
+Se han contado 0 Swaps y 1000 comparaciones
+Test 07_2. SecuencialSearch con lista ordenada: 0.094084
+Se han contado 0 Swaps y 1000 comparaciones
+Test 07_3. SecuencialSearch con lista inversamente: 0.001711
+Se han contado 0 Swaps y 1 comparaciones
+Test 07_4. SecuencialSearch con lista de todos los elementos iguales: 0.100499
+Se han contado 0 Swaps y 1000 comparaciones

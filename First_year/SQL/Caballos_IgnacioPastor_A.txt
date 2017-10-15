@@ -1,0 +1,580 @@
+--Caballos_IgnacioPastor_A
+
+--------------------------------------------------------------------------------------------
+--DLL
+create table caballos(
+    codcaballo varchar2(4) not null,
+    nombre varchar2(20),
+    peso number(3),
+    fechanacimiento date,
+    propietario varchar2(25),
+    nacionalidad varchar2(20),
+constraint pk_caballos primary key (codcaballo),
+constraint ck_caballos_peso
+    check(peso between 240 and 300),
+constraint ck_caballos_fechanacimiento
+    check(to_char(fechanacimiento, 'yyyy') > 2000),
+constraint ck_caballos_nombre
+    check(nombre is not null)
+);
+
+
+create table carreras(
+    codcarrera varchar2(4) not null,
+    fechahora date,
+    nombre varchar2(20),
+    importepremio number(6),
+    apuestalimite number(7,2),
+constraint pk_carreras primary key (codcarrera),
+constraint ck_carreras_fechahora
+    check(to_number(to_char(fechahora, 'hh24mm')) between 900 and 1430),
+constraint ck_carreras_apuestalimite
+    check(apuestalimite < 20000)
+);
+
+create table participaciones(
+    codcaballo varchar2(4) not null,
+    codcarrera varchar2(4),
+    dorsal number(2),
+    jockey varchar2(20),
+    posicionfinal number(2),
+constraint pk_participaciones primary key (codcaballo, codcarrera),
+constraint fk_particip_caballos foreign key (codcaballo)
+    references caballos (codcaballo),
+constraint fk_particip_carreras foreign key (codcarrera)
+    references carreras (codcarrera),
+constraint ck_participaciones_dorsal
+    check(dorsal is not null),
+constraint ck_participaciones_jockey
+    check(jockey is not null),
+constraint ck_participaciones_posfinal
+    check(posicionfinal > 0)
+);
+
+
+
+create table clientes(
+    dnicliente varchar2(10) not null,
+    nombre varchar2(20),
+    nacionalidad varchar2(20),
+constraint pk_clientes primary key (dnicliente)
+);
+
+
+create table apuestas(
+    dnicliente varchar2(10) not null,
+    codcaballo varchar2(4) not null,
+    codcarrera varchar2(4) not null,
+    importe number(6) default 300,
+    tantoporuno number(6,2),
+constraint pk_apuestas primary key (dnicliente, codcaballo, codcarrera),
+constraint fk_apuestas_clientes foreign key (dnicliente)
+    references clientes (dnicliente),
+constraint fk_apuestas_caballos foreign key (codcaballo)
+    references caballos (codcaballo),
+constraint fk_apuestas_carreras foreign key (codcarrera)
+    references carreras (codcarrera),
+constraint ck_apuestas_tantoporuno
+    check(tantoporuno > 1),
+constraint ck_apuestas_importe
+    check(importe is not null)
+);
+
+
+-----------------------------------------------------------------------------------------
+--INSERTS
+
+-- Caballos
+
+INSERT INTO caballos (codcaballo, nombre, peso, fechanacimiento, propietario, nacionalidad)
+VALUES('1','Ariza',245,'03/06/2004','Sir Archibald Bradley','Británica');
+INSERT INTO caballos (codcaballo, nombre, peso, fechanacimiento, propietario, nacionalidad)
+VALUES('2','Duncan De Ran',267,'02/07/2006','Lali Montijo','Española');
+INSERT INTO caballos (codcaballo, nombre, peso, fechanacimiento, propietario, nacionalidad)
+VALUES('3','Giraldilla',241,'03/10/2005','Ali Rahid','Árabe');
+INSERT INTO caballos (codcaballo, nombre, peso, fechanacimiento, propietario, nacionalidad)
+VALUES('4','Danirrah',287,'12/11/2004','John Smith','Británica');
+INSERT INTO caballos (codcaballo, nombre, peso, fechanacimiento, propietario, nacionalidad)
+VALUES('5','Persicus',275,'03/10/2004','Ali Rahid','Española');
+INSERT INTO caballos (codcaballo, nombre, peso, fechanacimiento, propietario, nacionalidad)
+VALUES('6','Mia''s Choice',250,'07/07/2005','Miriam Belluci', 'Británica');
+INSERT INTO caballos (codcaballo, nombre, peso, fechanacimiento, propietario, nacionalidad)
+VALUES('7','Comanche Trail',296,'22/11/2005','John Smith', 'Británica');
+INSERT INTO caballos (codcaballo, nombre, peso, fechanacimiento, propietario, nacionalidad)
+VALUES('8','Chulapo',260,'10/07/2006','Lali Montijo','Española');
+INSERT INTO caballos (codcaballo, nombre, peso, fechanacimiento, propietario, nacionalidad)
+VALUES('9','Bucefalo',260,'10/01/2001','Alejandro Magno','Macedonia');
+
+
+-- Carreras
+
+ALTER SESSION SET NLS_DATE_FORMAT='DD/MM/YYYY HH24:MI';
+
+INSERT INTO carreras(codcarrera, fechahora, importepremio, apuestalimite)
+VALUES('C1', '12/07/2009 09:30',50000, 2000);
+INSERT INTO carreras(codcarrera, fechahora, importepremio, apuestalimite)
+VALUES('C2', '12/07/2009 10:30', 12000, 1300);
+INSERT INTO carreras(codcarrera, fechahora, importepremio, apuestalimite)
+VALUES('C3', '12/07/2009 11:30', 4000, 500 );
+INSERT INTO carreras(codcarrera, fechahora, importepremio, apuestalimite)
+VALUES('C4', '19/07/2009 09:30', 24000, 900);
+INSERT INTO carreras(codcarrera, fechahora, importepremio, apuestalimite)
+VALUES('C5', '19/07/2009 10:30', 3000, 350);
+INSERT INTO carreras(codcarrera, fechahora, importepremio, apuestalimite)
+VALUES('C6', '21/10/2009 11:00', 5000, 400);
+INSERT INTO carreras(codcarrera, fechahora, importepremio, apuestalimite)
+VALUES('C7', '21/10/2008 12:00', 25000, 2400);
+
+
+-- Clientes
+
+INSERT INTO clientes (dnicliente, nombre, nacionalidad)
+VALUES ('111A', 'Ronald McDonald', 'Estadounidense');
+INSERT INTO clientes (dnicliente, nombre, nacionalidad)
+VALUES ('222B', 'Douglas O''Connors', 'Escocesa');
+INSERT INTO clientes (dnicliente, nombre, nacionalidad)
+VALUES ('333C', 'Juanita de Alba', 'Española');
+INSERT INTO clientes (dnicliente, nombre, nacionalidad)
+VALUES ('444D', 'Sid Vicious', 'Estadounidense');
+INSERT INTO clientes (dnicliente, nombre, nacionalidad)
+VALUES ('555E', 'Rob Halford', 'Británica');
+INSERT INTO clientes (dnicliente, nombre, nacionalidad)
+VALUES ('666F', 'Dioni Pérez', 'Española');
+INSERT INTO clientes (dnicliente, nombre, nacionalidad)
+VALUES ('777G', 'Hamed Karim Aizam', 'Árabe');
+INSERT INTO clientes (dnicliente, nombre, nacionalidad)
+VALUES ('888H', 'John H. Bonham', 'Británica');
+INSERT INTO clientes (dnicliente, nombre, nacionalidad)
+VALUES ('999I', 'Manuel Sánchez', 'Española');
+
+
+-- Apuestas
+
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('111A','1','C1',400,25);
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('111A','2','C1',300,4);
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('222B','3','C1',500,5.5 );
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('333C','4','C2',1200,6 );
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('333C','5','C2',1800,10);
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('444D','6','C2',3000,2);
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('444D','7','C3',350,10);
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('555E','8','C3',400,6 );
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('777G','9','C3',300,1.8 );
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('111A','1','C4',400,3 );
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('888H','3','C4',600,2.5 );
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('999I','5','C4',800,5 );
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('222B','2','C5',300,5 );
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('333C','2','C5',310,5 );
+INSERT INTO apuestas (dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+VALUES('555E','4','C5',325,3 );
+
+-- Participaciones
+
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('1','C1',3,'Claudio Carudel', 1);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('2','C1',1,'Charlie Rivel', 3);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('3','C1',2,'Jesús Navas', 2);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('4','C2',2,'Claudio Carudel', 1);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('5','C2',3,'Sara Montiel', 3);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('6','C2',2,'Lucas Grijander', 2);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('7','C3',8,'Claudio Carudel', 2);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('8','C3',5,'Luis Parrales', 1);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('9','C3',12,'Matthew Tuck', 3);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('1','C4',1,'Luis Parrales', 2);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('3','C4',6,'Janis Joplin', 3);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('5','C4',4,'Claudio Carudel', 1);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('7','C4',2,'Josue Monge', 4);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('2','C5',3,'Jesús Lucas', 1);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('6','C5',6,'Monica Naranjo', 3);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('8','C5',2,'Marilyn Manson', 4);
+INSERT INTO participaciones(codcaballo, codcarrera,dorsal, jockey, posicionfinal)
+VALUES('5','C5',1,'Karl Heinz', 2);
+
+
+-------------------------------------------------------------------------------------
+--EJERCICIOS
+
+
+-- 1. Indica el nombre de los caballos, el nombre de los jinetes y la posición,
+-- de aquellos que hayan quedado entre los dos primeros puestos y que sean
+-- de nacionalidad Británica ordenados por el nombre del caballo.
+
+select cab.nombre, par.jockey, par.posicionfinal
+from caballos cab, carreras ca, participaciones par
+where cab.codcaballo = par.codcaballo
+and ca.codcarrera = par.codcarrera
+and cab.nacionalidad = 'Británica'
+and par.posicionfinal in (1,2)
+order by cab.nombre;
+
+
+-- 2. Nombre de los Caballos de nacionalidad Española que tengan una A
+-- en su nombre o Caballos que los clientes que ha apostado por ellos
+-- empiecen con consonante, saliendo duplicados, a lo que te de quitándole
+-- los Caballos que hayan quedado segundo. Debes usar conjuntos.
+
+select nombre
+from caballos
+where nacionalidad = 'Española'
+INTERSECT
+select nombre
+from caballos
+where upper(nombre) like '%A%'
+UNION ALL
+select cab.nombre
+from caballos cab, carreras ca, participaciones par,
+	apuestas ap, clientes cli
+where cab.codcaballo = par.codcaballo
+and ca.codcarrera = par.codcarrera
+and cli.dnicliente = ap.dnicliente
+and ca.codcarrera = ap.codcarrera
+and cab.codcaballo = ap.codcaballo
+and upper(cli.nombre) not like 'A%'
+and upper(cli.nombre) not like 'E%'
+and upper(cli.nombre) not like 'I%'
+and upper(cli.nombre) not like 'O%'
+and upper(cli.nombre) not like 'U%'
+MINUS
+select cab.nombre
+from caballos cab, carreras ca, participaciones par
+where cab.codcaballo = par.codcaballo
+and ca.codcarrera = par.codcarrera
+and par.posicionfinal = 2;
+
+
+-- 3. Nos ordenan eliminar las carreras en las que no hay caballos inscritos
+
+delete carreras 
+where codcarrera not in (select ca.codcarrera
+			from carreras ca, caballos cab, participaciones par
+			where cab.codcaballo = par.codcaballo
+			and ca.codcarrera = par.codcarrera);
+
+
+-- 4. Como podrás comprobar en la Carrera C6 no hay caballos para realizarla.
+-- Introduce 4 caballos de los ya existentes en la carrera C6. Te puedes
+-- inventar jockeys y dorsales.
+
+-- Hacemos rollback o volvemos a insertar las carreras que hemos borrado en el
+-- ejercicio 3 para poder hacer el ejercicio 4.
+
+/*
+rollback;
+
+INSERT INTO carreras(codcarrera, fechahora, importepremio, apuestalimite)
+VALUES('C6', '21/10/2009 11:00', 5000, 400);
+INSERT INTO carreras(codcarrera, fechahora, importepremio, apuestalimite)
+VALUES('C7', '21/10/2008 12:00', 25000, 2400);
+*/
+
+insert into participaciones
+(codcaballo, codcarrera, dorsal, jockey)
+values
+('1', 'C6', 11, 'Jockey1');
+
+insert into participaciones
+(codcaballo, codcarrera, dorsal, jockey)
+values
+('2', 'C6', 22, 'Jockey2');
+
+insert into participaciones
+(codcaballo, codcarrera, dorsal, jockey)
+values
+('3', 'C6', 33, 'Jockey3');
+
+insert into participaciones
+(codcaballo, codcarrera, dorsal, jockey)
+values
+('4', 'C6', 44, 'Jockey4');
+
+
+-- 5. Ya se ha celebrado la carrera C6 y los caballos llegan por orden de edad
+-- del más joven al más adulto. Actualiza la tabla Participaciones con los
+-- resultados de la carrera
+
+--Pongo 1 en el caballo de la carrera C6 que sea el caballo de la carrera C6
+--que tiene la misma edad que el caballo de la carrera C6 más joven
+update participaciones
+set posicionfinal = 1
+where codcarrera = 'C6'
+and codcaballo = (select cab.codcaballo
+            from caballos cab, carreras ca, participaciones par
+            where cab.codcaballo = par.codcaballo
+            and ca.codcarrera = par.codcarrera
+            and ca.codcarrera = 'C6'
+            and (months_between(trunc(sysdate), trunc(cab.fechanacimiento))/12) = 
+                (select min((months_between(trunc(sysdate), trunc(cab2.fechanacimiento))/12))
+                    from caballos cab2, carreras ca2, participaciones par2
+                    where cab2.codcaballo = par2.codcaballo
+                    and ca2.codcarrera = par2.codcarrera
+                    and ca2.codcarrera = 'C6'));
+
+--Ahora lo que hago es lo mismo, pero con los que tienen posición final a null (los que quedan vaya)
+update participaciones
+set posicionfinal = 2
+where codcarrera = 'C6'
+and codcaballo = (select cab.codcaballo
+            from caballos cab, carreras ca, participaciones par
+            where cab.codcaballo = par.codcaballo
+            and ca.codcarrera = par.codcarrera
+            and ca.codcarrera = 'C6'
+            and (months_between(trunc(sysdate), trunc(cab.fechanacimiento))/12) = 
+                (select min((months_between(trunc(sysdate), trunc(cab2.fechanacimiento))/12))
+                    from caballos cab2, carreras ca2, participaciones par2
+                    where cab2.codcaballo = par2.codcaballo
+                    and ca2.codcarrera = par2.codcarrera
+                    and posicionfinal is null
+                    and ca2.codcarrera = 'C6'));
+
+update participaciones
+set posicionfinal = 3
+where codcarrera = 'C6'
+and codcaballo = (select cab.codcaballo
+            from caballos cab, carreras ca, participaciones par
+            where cab.codcaballo = par.codcaballo
+            and ca.codcarrera = par.codcarrera
+            and ca.codcarrera = 'C6'
+            and (months_between(trunc(sysdate), trunc(cab.fechanacimiento))/12) = 
+                (select min((months_between(trunc(sysdate), trunc(cab2.fechanacimiento))/12))
+                    from caballos cab2, carreras ca2, participaciones par2
+                    where cab2.codcaballo = par2.codcaballo
+                    and ca2.codcarrera = par2.codcarrera
+                    and posicionfinal is null
+                    and ca2.codcarrera = 'C6'));
+
+update participaciones
+set posicionfinal = 4
+where codcarrera = 'C6'
+and codcaballo = (select cab.codcaballo
+            from caballos cab, carreras ca, participaciones par
+            where cab.codcaballo = par.codcaballo
+            and ca.codcarrera = par.codcarrera
+            and ca.codcarrera = 'C6'
+            and (months_between(trunc(sysdate), trunc(cab.fechanacimiento))/12) = 
+                (select min((months_between(trunc(sysdate), trunc(cab2.fechanacimiento))/12))
+                    from caballos cab2, carreras ca2, participaciones par2
+                    where cab2.codcaballo = par2.codcaballo
+                    and ca2.codcarrera = par2.codcarrera
+                    and posicionfinal is null
+                    and ca2.codcarrera = 'C6'));
+
+
+-- 6. Añade los siguientes CHECKS a las tablas del modelo:
+
+-- a) En las Participaciones los nombres de los jockeys tienen siempre las
+-- iniciales en mayúsculas.
+
+alter table participaciones add constraint ck_participaciones_jockey_init
+	check(jockey = initcap(jockey));
+
+-- b) La nacionalidad de los caballos solo puede ser Británica, Española,
+-- Árabe o Macedonia.
+
+alter table caballos add constraint ck_caballos_nacionalidad
+	check(nacionalidad =any ('Británica', 'Española', 'Árabe', 'Macedonia'));
+
+-- c) La temporada de carreras solo puede transcurrir del
+-- 10 de Marzo al 10 de Noviembre.
+
+alter table carreras add constraint ck_carreras_fecha
+	check(to_number(to_char(fechahora, 'mmdd')) between 0310 and 1110);
+
+
+-- 7. Saca de cada una de las carreras el número total de participantes,
+-- debes incluir aquellas en las que no hay caballos inscritos
+
+select ca.codcarrera, count(par.codcaballo) participantes
+from caballos cab, carreras ca, participaciones par
+where cab.codcaballo = par.codcaballo
+and ca.codcarrera = par.codcarrera(+)
+group by ca.codcarrera
+order by ca.codcarrera;
+
+
+-- 8. Te piden que introduzcas la siguiente apuesta, un cliente con nacionalidad
+-- Escocesa ha apostado por el caballo más pesado de la primera carrera que
+-- se corra duante el verano del 2009 con un importe de 2000, y sabemos que
+-- en ese momento para esa carrera a ese caballo se paga 30 a 1.
+
+--En la captura de imagen de la solución dice que sale el caballo 7, pero ese no participa en la carrera C1
+
+insert into apuestas
+(dnicliente, codcaballo, codcarrera, importe, tantoporuno)
+values
+((select dnicliente
+	from clientes
+	where nacionalidad = 'Escocesa'),
+(select cab.codcaballo
+	from caballos cab, carreras ca, participaciones par
+	where cab.codcaballo = par.codcaballo
+	and ca.codcarrera = par.codcarrera
+	and par.codcarrera = (select ca2.codcarrera
+                            from carreras ca2
+                            where ca2.fechahora = (select min(ca3.fechahora)
+                                                        from carreras ca3
+                                                        where ca3.fechahora > to_date('21/06/2009', 'dd/mm/yyyy')))
+    	and cab.peso = (select max(cab4.peso)
+                    	from caballos cab4
+                   	where cab4.codcaballo in (select cab5.codcaballo
+                                            from participaciones par2, carreras ca, caballos cab5
+                                            where ca.codcarrera = par2.codcarrera
+                                            and cab5.codcaballo = par2.codcaballo
+                                            and par2.codcarrera = (select ca2.codcarrera
+                                                                    from carreras ca2
+                                                                    where ca2.fechahora = (select min(ca3.fechahora)
+                                                                                                from carreras ca3
+                                                                                                where ca3.fechahora > to_date('21/06/2009', 'dd/mm/yyyy')))))),
+(select ca2.codcarrera
+                            from carreras ca2
+                            where ca2.fechahora = (select min(ca3.fechahora)
+                                                        from carreras ca3
+                                                        where ca3.fechahora > to_date('21/06/2009', 'dd/mm/yyyy'))),
+2000,30);
+
+
+-- 9. Obtén el nombre del caballo y la carrera con más peso en cada carrera.
+
+select ca.codcarrera, cab.nombre
+from carreras ca, caballos cab, participaciones par
+where ca.codcarrera = par.codcarrera
+and cab.codcaballo =  par.codcaballo
+group by ca.codcarrera, cab.peso, cab.nombre
+having cab.peso in (select max(cab2.peso)
+			from caballos cab2, carreras ca2, participaciones par2
+			where ca2.codcarrera = par2.codcarrera
+			and cab2.codcaballo = par2.codcaballo
+            and par2.codcarrera = par.codcarrera
+			group by ca2.codcarrera)
+order by ca.codcarrera;
+
+
+-- 10. Teniendo en cuenta estas dos premisas:
+-- 1) Un cliente gana una apuesta si el caballo por el que apuesta
+--	gana la carrera
+-- 2) El importe de su premio es el importe apostado multiplicado por el
+--	tanto por uno de la apuesta correspondiente.
+-- Muestra los nombres de todos los clientes que con sus apuestas hayan
+-- ganado más de 8000 euros.
+
+select cli.nombre, sum(importe*tantoporuno) premio
+from clientes cli, apuestas apu, participaciones par
+where cli.dnicliente = apu.dnicliente
+and par.codcaballo = apu.codcaballo
+and apu.codcarrera = par.codcarrera
+and par.posicionfinal = 1
+group by cli.nombre
+having sum(importe*tantoporuno) > 8000;
+
+
+-- 11. Dime qué jockey ha ganado más carreras
+
+select par.jockey
+from participaciones par
+where par.posicionfinal = 1
+group by par.posicionfinal, par.jockey
+having count(*) = (select max(count(*))
+                        from participaciones par2
+                        where par2.posicionfinal = 1
+                        group by par2.jockey, par2.posicionfinal);
+
+
+-- 12. Sabiendo que el premio de una carrera se lo lleva el vencedor de la misma
+-- dime el propietario que más dinero ha ganado en premios con sus caballos.
+
+select cab.propietario
+from caballos cab, carreras ca, participaciones par
+where cab.codcaballo = par.codcaballo
+and ca.codcarrera = par.codcarrera
+and par.posicionfinal = 1
+group by cab.propietario
+having sum(ca.importepremio) = (select max(sum(ca2.importepremio))
+				from caballos cab2, carreras ca2, participaciones par2
+				where cab2.codcaballo = par2.codcaballo
+				and ca2.codcarrera = par2.codcarrera
+				and par2.posicionfinal = 1
+                		group by cab2.propietario);
+
+
+-- 13. Sacas los caballos (sus nombres) que más veces han quedado
+-- entre los tres primeros puestos.
+
+select cab.nombre, count(*)
+from caballos cab, carreras ca, participaciones par
+where cab.codcaballo = par.codcaballo
+and ca.codcarrera = par.codcarrera
+and par.posicionfinal =any (1,2,3)
+group by cab.codcaballo, cab.nombre
+having count(*) = (select max(count(*))
+                    from caballos cab, carreras ca, participaciones par
+                    where cab.codcaballo = par.codcaballo
+                    and ca.codcarrera = par.codcarrera
+                    and par.posicionfinal =any (1,2,3)
+                    group by cab.codcaballo, cab.nombre);
+
+
+-- 14. Obtén los clientes y la cantidad de caballos sobre los que han
+-- apostado, teniendo que haber apostado a más de 1 caballo y con una
+-- suma de todas sus apuestas de más de 3000
+
+select nombre, count(*) cant_caballos_apost, sum(importe) total_apostado
+from clientes cli, apuestas apu
+where cli.dnicliente = apu.dnicliente
+group by nombre, apu.dnicliente
+having count(*) > 1
+and sum(importe) > 3000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

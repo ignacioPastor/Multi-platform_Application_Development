@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="307.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="currencyconverter.FXMLDocumentController">
+   <children>
+        
+       <menus>
+            <RadioMenuItem fx:id="ed" text="EUR &gt; USD">
+                <toggleGroup>
+                    <ToggleGroup fx:id="tiposConversion"/>
+                </toggleGroup>
+            </RadioMenuItem>
+            <RadioMenuItem fx:id="el" text="EUR &gt; GBP" toggleGroup="$tiposConversion"/>
+            <RadioMenuItem fx:id="de" text="USD &gt; EUR" toggleGroup="$tiposConversion" />
+            <RadioMenuItem fx:id="dl" text="USD &gt; GBP" toggleGroup="$tiposConversion"/>
+            <RadioMenuItem fx:id="le" text="GBP &gt; EUR" toggleGroup="$tiposConversion"/>
+            <RadioMenuItem fx:id="ld" text="GBP &gt; USD" toggleGroup="$tiposConversion" />
+       </menus>
+      <Label fx:id="labelCurrency" text="Currency">
+         <VBox.margin>
+            <Insets left="130.0" />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="textoDatos" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="177.0">
+         <VBox.margin>
+            <Insets left="65.0" />
+         </VBox.margin>
+      </TextField>
+      <Label fx:id="labelResultado" alignment="CENTER" prefHeight="17.0" prefWidth="176.0">
+         <VBox.margin>
+            <Insets left="65.0" />
+         </VBox.margin>
+      </Label>
+   </children>
+</VBox>

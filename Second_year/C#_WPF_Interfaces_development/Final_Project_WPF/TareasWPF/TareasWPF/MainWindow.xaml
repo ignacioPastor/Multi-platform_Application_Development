@@ -1,0 +1,33 @@
+﻿<Window x:Class="TareasWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TareasWPF"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Title="Tareas - WPF" Height="726" Width="1024">
+    <Grid>
+        <StatusBar HorizontalAlignment="Left" Height="37" Margin="0,658,0,0" VerticalAlignment="Top" Width="1006">
+            <TextBlock x:Name="tbInfo" TextWrapping="Wrap" Text="" Margin="20,0,0,0"/>
+            <TextBlock x:Name="tbUserLoged" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="600,0,0,0"/>
+        </StatusBar>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="1016">
+            <MenuItem Header="Archivo">
+                <MenuItem Header="Exportar tareas" Click="Archivo_ExportarTareas_Click"/>
+                <MenuItem Header="Salir" Click="Archivo_Salir_Click"/>
+            </MenuItem>
+            <MenuItem Header="Usuario">
+                <MenuItem Header="Insertar" Click="Usuario_Insertar_Click"/>
+                <MenuItem Header="Buscar y Modificar" Click="Usuario_BuscarModificar_Click"/>
+            </MenuItem>
+            <MenuItem Header="Tareas">
+                <MenuItem Header="Insertar" Click="Tarea_Insertar"/>
+                <MenuItem Header="Buscar y Modificar" Click="Tarea_Buscar_y_Modificar"/>
+            </MenuItem>
+            <MenuItem Header="Informe mensual" Click="InformeMensual_Click"></MenuItem>
+        </Menu>
+
+    </Grid>
+</Window>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-ene-2017 17:32:50 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="ejerciciospropuestos_4_7_3.Series" table="series" schema="public" optimistic-lock="version">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cadenas" class="ejerciciospropuestos_4_7_3.Cadenas" fetch="select">
+            <column name="codcadena" length="6" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="60" />
+        </property>
+        <property name="duracion" type="java.lang.Integer">
+            <column name="duracion" />
+        </property>
+    </class>
+</hibernate-mapping>

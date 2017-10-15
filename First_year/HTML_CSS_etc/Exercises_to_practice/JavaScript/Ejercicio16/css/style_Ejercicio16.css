@@ -1,0 +1,38 @@
+
+
+body{
+	font-family: arial, helvetica;
+}
+#infoRaton{
+	width:200px;
+	border:thin solid silver;
+	padding:.5em;
+	float: left;
+}
+#infoTeclado{
+	width:200px;
+	border:thin solid silver;
+	padding:.5em;
+	float: left;
+}
+#infoDondeClick{
+	width:200px;
+	border:thin solid silver;
+	padding:.5em;
+	float: left;
+	height: 148px;
+}
+
+/* .cuadro{ */
+	/* width:200px; */
+	/* border:thin solid silver; */
+	/* padding:.5em; */
+	/* float: left; */
+/* } */
+
+#info h1{
+	margin: 0;
+}
+h1, p, h2{
+	text-align: center;
+}

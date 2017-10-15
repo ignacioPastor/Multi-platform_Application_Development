@@ -1,0 +1,13 @@
+<!ELEMENT arbol ((lugares, personas) | (personas, lugares))>
+<!ELEMENT lugares (lugar)*>
+<!ELEMENT lugar EMPTY>
+<!ATTLIST lugar nombre (Valencia | Gandia | Marsella) #REQUIRED>
+<!ATTLIST lugar pais CDATA #REQUIRED>
+<!ELEMENT personas (persona)*>
+<!ELEMENT persona (nombre, padre?, madre?, nacimiento?)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT padre (#PCDATA)>
+<!ELEMENT madre (#PCDATA)>
+<!ELEMENT nacimiento EMPTY>
+<!ATTLIST nacimiento fecha CDATA #IMPLIED>
+<!ATTLIST nacimiento lugar (Valencia | Gandia | Marsella) #REQUIRED>

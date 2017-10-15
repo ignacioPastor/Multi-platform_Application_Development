@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView layoutX="197.0" layoutY="18.0" prefHeight="236.0" prefWidth="638.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="columnReference" prefWidth="75.0" text="Reference" />
+                        <TableColumn fx:id="columnName" prefWidth="300.0" text="Name" />
+                      <TableColumn fx:id="columnPrice" prefWidth="75.0" text="Price" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <VBox layoutX="14.0" layoutY="10.0" maxWidth="1.7976931348623157E308" spacing="15.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="20.0">
+                           <children>
+                              <Label fx:id="labelCategory" text="Category" />
+                              <ChoiceBox id="addCategoryBtn" fx:id="choiceCategory" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </ChoiceBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="15.0">
+                           <children>
+                              <Label fx:id="labelReference" text="Reference" />
+                              <TextField fx:id="textReference" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="36.0">
+                           <children>
+                              <Label fx:id="labelName" text="Name" />
+                              <TextField fx:id="textName" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="42.0">
+                           <children>
+                              <Label fx:id="labelPrice" text="Price" />
+                              <TextField fx:id="textPrice" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+   <top>
+      <AnchorPane prefHeight="134.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="160.0" layoutY="-54.0" prefHeight="146.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="90.0" fitWidth="267.0" layoutX="14.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/App%20Title.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="329.0" layoutY="84.0" spacing="20.0" AnchorPane.rightAnchor="17.0">
+                     <children>
+                        <Button fx:id="buttonNew" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="New" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="buttonSave" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Save" HBox.hgrow="ALWAYS" />
+                        <Button id="deleteButton" fx:id="buttonDelete" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Delete" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
+         </children></AnchorPane>
+   </top>
+   <left>
+      <VBox prefHeight="346.0" prefWidth="146.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox spacing="5.0">
+               <children>
+                  <TextField fx:id="textPlus" />
+                  <Button fx:id="buttonPlus" mnemonicParsing="false" text="+" />
+               </children>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
+            </HBox>
+            <ListView>
+               <VBox.margin>
+                  <Insets left="3.0" />
+               </VBox.margin>
+            </ListView>
+         </children>
+      </VBox>
+   </left>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <Label fx:id="labelBottom" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

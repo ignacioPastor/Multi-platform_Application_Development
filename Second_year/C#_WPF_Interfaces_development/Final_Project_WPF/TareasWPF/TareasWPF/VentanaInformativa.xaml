@@ -1,0 +1,15 @@
+﻿<Window x:Class="TareasWPF.VentanaInformativa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TareasWPF"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Title="VentanaInformativa" Height="200" Width="300">
+    <Grid>
+        <Button x:Name="bAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="108,119,0,0" VerticalAlignment="Top" Width="65" Click="bAceptar_Click" Height="21" RenderTransformOrigin="0.5,0.5"/>
+        <TextBlock x:Name="tbMessage" HorizontalAlignment="Left" Margin="33,63,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

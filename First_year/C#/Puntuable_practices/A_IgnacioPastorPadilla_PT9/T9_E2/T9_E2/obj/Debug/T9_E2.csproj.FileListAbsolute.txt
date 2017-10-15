@@ -1,0 +1,12 @@
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E2\T9_E2\bin\Debug\T9_E2.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E2\T9_E2\bin\Debug\T9_E2.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E2\T9_E2\bin\Debug\T9_E2.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E2\T9_E2\obj\Debug\T9_E2.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E2\T9_E2\obj\Debug\T9_E2.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E2\T9_E2\obj\Debug\T9_E2.pdb
+C:\Users\Ignacio\Desktop\T9_E2_binario\T9_E2\bin\Debug\T9_E2.exe.config
+C:\Users\Ignacio\Desktop\T9_E2_binario\T9_E2\obj\Debug\T9_E2.exe
+C:\Users\Ignacio\Desktop\T9_E2_binario\T9_E2\obj\Debug\T9_E2.pdb
+C:\Users\Ignacio\Desktop\T9_E2_binario\T9_E2\bin\Debug\T9_E2.exe
+C:\Users\Ignacio\Desktop\T9_E2_binario\T9_E2\bin\Debug\T9_E2.pdb
+C:\Users\Ignacio\Desktop\T9_E2_binario\T9_E2\obj\Debug\T9_E2.csprojResolveAssemblyReference.cache

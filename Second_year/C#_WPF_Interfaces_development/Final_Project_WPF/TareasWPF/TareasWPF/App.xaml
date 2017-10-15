@@ -1,0 +1,11 @@
+﻿<Application x:Class="TareasWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TareasWPF"
+             StartupUri="Login.xaml">
+    <Application.Resources>
+        <DataTemplate x:Key="MisUsuariosTemplate">
+        
+        </DataTemplate>
+    </Application.Resources>
+</Application>

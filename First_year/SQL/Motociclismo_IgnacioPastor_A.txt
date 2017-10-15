@@ -1,0 +1,434 @@
+-- MODELO Campeonato del Mundo de Motociclismo, Ignacio Pastor Padilla, DAM Semi-A
+
+--TABLAS
+
+create table circuitos(
+	nombre varchar2(15) not null,
+	pais varchar2(15),
+	tipo varchar2(15),
+	longitud number(5,1),
+	disenyador varchar2(29),
+constraint pk_circuitos primary key (nombre),
+constraint ck_circuitos_longitud
+	check(longitud < 7000)
+);
+
+create table escuderias(
+	nombre varchar2(15) not null,
+	manager varchar2(15),
+	fabricantemotor varchar2(15),
+	sede varchar2(15),
+constraint pk_escuderias primary key (nombre),
+constraint ck_escuderias_fabricantemotor
+	check(fabricantemotor in ('Honda', 'Yamaha', 'Ducati')),
+constraint ck_escuderias_sede
+	check(instr(sede, 'Bélgica') > 0
+		or instr(sede, 'Francia') > 0
+		or instr(sede, 'Italia') > 0)
+);
+
+create table pilotos(
+	codigo varchar2(3) not null,
+	nombre varchar2(15),
+	nacionalidad varchar2(15),
+	fechanacimiento date,
+	carreradebut varchar2(20),
+	nombreescuderia varchar2(20),
+constraint pk_pilotos primary key (codigo),
+constraint fk_pilotos_escuderias foreign key (nombreescuderia)
+	references escuderias (nombre),
+constraint ck_pilotos_nombre_initcap
+	check (nombre = initcap(nombre)),
+constraint ck_pilotos_nacionalidad
+	check (nacionalidad in ('Española', 'Italiana', 'Australiana', 'Estadounidense')),
+constraint ck_pilotos_fechanacimiento
+	check (to_number(to_char(fechanacimiento, 'yy'))  < 99),
+constraint ck_pilotos_carreradebut
+	check (substr(carreradebut,(length(carreradebut)-3)) between 2000 and 2010)
+);
+
+create table carreras(
+	nombregp varchar2(15) not null,
+	anyo varchar2(4) not null,
+	fechahorainicio date,
+	numvueltas number(2),
+	nombrecircuito varchar2(15),
+constraint pk_carreras primary key (nombregp, anyo),
+constraint fk_carreras_circuitos foreign key (nombrecircuito)
+	references circuitos (nombre),
+constraint ck_carreras_anyo
+	check(substr(anyo, 1, 2) = '20'),
+constraint ck_carreras_fechahorainicio
+	check(to_number(to_char(fechahorainicio,'mm')) between 3 and 10),
+constraint ck_carreras_numvueltas
+	check(numvueltas between 16 and 32)
+);
+
+create table resultados(
+	nombregp varchar2(15) not null,
+	anyo varchar2(4) not null,
+	codpiloto varchar2(4) not null,
+	puesto number(2),
+	distanciaganador varchar2(8),
+constraint pk_resultados primary key (nombregp, anyo, codpiloto),
+constraint fk_resultados_carreras foreign key (nombregp, anyo)
+	references carreras (nombregp, anyo),
+constraint fk_resultados_pilotos foreign key (codpiloto)
+	references pilotos (codigo),
+constraint ck_resultados_distanciaganador
+	check(distanciaganador is null
+		or distanciaganador = 'Abandono'
+		or to_number(substr(distanciaganador,2,2)) between 0 and 60 
+			and to_number(substr(distanciaganador,5,2)) between 0 and 60
+			and substr(distanciaganador,4,1) = ':'
+			and substr(distanciaganador,1,1) = '+')
+);
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+--ALTERACIONES NECESARIAS PARA PODER INTRODUCIR LOS DATOS
+
+--CIRCUITOS
+
+alter table circuitos drop constraint ck_circuitos_longitud;
+
+alter table circuitos add constraint ck_circuitos_longitud
+	check(longitud < 7005);
+
+
+--ESCUDERIAS
+
+alter table escuderias modify manager varchar2(17);
+
+alter table escuderias modify sede varchar2(16);
+
+alter table escuderias modify nombre varchar2(23);
+
+alter table escuderias modify sede varchar2(22);
+
+
+--PILOTOS
+
+alter table pilotos modify nombre varchar2(16);
+
+alter table pilotos modify nombreescuderia varchar2(23);
+
+alter table pilotos drop constraint ck_pilotos_carreradebut;
+
+alter table pilotos add constraint ck_pilotos_carreradebut
+	check(to_number(substr(carreradebut, (length(carreradebut)-3))) between 2000 and 2012);
+
+
+--CARRERRAS
+-- No sé si por error o a posta, en el GP de Europa 2011 faltaba
+-- una comilla simple al final de la fecha
+
+alter table carreras modify fechahorainicio timestamp;
+
+alter table carreras modify nombregp varchar2(20);
+
+
+--RESULTADOS
+
+alter table resultados modify nombregp varchar2(20);
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+--INSERTS
+
+
+-- Insertamos escuderias
+insert into escuderias(nombre, manager, fabricantemotor, sede)
+values('Ducati Team','Bernhard Gobmeier','Ducati','Bolonia (Italia)');
+insert into escuderias(nombre, manager, fabricantemotor, sede)
+values('Go&Fun Honda Gresini', 'Fausto Gresini','Honda','Faenza (Italia)');
+insert into escuderias(nombre, manager, fabricantemotor, sede)
+values('Yamaha Racing Team','Wilco Zeelenberg','Yamaha','Gerno di Lesmo(Italia)');
+insert into escuderias(nombre, manager, fabricantemotor, sede)
+values('Repsol Honda Team','Kazuhiko Yamano','Honda','Aalst (Bélgica)');
+insert into escuderias(nombre, manager, fabricantemotor, sede)
+values('Monster Yamaha Tech3','Hervé Poncharal','Yamaha','Provence (Francia)');
+
+
+-- Insertamos circuitos
+insert into circuitos(nombre, pais, tipo, longitud)
+values('Albert Park','Australia','Urbano',5300);
+insert into circuitos(nombre, pais, longitud, disenyador)
+values('Spa','Belgica',7004,'Jules de Their');
+insert into circuitos(nombre, pais, longitud)
+values('Indianapolis','Estados Unidos',4168);
+insert into circuitos(nombre, pais, longitud, disenyador)
+values('Sepang','Malasia',5540,'Hermann Tilke');
+insert into circuitos(nombre, pais, tipo, longitud)
+values('Montecarlo','Monaco','Urbano',3340);
+insert into circuitos(nombre, pais, longitud)
+values('Interlagos','Brasil',4309);
+
+
+-- Insertamos pilotos
+insert into pilotos
+values('4','Andrea Dovizioso','Italiana','23/03/86','Australia 2008','Ducati Team');
+insert into pilotos
+values('69','Nicky Hayden','Estadounidense','30/07/81','Estados Unidos 2005','Ducati Team');
+insert into pilotos
+values('19','Alvaro Bautista','Española','21/11/84','Australia 2004','Go&Fun Honda Gresini');
+insert into pilotos
+values('67','Bryan Staring','Australiana','01/06/87','Australia 2012','Go&Fun Honda Gresini');
+insert into pilotos
+values('99','Jorge Lorenzo','Española','04/05/87','Belgica 2006','Yamaha Racing Team');
+insert into pilotos
+values('46','Valentino Rossi','Italiana','16/02/79','Australia 2000','Yamaha Racing Team');
+insert into pilotos
+values('26','Dani Pedrosa','Española','29/09/85','Australia 2007','Repsol Honda Team');
+
+
+-- Insertamos carreras
+insert into carreras
+values('GP de Australia','2010','15/03/10 19:00',27,'Albert Park');
+insert into carreras
+values('GP de Europa','2010','22/03/10 14:00',18,'Spa');
+insert into carreras
+values('GP de Estados Unidos','2010','29/03/10 19:00',20,'Indianapolis');
+insert into carreras
+values('GP de Malasia','2010','05/04/10 13:00',23,'Sepang');
+insert into carreras
+values('GP de Brasil','2010','12/04/10 20:00',24,'Interlagos');
+insert into carreras
+values('GP de Australia','2011','14/03/11 19:00',27,'Albert Park');
+insert into carreras
+values('GP de Europa','2011','21/03/11 14:00',23,'Montecarlo');
+insert into carreras
+values('GP de Estados Unidos','2011','28/03/11 19:00',20,'Indianapolis');
+insert into carreras
+values('GP de Malasia','2011','04/04/11 13:00',23,'Sepang');
+insert into carreras
+values('GP de Brasil','2011','11/04/11 20:45',24,'Interlagos');
+
+
+-- Insertamos resultados
+insert into resultados(nombregp, anyo, codpiloto, puesto)
+values('GP de Australia','2010','26',1);
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Australia','2010','99',2, '+00:12');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Australia','2010','4',3, '+00:23');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Australia','2010','19',4, '+01:02');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Australia','2010','69',5, 'Abandono');
+
+insert into resultados(nombregp, anyo, codpiloto, puesto)
+values('GP de Europa','2010','4',1);
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Europa','2010','26',2, '+00:22');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Europa','2010','99',3, '+00:42');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Europa','2010','46',4, 'Abandono');
+
+insert into resultados(nombregp, anyo, codpiloto, puesto)
+values('GP de Estados Unidos','2010','99',1);
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Estados Unidos','2010','19',2, '+00:03');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Estados Unidos','2010','26',3, '+02:12');
+
+insert into resultados(nombregp, anyo, codpiloto, puesto)
+values('GP de Malasia','2010','26',1);
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Malasia','2010','99',2, '+01:12');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Malasia','2010','4',3, '+01:14');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Malasia','2010','46',4, 'Abandono');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Malasia','2010','19',5, 'Abandono');
+
+insert into resultados(nombregp, anyo, codpiloto, puesto)
+values('GP de Brasil','2011','26',1);
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Brasil','2011','19',2, '+00:02');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Brasil','2011','99',3, '+00:12');
+
+insert into resultados(nombregp, anyo, codpiloto, puesto)
+values('GP de Australia','2011','19',1);
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Australia','2011','26',2, '+00:01');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Australia','2011','4',3, '+01:01');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Australia','2011','46',4, 'Abandono');
+
+insert into resultados(nombregp, anyo, codpiloto, puesto)
+values('GP de Europa','2011','4',1);
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Europa','2011','19',2, '+00:06');
+
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Europa','2011','99',3, '+00:09');
+insert into resultados(nombregp, anyo, codpiloto, puesto, distanciaganador)
+values('GP de Europa','2011','26',4, 'Abandono');
+
+
+-----------------------------------------------------------------------------------------------------------
+--EJERCICIOS VARIOS
+
+-- 2. Mediante una Insert-select inserta un piloto con código 93.
+-- Se llama Marc Marquez y corre en la misma escuderia que Dani Pedrosa
+-- y es de su misma nacionalidad. Debutó en Australia en 2007
+-- y nació el 17 de febrero de 1993.
+
+insert into pilotos
+(codigo, nombre, nacionalidad, fechanacimiento, carreradebut, nombreescuderia)
+values
+('93', 'Marc Marquez', (select nacionalidad
+			from pilotos
+			where nombre = 'Dani Pedrosa'), '17/02/93', 'Australia 2007', (select nombreescuderia
+											from pilotos
+											where nombre = 'Dani Pedrosa'));
+
+
+-- 3. Muestra el nombre de los pilotos que llegaron a más de diez segundos del ganador
+-- en la carrera en la que se recorrieron menos vueltas en el año 2010.
+
+select pil.nombre
+from pilotos pil, resultados resul, carreras ca
+where ca.anyo = '2010'
+and ca.nombregp = resul.nombregp
+and  pil.codigo = resul.codpiloto
+and resul.anyo = '2010'
+and ca.numvueltas = (select min(ca2.numvueltas)
+                        from carreras ca2)
+and (resul.distanciaganador = 'Abandono' 
+    or (substr(resul.distanciaganador,1,1) = '+'
+        and to_number(substr(resul.distanciaganador,2,2)) > 0)
+	or (substr(resul.distanciaganador,1,1) = '+'
+        and to_number(substr(resul.distanciaganador,5,2)) > 10))
+and resul.distanciaganador is not null;
+
+
+-- 4. Muestra el apellido (y solo el apellido) y el año del debut (solo el año)
+-- del piloto que ha ganado más grandes premios.
+
+select substr(pil.nombre,(instr(pil.nombre,' ')+1)) apellido,
+	substr(pil.carreradebut, (length(pil.carreradebut)-3)) debut
+from pilotos pil
+where pil.codigo = (select pil2.codigo
+			from pilotos pil2, resultados re
+			where pil2.codigo = re.codpiloto
+			group by re.codpiloto
+			having count(*) = (select max(count(*))
+						from resultados re2
+						group by re2.codpiloto));
+
+
+-- 5. Muestra el número de carreras ganadas en 2010 por cada piloto
+-- ordenadas de mayor a menor, incluyendo a los pilotos que no han ganado ninguna.
+
+select *
+from(
+	select pil.nombre nombre, count(*) carreras_ganadas
+	from pilotos pil, resultados re
+	where pil.codigo = re.codpiloto
+	and re.puesto = 1
+	group by re.codpiloto, pil.nombre
+	UNION
+	select pil.nombre nombre, 0 carreras_ganadas
+	from pilotos pil
+	where codigo not in (select pil2.codigo
+                        	from pilotos pil2, resultados re
+                        	where pil2.codigo = re.codpiloto
+                        	and re.puesto = 1)
+) order by carreras_ganadas desc, nombre;
+
+
+-- 6. Muestra el número de pilotos de cada escuderia,
+-- incluyendo las que no tengan ninguno.
+
+select esc.nombre, count(*)
+from escuderias esc, pilotos pil
+where pil.nombreescuderia = esc.nombre
+group by esc.nombre
+UNION
+select distinct esc.nombre, 0
+from escuderias esc, pilotos pil
+where esc.nombre not in (select pil2.nombreescuderia
+				from pilotos pil2);
+
+
+-- 7. Crea una vista con los pilotos y sus correspondientes escuderías
+-- que hayan ganado más de una carrera celebrada a partir de las 15:00 horas
+-- en 2010, junto con el número de carreras ganadas.
+
+create or replace view pilotos_ganadores_15
+as select pil.nombre piloto, esc.nombre escuderia,count(*) num_victorias
+from pilotos pil, escuderias esc, resultados re, carreras ca
+where pil.nombreescuderia = esc.nombre
+and pil.codigo = re.codpiloto
+and ca.anyo = '2010'
+and re.anyo = ca.anyo
+and ca.nombregp = re.nombregp
+and to_number(to_char(ca.fechahorainicio, 'hh24')) > 15
+and re.puesto = 1
+group by pil.nombre, esc.nombre
+having count(*) > 1;
+
+
+-- 8. Borra los pilotos mayores de 30 años que no han subido al podium en 2011.
+
+-- Tengo que cambiar la fk de resultados porque no le puse on delete cascade,
+-- así que no me deja borrar
+
+alter table resultados drop constraint fk_resultados_pilotos;
+
+alter table resultados add constraint fk_resultados_pilotos foreign key (codpiloto)
+	references pilotos (codigo) on delete cascade;
+
+delete pilotos
+where (months_between(sysdate, fechanacimiento)/12) > 30
+and codigo in (select codpiloto
+			from resultados
+			where puesto = 1
+			and anyo = '2011');
+			
+
+-- 9. Muestra los circuitos en los que nunca ha ganado un piloto español.
+
+select cir.nombre
+from circuitos cir, pilotos pil, resultados re, carreras ca
+where pil.codigo = re.codpiloto
+and cir.nombre = ca.nombrecircuito
+and ca.nombregp = re.nombregp
+and ca.anyo = re.anyo
+MINUS
+select cir.nombre
+from circuitos cir, pilotos pil, resultados re, carreras ca
+where pil.codigo = re.codpiloto
+and cir.nombre = ca.nombrecircuito
+and ca.nombregp = re.nombregp
+and ca.anyo = re.anyo
+and pil.nacionalidad = 'Española'
+and re.puesto = 1;
+
+
+-- 10. Muestra el nombre de los pilotos de las escuderias con sede en Italia
+-- que hayan ganado más de una carrera.
+
+select pil.nombre
+from pilotos pil, escuderias es
+where pil.nombreescuderia = es.nombre
+and exists (select 'me ha salido a la primera, logro desbloqueado :)'
+		from escuderias es2
+		where instr(es2.sede, 'Italia') > 0)
+INTERSECT
+select pil.nombre
+from pilotos pil, resultados re, carreras ca
+where pil.codigo = re.codpiloto
+and ca.nombregp = re.nombregp
+and ca.anyo = re.anyo
+and re.puesto = 1
+group by re.codpiloto, pil.nombre
+having count(*) > 1;
+
+

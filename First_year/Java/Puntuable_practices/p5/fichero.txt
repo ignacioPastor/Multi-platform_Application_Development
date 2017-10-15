@@ -1,0 +1,9 @@
+Test 01_1. BubbleSort con lista aleatoria: 0.922024
+Test 01_2. BubbleSort con lista ordenada: 0.709907
+Test 01_3. BubbleSort con lista de todos inversamente ordenada: 0.952387
+Test 01_4. BubbleSort con lista de todos los elementos iguales: 0.672701
+
+Test 02_1. SelectionSort con lista aleatoria: 0.729151
+Test 02_2. SelectionSort con lista ordenada: 0.658588
+Test 02_3. SelectionSort con lista de todos inversamente ordenada: 0.649608
+Test 02_4. SelectionSort con lista de todos los elementos iguales: 0.660299

@@ -1,0 +1,6 @@
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_12\Ejercicios_propuestos\Ejercicio_12_6_3\Ejercicio_12_6_3\bin\Debug\Ejercicio_12_6_3.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_12\Ejercicios_propuestos\Ejercicio_12_6_3\Ejercicio_12_6_3\bin\Debug\Ejercicio_12_6_3.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_12\Ejercicios_propuestos\Ejercicio_12_6_3\Ejercicio_12_6_3\bin\Debug\Ejercicio_12_6_3.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_12\Ejercicios_propuestos\Ejercicio_12_6_3\Ejercicio_12_6_3\obj\Debug\Ejercicio_12_6_3.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_12\Ejercicios_propuestos\Ejercicio_12_6_3\Ejercicio_12_6_3\obj\Debug\Ejercicio_12_6_3.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_12\Ejercicios_propuestos\Ejercicio_12_6_3\Ejercicio_12_6_3\obj\Debug\Ejercicio_12_6_3.pdb

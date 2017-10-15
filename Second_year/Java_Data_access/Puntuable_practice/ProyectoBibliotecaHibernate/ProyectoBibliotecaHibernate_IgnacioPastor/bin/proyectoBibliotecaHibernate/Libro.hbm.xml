@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-ene-2017 14:46:14 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="proyectoBibliotecaHibernate.Libro" table="libro" schema="public" optimistic-lock="version">
+        <id name="isbn" type="int">
+            <column name="isbn" />
+            <generator class="assigned" />
+        </id>
+        <property name="titulo" type="string">
+            <column name="titulo" length="200" />
+        </property>
+        <property name="autor" type="string">
+            <column name="autor" length="100" />
+        </property>
+        <property name="editorial" type="string">
+            <column name="editorial" length="50" />
+        </property>
+        <property name="anyopublicacion" type="java.lang.Integer">
+            <column name="anyopublicacion" />
+        </property>
+        <property name="edicionlujo" type="java.lang.Boolean">
+            <column name="edicionlujo" />
+        </property>
+    </class>
+</hibernate-mapping>

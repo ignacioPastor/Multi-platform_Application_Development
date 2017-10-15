@@ -1,0 +1,6 @@
+C:\Users\Ignacio\Desktop\DAM\Programacion\previo 3er trimestre\Tema 7\A_Ignacio_Pastor_Padilla_PracticaTema7\Consolenoid\Consolenoid\bin\Debug\Consolenoid.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\previo 3er trimestre\Tema 7\A_Ignacio_Pastor_Padilla_PracticaTema7\Consolenoid\Consolenoid\obj\Debug\Consolenoid.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\previo 3er trimestre\Tema 7\A_Ignacio_Pastor_Padilla_PracticaTema7\Consolenoid\Consolenoid\obj\Debug\Consolenoid.pdb
+C:\Users\Ignacio\Desktop\DAM\Primero\Programacion\previo 3er trimestre\Tema 7\A_Ignacio_Pastor_Padilla_PracticaTema7\Consolenoid\Consolenoid\bin\Debug\Consolenoid.exe.config
+C:\Users\Ignacio\Desktop\DAM\Primero\Programacion\previo 3er trimestre\Tema 7\A_Ignacio_Pastor_Padilla_PracticaTema7\Consolenoid\Consolenoid\obj\Debug\Consolenoid.exe
+C:\Users\Ignacio\Desktop\DAM\Primero\Programacion\previo 3er trimestre\Tema 7\A_Ignacio_Pastor_Padilla_PracticaTema7\Consolenoid\Consolenoid\obj\Debug\Consolenoid.pdb

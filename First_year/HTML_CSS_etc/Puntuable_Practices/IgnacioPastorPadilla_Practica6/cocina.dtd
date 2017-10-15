@@ -1,0 +1,21 @@
+<!ELEMENT cocina (receta)*>
+<!ELEMENT receta (nombre, tiempo, ingredientes, preparacion, comensales, autores, imagen*)>
+<!ATTLIST receta dificultad (baja | media | alta) #REQUIRED>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT tiempo EMPTY>
+<!ATTLIST tiempo unidad (segundos | minutos | horas) #REQUIRED>
+<!ATTLIST tiempo cantidad CDATA #REQUIRED>
+<!ELEMENT ingredientes (ingrediente+)>
+<!ELEMENT ingrediente (#PCDATA)>
+<!ATTLIST ingrediente unidad CDATA #IMPLIED>
+<!ATTLIST ingrediente cantidad CDATA #IMPLIED>
+<!ELEMENT preparacion (#PCDATA)>
+<!ELEMENT comensales EMPTY>
+<!ATTLIST comensales cantidad CDATA #REQUIRED>
+<!ELEMENT autores (autor)*>
+<!ELEMENT autor (nombreAutor, primerApellido?, segundoApellido?)>
+<!ELEMENT nombreAutor (#PCDATA)>
+<!ELEMENT primerApellido (#PCDATA)>
+<!ELEMENT segundoApellido (#PCDATA)>
+<!ELEMENT imagen EMPTY>
+<!ATTLIST imagen ubicacion CDATA #REQUIRED>

@@ -1,0 +1,38 @@
+﻿<Window x:Class="Pastor_Ignacio_DellStore2WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pastor_Ignacio_DellStore2WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        ResizeMode="NoResize">
+    <Grid>
+        <StackPanel>
+            <Menu>
+                <MenuItem Header="Clientes">
+                    <MenuItem Header="Alta" Click="Click_Clientes_Alta"/>
+                    <MenuItem Header="Modificación" Click="Click_Clientes_Modificacion"/>
+                </MenuItem>
+                <MenuItem Header="Productos">
+                    <MenuItem Header="Alta" Click="Click_Productos_Alta" />
+                    <MenuItem Header="Modificación" Click="Click_Productos_Modificacion"/>
+                </MenuItem>
+                <MenuItem Header="Pedidos">
+                    <MenuItem Header="Alta" Click="Click_Pedidos_Alta"/>
+                    <MenuItem Header="Modificación" Click="Click_Pedidos_Modificacion"/>
+                </MenuItem>
+            </Menu>
+            
+
+        </StackPanel>
+        <StatusBar Height="38" Margin="0,653,0,0">
+            <TextBlock x:Name="tbStatusInfo" Text="" Margin="5,2,2,2"/>
+        </StatusBar>
+        <!--<Button x:Name="bActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="1082,619,0,0" VerticalAlignment="Top" Width="74" Click="bActualizar_Click"/>-->
+
+    </Grid>
+    
+</Window>

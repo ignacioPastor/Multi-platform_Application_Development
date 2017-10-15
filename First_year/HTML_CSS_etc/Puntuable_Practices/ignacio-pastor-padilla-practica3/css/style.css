@@ -1,0 +1,181 @@
+/* Ignacio Pastor Padilla - Practica3 - Lenguaje de Marcas - DAM - Semipresencial - GrupoA */
+
+
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+article, h2, h3, aside, nav, header, footer, figure, figcaption, main{
+	display: block;
+}
+
+html{
+	background: white;
+}
+
+body
+{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align:center;
+	background: -webkit-linear-gradient(top, rgb(227, 76, 38) 0%, rgba(240, 101, 41, 0) 90%);
+	background: -moz-linear-gradient(top, rgb(227, 76, 38) 0%, rgba(240, 101, 41, 0) 90%);
+	background: linear-gradient(to bottom, rgb(227, 76, 38) 0%, rgba(240, 101, 41, 0) 90%);
+
+}		
+
+#page
+{
+	width:960px;
+	margin:0 auto;
+	text-align:left;
+	-moz-box-shadow: 10px 10px 10px grey;
+	-webkit-box-shadow: 10px 10px 10px grey;
+	box-shadow: 10px 10px 10px grey;
+	/* Tenemos que poner aquí también los bordes redondeados para que las sombras se vean correctamente */
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+}
+
+header
+{
+	font-family:Courier;
+	font-size:1.1em;
+	color:white;
+	border-bottom:6px black solid;
+	background: -webkit-linear-gradient(top, #0170B9, #27AADE);
+	background: -moz-linear-gradient(top, #0170B9, #27AADE);
+	background: linear-gradient(to bottom, #0170B9, #27AADE);
+	-moz-border-radius: 20px 20px 0px 0px;
+	-webkit-border-radius: 20px 20px 0px 0px;
+	border-radius: 20px 20px 0px 0px; /* Para los bordes redondeados de la parte superior */
+}
+
+h1
+{
+	background-image: url("../img/logo.png");
+	background-repeat:no-repeat;
+	background-position: 25px center;
+	padding:20px 100px;
+}
+
+nav
+{
+	font-family:Courier;
+	font-size:1.4em;
+	color:silver;
+	text-align:center;
+	background: -webkit-linear-gradient(top, rgb(213, 186, 50), rgb(225, 218, 62));
+	background: -moz-linear-gradient(top, rgb(213, 186, 50), rgb(225, 218, 62));
+	background: linear-gradient(to bottom, rgb(213, 186, 50), rgb(225, 218, 62));
+}
+
+nav ul li 
+{
+	padding:80px 0px 0px 0px;
+	margin:0px 100px 20px 100px;
+	list-style:none;
+	display:inline-block;
+	text-align:center;
+	cursor:default;
+}
+
+nav li:nth-child(1) /* De esta forma podemos seleccionar distintos elementos sin tener que recurrir a etiquetas */
+{
+	background:url("../img/book.png");
+	background-repeat:no-repeat;
+	background-position: center 10px;
+}
+
+nav li:nth-child(2)
+{
+	background:url("../img/film.png");
+	background-repeat:no-repeat;
+	background-position: center 10px;
+}
+
+nav li:nth-child(3)
+{
+	background:url("../img/mail.png");
+	background-repeat:no-repeat;
+	background-position: center 10px;
+}
+
+nav ul li a
+{
+	text-decoration:none;
+	color:white;
+}
+
+nav ul li a:hover
+{
+	color:orange;
+}
+
+.clearfix:before,
+.clearfix:after, 
+main
+{
+	font-family:Verdana;
+	font-size:0.8em;
+	background: white;
+	width:100%;
+	display: table;
+}
+
+article
+{
+	width:240px;
+	background-color:white;
+	text-align:center;
+	line-height: 1.8em;
+	padding:5px 5px 22px 5px;
+	margin: 14px;
+	float:left;
+	border-style: solid;
+	border-width: 70px 21px;
+	border-image-source: url("../img/movil.png");
+	border-image-slice: 73 20 73 22;
+}		
+
+h2
+{
+	border-bottom: 1px solid #999999;
+}
+
+h2
+{
+	padding: 10px 10px 10px 0px;
+	font-size: 1.2em;
+	text-shadow: 2px 2px 2px grey;
+}
+
+footer
+{
+	clear: both;
+	/* font-size:0.7em; */ /* Esta línea ya no es necesaria porque introducimos la etiqueta small */
+	color:white;
+	text-align: center;
+	border-top:6px black solid;
+	padding:15px 0px;
+	background: -webkit-linear-gradient(bottom, #0170B9, #27AADE);
+	background: -moz-linear-gradient(bottom, #0170B9, #27AADE);
+	background: linear-gradient(to top, #0170B9, #27AADE);	
+	-moz-border-radius: 0px 0px 20px 20px;
+	-webkit-border-radius: 0px 0px 20px 20px;
+	border-radius: 0px 0px 20px 20px; /* Para los bordes redondeados de la parte inferior */
+}
+
+footer a
+{
+	color:white;
+}
+
+img[src*="img/javascript.png"]{
+	background:-webkit-radial-gradient(circle, #FFFFFF 0%, #CECECE 200%);
+	background:-moz-radial-gradient(circle, #FFFFFF 0%, #CECECE 200%);
+	background:radial-gradient(circle, #FFFFFF 0%, #CECECE 200%);
+}

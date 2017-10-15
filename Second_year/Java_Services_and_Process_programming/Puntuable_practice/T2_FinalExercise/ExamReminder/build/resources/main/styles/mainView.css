@@ -1,0 +1,41 @@
+/**
+ * Final Exercise - Unit 2 - Service and Process Programming
+ * Ignacio Pastor Padilla - 2º DAM Semi-presincial
+ * Style sheet for main window
+ */
+
+.root {
+    -fx-background-color: #9fdfbe;
+}
+#columnSubject {
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 8;
+}
+#columnDate {
+    -fx-alignment: center;
+}
+#columnMark {
+    -fx-alignment: center-right;
+    -fx-padding: 0 8 0 0;
+}
+.label {
+    -fx-text-fill: #293d3d;
+}
+.button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+.table-row-cell {
+    -fx-background-color: white, #b3cccc;
+}
+.table-row-cell:selected {
+    -fx-background-color: #009933;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+.table-view .column-header {
+    -fx-background-color: linear-gradient(#131313 0%, #424141 100%);
+}
+.table-view .column-header .label {
+    -fx-text-fill: #ccccff;
+}

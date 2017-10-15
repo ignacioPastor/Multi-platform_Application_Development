@@ -1,0 +1,382 @@
+-- DML Geografía Ignacio Pastor, DAM Semi-A
+
+
+-- 1. Mostrar el nombre de cada provincia y la capital de la misma
+
+select pro.nombre provincia, lo.nombre capital
+from provincias pro, localidades lo
+where id_capital = id_localidad;
+
+
+-- 2. Mostrar el nombre de cada localidad, la provincia en la que está y su
+-- comunidad.
+
+select lo.nombre nombre_localidad, pro.nombre nombre_provincia, co.nombre nombre_comunidad
+from localidades lo, provincias pro, comunidades co
+where lo.n_provincia = pro.n_provincia
+and pro.id_comunidad = co.id_comunidad;
+
+
+-- 3. Añade al resultado la capital de cada provincia.
+
+select lo.nombre nombre_localidad, pro.nombre nombre_provincia, 
+	lo_capi.nombre capital_provincia, co.nombre nombre_comunidad
+from localidades lo, provincias pro, comunidades co, localidades lo_capi
+where pro.n_provincia = lo.n_provincia
+and pro.id_comunidad = co.id_comunidad
+and pro.id_capital = lo_capi.id_localidad;
+
+
+-- 4. Y aahora la capital de cada comunidad
+
+select lo.nombre nombre_localidad, pro.nombre nombre_provincia,
+	co.nombre nombre_comunidad, lo_capi_pro.nombre capital_provincia,
+	lo_capi_co.nombre capital_comunidad
+from localidades lo, provincias pro, comunidades co,
+	localidades lo_capi_pro, localidades lo_capi_co
+where lo.n_provincia = pro.n_provincia
+and pro.id_comunidad = co.id_comunidad
+and pro.id_capital = lo_capi_pro.id_localidad
+and co.id_capital = lo_capi_co.id_localidad;
+
+
+-- 5. Mostrar el nombre de las localidades de Oviedo que comiencen con la
+-- letra G.
+-- Igual me he liado yo, Oviedo la he metido como localidad, capital de la
+-- provincia de Asturias, comunidad Principado de Asturias. Si no me equivoco
+-- en el ejercicio se pide las localidades de la provincia (Asturias, en mi caso)
+-- ... si no es así, me he lidado :s
+
+select lo.nombre
+from localidades lo
+where lo.n_provincia = (select n_provincia 
+                            from localidades lo2
+                            where upper(lo2.nombre) = 'OVIEDO')
+and upper(lo.nombre) like 'G%';
+
+
+-- 6. Mostrar todas las localidades que no están ni en Cataluña
+-- ni en Castilla y León.
+
+select lo.nombre
+from localidades lo, provincias pro
+where lo.n_provincia = pro.n_provincia
+and pro.id_comunidad not in (select co.id_comunidad
+				from comunidades co
+				where upper(co.nombre) = 'CATALUÑA'
+				or upper(co.nombre) = 'CASTILLA Y LEÓN');
+
+/*
+--PARA COMPROBAR QUE ESTÁ BIEN
+select lo.nombre, pro.nombre, com.nombre
+from localidades lo, provincias pro, comunidades com
+where lo.n_provincia = pro.n_provincia
+and pro.id_comunidad not in (select co.id_comunidad
+				from comunidades co
+				where upper(co.nombre) = 'CATALUÑA'
+				or upper(co.nombre) = 'CASTILLA Y LEÓN')
+and pro.id_comunidad = com.id_comunidad;
+*/
+
+-- 7. Mostrar el nombre de las ciudades que tengan más habitantes que Cáceres
+
+select *
+from localidades
+where poblacion > (select lo.poblacion
+			from localidades lo
+			where upper(lo.nombre) = 'CÁCERES');
+
+
+-- 8. Mostrar el nombre de la localidad de Asturias que tenga más habitantes
+
+select lo.nombre
+from localidades lo
+where lo.n_provincia = (select pro.n_provincia
+				from provincias pro
+				where upper(pro.nombre) = 'ASTURIAS')
+and lo.poblacion = (select max(lo2.poblacion)
+			from localidades lo2
+			where lo2.n_provincia = (select pro2.n_provincia
+							from provincias pro2
+							where upper(pro2.nombre) = 'ASTURIAS'));
+	
+						
+-- 9. Mostrar el nombre de las ciudades que tienen el mismo nombre
+-- que la provincia en la que están
+
+select lo.nombre
+from localidades lo, provincias pro
+where upper(lo.nombre) = upper(pro.nombre);
+
+
+-- 10. Mostrar capitales de provincia con distinto nombre que el nombre
+-- de su provincia
+
+select lo.nombre
+from localidades lo, provincias pro
+where lo.n_provincia = pro.n_provincia
+and upper(lo.nombre) <> upper(pro.nombre)
+and pro.id_capital = lo.id_localidad;
+
+
+-- 11. Mostrar el nombre de las provincias que tengan más superficie que
+-- cualquiera de las de Cataluña.
+-- Entiendo que hay que incluir las de la propia cataluña, de no ser así, 
+-- habría que añadir al final:
+/*
+and pro.id_comunidad not in (select co2.id_comunidad
+                            from comunidades co2
+                            where upper(co2.nombre) = 'CATALUÑA');
+*/
+select pro.nombre
+from provincias pro
+where superficie >any (select pro1.superficie
+			from provincias pro1
+			where pro1.id_comunidad = (select co.id_comunidad
+							from comunidades co
+							where upper(co.nombre) = 'CATALUÑA'));
+
+-- 12. Mostrar el nombre de las localidades que tengan más habitantes
+-- que su capital de provincia
+
+select lo.nombre
+from localidades lo, provincias pro
+where lo.n_provincia = pro.n_provincia
+and lo.poblacion > (select lo_capi.poblacion
+			from localidades lo_capi
+			where lo_capi.n_provincia = pro.n_provincia
+			and lo_capi.id_localidad = pro.id_capital);
+
+
+-- 13. Mostrar el nombre de las localidades que sean capital de comunidad
+-- y no de provincia.
+
+select lo.nombre
+from localidades lo, comunidades co
+where lo.id_localidad = co.id_capital
+and lo.id_localidad not in (select pro.id_capital
+				from provincias pro);
+
+
+-- 14. Mostrar el nombre de localidades que tengan más del doble de la
+-- población de la capital de Galicia.
+
+select lo.nombre
+from localidades lo
+where lo.poblacion > (2 * (select lo2.poblacion
+				from localidades lo2, comunidades co
+				where lo2.id_localidad = co.id_capital
+				and upper(co.nombre) = 'GALICIA'));
+
+
+-- 15. Mostrar el nombre de las localidades que repital el nombre
+-- Entiendo que hay que mostrar el nombre de las localidades que se llaman
+-- igual que alguna otra localidad.
+
+select distinct nombre
+from localidades
+group by nombre
+having count(*) > 1;
+
+
+-- 16. Obtener las localidades que tienen más población que la ciudad de Palencia
+
+select lo.*
+from localidades lo
+where lo.poblacion > (select lo2.poblacion
+			from localidades lo2
+			where upper(lo2.nombre) = 'PALENCIA');
+
+
+-- 17. Obtener las localidades que tienen más población que la ciudad de Palencia
+-- y menos que la de Valladolid.
+
+select lo.*
+from localidades lo
+where lo.poblacion > (select lo2.poblacion
+			from localidades lo2
+			where upper(lo2.nombre) ='PALENCIA')
+and lo.poblacion < (select lo3.poblacion
+			from localidades lo3
+			where upper(lo3.nombre) = 'VALLADOLID');
+
+
+-- 18. Obtener las localidades que tienen menos población que la
+-- provincia de Palencia.
+-- mmm no hay que almacenar la población de cada provincia en la base de datos,
+-- entiendo que la población de la provincia es la suma de la de todas sus 
+-- localidades? en el hipotético caso de haber cargado todas las localidades
+-- de cada provincia.
+
+select lo.nombre
+from localidades lo
+where lo.poblacion < (select sum(lo2.poblacion)
+			from localidades lo2, provincias pro
+			where lo2.n_provincia = pro.n_provincia
+			and upper(pro.nombre) = 'PALENCIA');
+
+
+-- 19. Consulta que obtenga el nombre de cada provincia y su población
+-- (ordenadas de menor a mayor)
+
+select pro.nombre, (select sum(lo.poblacion)
+                        from localidades lo
+                        where lo.n_provincia = pro.n_provincia) poblacion_provincia
+from provincias pro
+order by pro.nombre;
+
+
+-- 20. Consulta que obtenga el nombre de cada provincia y su población
+-- (ordenadas de menor a mayor)
+-- Se entiende errata en el enunciado y que ahora es de mayor a menor
+
+select pro.nombre, (select sum(lo.poblacion)
+                        from localidades lo
+                        where lo.n_provincia = pro.n_provincia) poblacion_provincia
+from provincias pro
+order by pro.nombre desc;
+
+
+-- 21. Consulta que obtenga el nombre de las provincias que tengan menos
+-- superficie que la provincia más pequeña de Galicia.
+
+select pro.nombre
+from provincias pro
+where pro.superficie < (select min(pro2.superficie)
+				from provincias pro2
+				where pro2.id_comunidad = (select co.id_comunidad
+								from comunidades co
+								where upper(co.nombre) = 'GALICIA'));
+
+
+-- 22. Consulta que obtenga el nombre de las comunidades autónomas
+-- formadas por una sola provincia.
+
+select co.nombre
+from comunidades co, provincias pro
+where pro.id_comunidad = co.id_comunidad
+group by pro.id_comunidad, co.nombre
+having count(*) = 1;
+
+
+-- 23. Consulta que obtenga el nombre de la provincia con más población
+
+select pro.nombre
+from provincias pro
+where (select sum(lo.poblacion)
+	from localidades lo
+	where lo.n_provincia = pro.n_provincia)
+= (select max(sum(lo2.poblacion))
+	from localidades lo2
+	where lo2.n_provincia = pro.n_provincia);
+
+
+-- 24) Consulta que obtenga el nombre de las provincias con menos densidad
+-- (población en superficie) que la media española. (Debes apoyarte en una
+-- Vista que contenga la provincia, superficie y población de la provincia para
+-- realizar la consulta).
+
+create or replace view provincias_densidad
+(provincia, superficie, poblacion_provincia)
+as select pro.nombre, pro.superficie, sum(lo.poblacion)
+    from provincias pro, localidades lo
+    where lo.n_provincia = pro.n_provincia
+    group by pro.n_provincia, pro.nombre, pro.superficie;
+
+select provincia
+from provincias_densidad
+where (poblacion_provincia/superficie) <
+	(select (sum(poblacion_provincia/superficie) / count(*))
+		from provincias_densidad);
+	
+
+/*
+25) Realiza una vista materializada, que se actualice cada 20 minutos, se
+ejecute inmediatamente y realízala de todas las provincias que sean capital
+de comunidad y de provincia o que lo sean de provincia pero de comunidad
+no o que sean las localidades situada en la provincia de mayor superficie y
+además de todo lo demás que la Comunidad empieza por consonante y a
+todo esto quítale las provincias que sean de Comunidades con una sola
+provincia. Debes usar Conjuntos y al menos 1 EXISTS
+
+-----creo que hay una errata en el enunciado, segunda línea, dice "de todas
+las provincias que sean capital de comunidad y de provincia", se referirá
+supongo a "todas las localidades que sean..."
+*/
+
+create materialized view log on localidades
+with primary key
+including new values;
+
+create materialized view log on provincias
+with primary key
+including new values;
+
+create materialized view log on comunidades
+with primary key
+including new values;
+
+
+
+create materialized view ejercicio_vistas_25
+build immediate
+refresh start with sysdate next sysdate + (2/1440)
+as (
+select distinct lo.*
+from localidades lo, provincias pro, comunidades co
+where lo.id_localidad = pro.id_capital
+		and lo.id_localidad = co.id_capital
+	or lo.id_localidad = pro.id_capital
+		and lo.id_localidad <> co.id_capital
+	or lo.n_provincia = (select pro2.n_provincia
+				from provincias pro2
+				where pro2.superficie = (select max(pro3.superficie)
+								from provincias pro3))
+intersect
+select lo.*
+from localidades lo, provincias pro, comunidades co
+where lo.n_provincia = pro.n_provincia
+and pro.id_comunidad = co.id_comunidad
+and exists (select 1
+					from comunidades co2
+					where co.id_comunidad = co2.id_comunidad
+                        			and upper(co2.nombre) not like 'A%'
+						and upper(co2.nombre) not like 'E%'
+						and upper(co2.nombre) not like 'I%'
+						and upper(co2.nombre) not like 'O%'
+						and upper(co2.nombre) not like 'U%')
+minus
+select distinct lo.*
+from localidades lo, provincias pro2
+where lo.n_provincia in (select pro.n_provincia
+				from provincias pro, comunidades co
+				where pro.id_comunidad = co.id_comunidad
+				group by co.id_comunidad, pro.n_provincia
+				having count(*) = 1)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

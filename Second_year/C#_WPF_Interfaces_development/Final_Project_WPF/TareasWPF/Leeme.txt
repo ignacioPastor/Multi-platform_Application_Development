@@ -1,0 +1,16 @@
+Ignacio Pastor Padilla
+
+
+Para el control DateTimePicker utilizo Extended WPF Toolkit,
+se descarga por el administrador de paquetes Nuget.
+En caso de que de error en otro equipo probar a descargar el paquete.
+
+Error en modificar tareas
+Si modificas dos campos a la vez, no se modifica la tarea. Sí que se modifica
+si sólo cambias un solo campo cada vez.
+ Se pueden modificar todos los campos, pero de uno en uno.
+ Quien lo entienda que lo compre, yo
+me he pasado un día y no ha habido narices a ver porqué si es un binding
+no hace una update que modifique dos campos.
+En mi BD iba bien, pero ahora la he medio ajustado con
+el script que pasaste y ahora tampoco va, y tampoco he sabido por qué.

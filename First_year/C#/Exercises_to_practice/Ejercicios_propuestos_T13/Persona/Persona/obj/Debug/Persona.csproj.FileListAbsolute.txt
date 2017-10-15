@@ -1,0 +1,9 @@
+C:\Users\Ignacio\Desktop\DAM\Programacion\previo 3er trimestre\Tema 6\Ejercicios Resueltos\Persona\Persona\bin\Debug\Persona.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\previo 3er trimestre\Tema 6\Ejercicios Resueltos\Persona\Persona\obj\Debug\Persona.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\previo 3er trimestre\Tema 6\Ejercicios Resueltos\Persona\Persona\obj\Debug\Persona.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Persona\Persona\bin\Debug\Persona.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Persona\Persona\obj\Debug\Persona.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Persona\Persona\obj\Debug\Persona.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Persona\Persona\bin\Debug\Persona.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Persona\Persona\bin\Debug\Persona.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Persona\Persona\obj\Debug\Persona.csprojResolveAssemblyReference.cache

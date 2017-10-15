@@ -1,0 +1,6 @@
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E1\T9_E1\bin\Debug\T9_E1.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E1\T9_E1\bin\Debug\T9_E1.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E1\T9_E1\bin\Debug\T9_E1.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E1\T9_E1\obj\Debug\T9_E1.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E1\T9_E1\obj\Debug\T9_E1.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\A_IgnacioPastorPadilla_PT9\T9_E1\T9_E1\obj\Debug\T9_E1.pdb

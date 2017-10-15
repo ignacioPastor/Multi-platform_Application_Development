@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/ver_amigos"
+            android:icon="@android:drawable/ic_menu_view"
+            android:title="Ver Amigos" />
+            android:title="Gallery" />
+    </group>
+
+    <item android:title="Personalizar">
+        <menu>
+            <item
+                android:id="@+id/editar_preferencias"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Preferencias" />
+        </menu>
+    </item>
+
+</menu>

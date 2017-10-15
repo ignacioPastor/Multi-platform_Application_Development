@@ -1,0 +1,15 @@
+/**
+ * Final Exercise - Unit 2 - Service and Process Programming
+ * Ignacio Pastor Padilla - 2º DAM Semi-presincial
+ * Style sheet for login window
+ */
+.root {
+    -fx-background-color: #143926;
+}
+.label {
+    -fx-text-fill: #c2d6d6;
+}
+.button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}

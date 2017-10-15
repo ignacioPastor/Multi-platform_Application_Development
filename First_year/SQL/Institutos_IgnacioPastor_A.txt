@@ -1,0 +1,347 @@
+--INSTITUTOS_IgnacioPastor_A
+
+
+CREATE TABLE comarques (
+    nom_c varchar2(50) NOT NULL,
+    provincia varchar2(25)
+);
+
+
+CREATE TABLE instituts (
+    codi varchar2(8) NOT NULL,
+    nom varchar2(60),
+    adreca varchar2(100),
+    numero varchar2(5),
+    codpostal number(5),
+    localitat varchar2(50)
+);
+
+
+CREATE TABLE poblacions (
+    nom varchar2(50) NOT NULL,
+    poblacio number(6),
+    extensio number(6,2),
+    altura number(4),
+    longitud varchar2(50),
+    lat varchar2(50),
+    llengua varchar2(1),
+    nom_c varchar2(50)
+);
+
+ALTER TABLE comarques
+    ADD CONSTRAINT PK_COMARQUES PRIMARY KEY (nom_c);
+
+ALTER TABLE instituts
+    ADD CONSTRAINT PK_INSTITUS PRIMARY KEY (codi);
+
+ALTER TABLE poblacions
+    ADD CONSTRAINT PK_POBLACIONS PRIMARY KEY (nom);
+
+
+ALTER TABLE instituts
+    ADD CONSTRAINT FK_ins_pob FOREIGN KEY (localitat) REFERENCES poblacions(nom);
+
+ALTER TABLE poblacions
+    ADD CONSTRAINT FK_pob_com FOREIGN KEY (nom_c) REFERENCES comarques(nom_c);
+
+
+------------------------------------------------------------------------------------------
+--Prácticas 5.1 SELECT
+
+
+-- 1.- Obtén el nombre de los pueblos, población, extensión y densidad de población
+-- (la densidad se ha de calcular).
+
+select nom, poblacio, extensio, (poblacio/extensio) densitat
+from poblacions
+order by nom;
+
+
+-- 2.- Saca las distintas localidades donde haya institutos
+-- (cada localidad solo ha de salir una vez).
+
+select distinct po.nom localitat
+from poblacions po, instituts ins
+where po.nom = ins.localitat
+order by po.nom;
+
+
+-- 3.- Saca las poblaciones de habla valenciana que
+-- estén a más de 1.000 de altura.
+
+select *
+from poblacions
+where altura > 1000
+and llengua = 'V'
+order by nom;
+
+
+-- 4.- Saca las poblaciones de una densidad de población de más
+-- de 200 h/Km2 y una altura de más de 500 m.
+
+select *
+from poblacions
+where (poblacio/extensio) > 200
+and altura > 500;
+
+
+-- 5.- Saca el número de comarcas de cada provincia.
+
+select provincia, count(*) num_comarques
+from comarques
+group by provincia;
+
+
+-- 6.- Saca todas las poblaciones, ordenadas por comarca,
+-- y dentro de la misma comarca por nombre.
+
+select nom, nom_c
+from poblacions
+order by nom_c, nom;
+
+
+-- 7.- Saca las poblaciones de la comarca de l'Alt Maestrat,
+-- ordenadas por altura de forma descendente.
+
+select nom, nom_c, altura
+from poblacions
+where upper(nom_c) = 'L\'ALT MAESTRAT' 
+order by altura desc;
+
+
+--------------------------------------------------------------------------------------------
+--Prácticas 5.2 AGRUPACIONES
+-- 1.- Calcular el número de Institutos de cada población.
+-- Solamente obtener aquellas poblaciones que tienen institutos
+
+select po.nom, count(*)
+from poblacions po, instituts ins
+where po.nom = ins.localitat
+group by po.nom;
+
+-- 2.- Saca las comarcas de más de 100.000 habitantes.
+
+select nom_c, sum(poblacio) total_habitants
+from poblacions
+group by nom_c
+having sum(poblacio) > 100000
+order by nom_c;
+
+
+-- 3.- Saca la densidad de población de cada comarca
+-- ordenada por esta de forma descendente.
+
+select nom_c, round((sum(poblacio)/sum(extensio)),2) densitat
+from poblacions
+group by nom_c
+order by densitat desc;
+
+
+-- 4. Cuenta cuantas lenguas son originarias de cada comarca.
+
+select nom_c, count(*)
+from(
+select nom_c, llengua
+from poblacions
+group by nom_c, llengua
+)
+group by nom_c
+order by nom_c;
+
+
+------------------------------------------------------------------------------------
+--Prácticas 5.3 Inner/Outer Join
+
+-- 1. Saca todas las poblaciones, ordenadas por provincia, dentro de la misma
+-- provincia pro comarca, y dentro de cada comarca por nombre de la población.
+
+select po.nom, co.nom_c, co.provincia
+from poblacions po, comarques co
+where po.nom_c = co.nom_c
+order by co.provincia, co.nom_c, po.nom; 
+
+
+-- 2. Saca el número de habitantes de cada población y su cantidad de
+-- institutos (incluyendo los que no tienen)
+
+select po.nom, po.poblacio, count(*)
+from poblacions po, instituts ins
+where po.nom = ins.localitat
+group by po.nom, po.poblacio
+union
+select distinct po.nom, po.poblacio, 0
+from poblacions po, instituts ins
+where po.nom not in (select ins2.localitat 
+                        from instituts ins2);
+
+
+-- 3. Saca el número de habitantes por instituto de aquellas poblaciones
+-- que tienen instituto.
+
+select po.nom, po.poblacio, count(*) num_institutos,
+	round(po.poblacio/count(*)) hab_inst
+from poblacions po, instituts inst
+where po.nom = inst.localitat
+group by po.nom, po.poblacio
+order by po.nom;
+
+
+-- 4. Saca cuántos pueblos hablan valenciano en cada comarca, indicando
+-- también la provincia.
+
+select co.nom_c, count(*) quants, co.provincia
+from poblacions po, comarques co
+where co.nom_c = po.nom_c
+group by llengua, co.nom_c, co.provincia
+having llengua = 'V'
+order by co.nom_c;
+
+
+-- 5. Saca las comarcas y el nombre de los institutos de cada comarca,
+-- incluyendo aquellos que no tienen ninguno.
+-- por lo que veo en el ejemplo, entiendo "nombre" como número en valenciano
+
+select co.nom_c, count(ins.localitat)
+from comarques co, poblacions po, instituts ins
+where co.nom_c = po.nom_c
+and po.nom = ins.localitat(+)
+group by po.nom_c
+order by co.nom_c;
+
+--Como lo estaba haciendo antes... :s
+select co.nom_c, count(*)
+from comarques co, poblacions po, instituts ins
+where co.nom_c = po.nom_c
+and po.nom = ins.localitat
+group by po.nom_c
+UNION
+select co.nom_c, 0
+from comarques co
+where co.nom_c not in (select co.nom_c
+from comarques co, poblacions po, instituts ins
+where co.nom_c = po.nom_c
+and po.nom = ins.localitat
+group by po.nom_c);
+
+
+----------------------------------------------------------------------------------
+--Prácticas 5.4 Subconsultas
+
+-- 1. Saca los pueblos con más habitantes que la media
+
+select po.nom, po.poblacio
+from poblacions po
+where po.poblacio > (select avg(po2.poblacio)
+			from poblacions po2)
+order by po.nom;
+
+
+-- 2. Saca toda la información del pueblo con menos habitantes
+-- que tenga instituto.
+
+select *
+from poblacions po, instituts
+where po.nom = localitat
+and po.poblacio = (select min(po2.poblacio)
+			from poblacions po2, instituts ins
+			where po2.nom = ins.localitat);
+
+
+-- 3. Saca los pueblos de más de 2000 habitantes que no tengan instituto
+
+select nom, poblacio
+from poblacions
+where poblacio > 2000
+and nom not in (select localitat
+			from instituts)
+order by nom;
+
+
+-- 4. Saca cuántos pueblos hablan valenciano en cada Comarca,
+-- incluso aquellos que no tienen ninguno.
+-- Realizala de dos maneras:
+
+-- a) Sin subconsultas con outer join
+
+--NO CONSIGO SACAR LOS 0-----------------------------------------------------------------------------------
+select co.nom_c, count(po.nom_c), co.provincia
+from comarques co, poblacions po
+where co.nom_c = po.nom_c(+)
+and po.llengua = 'V'
+group by co.nom_c, co.provincia
+order by co.nom_c;
+
+
+select co.nom_c, count(*), co.provincia
+from comarques co, poblacions po
+where co.nom_c = po.nom_c
+and po.llengua = 'V'
+group by co.nom_c, po.llengua, co.provincia
+UNION
+select nom_c, 0, provincia
+from comarques
+where nom_c not in (select co.nom_c
+from comarques co, poblacions po
+where co.nom_c = po.nom_c
+and po.llengua = 'V');
+
+-- b) Con una select simple de Comarques y usando una subconsulta
+-- en la propia línea de la select
+--NO SÉ QUE HACER AQUÍ-----------------------------------------------------------------------------------
+select co.nom_c, 0, co.provincia
+from comarques co
+where 
+
+
+
+-- 5. Saca las comarcas que tienen más institutos que la media
+
+select co.nom_c, count(*) num_instituts
+from comarques co, poblacions po, instituts ins
+where co.nom_c = po.nom_c
+and po.nom = ins.localitat
+group by co.nom_c
+having count(*) > (select avg(count(*))
+			from comarques co2, poblacions po2, instituts ins2
+			where co2.nom_c = po2.nom_c
+			and po2.nom = ins2.localitat
+			group by co2.nom_c);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

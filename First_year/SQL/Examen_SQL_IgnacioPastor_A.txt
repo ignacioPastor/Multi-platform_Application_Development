@@ -1,0 +1,229 @@
+--Examen_SQL_IgnacioPastor_A
+
+
+------------------------------------------------------------------------------------------------------------
+--MUNDIAL
+
+-- 1- Obtén la selección que más goles ha marcado en todos los Mundiales,
+-- indistintamente si el partido lo jugó de local o de visitante,
+-- debe aparecer junto a dicha selección, los goles totales marcados y el
+-- número de partidos que jugó para marcarlos (2,5 ptos).
+-- NOTA: Recuerda que los goles marcados por el EQUIPO_L están en RESULTADO_L
+-- y del EQUIPO_V en RESULTADO_V.
+
+select equip.equipo, (sum(gol.equipo_L_gol) + sum(gol.equipo_L_gol)) goles_marcado, count(*) partidos_jugados
+from equipos equip, partido par, jugar ju, gol
+where equip.equipo = par.equipo_L
+	or equip.equipo = par.equipo_V
+and par.equipo_L = ju.equipo_L_part
+and par.equipo_V = ju.equipo_V_part
+and par.fecha = ju.fecha_part
+and ju.equipo_L_part = gol.equipo_L_gol
+and ju.equipo_V_part = gol.equipo_V_gol
+and ju.fecha_part = gol.fecha_gol
+group by gol.equipo_L_gol, gol.equipo_V_gol;
+
+
+
+
+
+-- 1- Obtén la selección que más goles ha marcado en todos los Mundiales,
+-- indistintamente si el partido lo jugó de local o de visitante,
+-- debe aparecer junto a dicha selección, los goles totales marcados y el
+-- número de partidos que jugó para marcarlos (2,5 ptos).
+-- NOTA: Recuerda que los goles marcados por el EQUIPO_L están en RESULTADO_L
+-- y del EQUIPO_V en RESULTADO_V.
+
+
+
+select equipo, sum(decode(equipo,
+                        equipo_L, resultado_L,
+                        equipo_V, resultado_V,
+                        0)) goles_marcados, count(*) partidos_jugados
+from equipos, partido
+where equipo = equipo_L
+    or equipo = equipo_V
+group by equipo
+having sum(decode(equipo,
+            equipo_L, resultado_L,
+            equipo_V, resultado_V,
+            0)) = (select max(sum(decode(equipo,
+                                    equipo_L, resultado_L,
+                                    equipo_V, resultado_V,
+                                    0)))
+                        from equipos, partido
+                        where equipo = equipo_L or equipo = equipo_V
+                        group by equipo);
+
+
+-- 2- Desde la FIFA te indican que han encontrado errores en la base de datos,
+-- te solicitan que indiques todos los datos de los partidos donde los goles
+-- indicados en el resultado de dicho partido no coincidan con los goles
+-- marcados por los jugadores en el mismo.
+-- (1,25 ptos) (Pista: Cuidado con los resultados 0-0)
+
+select *
+from partido
+where (equipo_L, equipo_V, fecha) not in
+(
+    select equipo_L, equipo_V, fecha from
+    (
+        select equipo_L, equipo_V, fecha, (resultado_L + resultado_V) goles
+        from partido
+        INTERSECT
+        (
+            select equipo_L_gol, equipo_V_gol, fecha_gol, count(minuto) goles
+            from gol
+            group by equipo_L_gol, equipo_V_gol, fecha_gol
+            UNION
+            (
+                select equipo_L, equipo_V, fecha, 0 goles
+                from partido
+                MINUS
+                select equipo_L_gol, equipo_V_gol, fecha_gol, 0 goles
+                from gol
+                group by equipo_L_gol, equipo_V_gol, fecha_gol
+            )
+        )
+    )
+);
+
+
+-- 3. Obtén el jugador que más goles ha marcado jugando como delantero en el
+-- mundial 2010 y jugando menos de 470 minutos en todos sus partidos. Debes
+-- obtener el jugador y la cantidad de goles marcados.
+
+select nombre_jug, count(*) goles_marcados
+from jugar, gol
+where nombre_jug = jugador_gol
+and puesto_jugar = 'DL'
+and nombre_jug in (select nombre_jug
+                        from jugar
+                        group by nombre_jug
+                        having sum(min_jugar) < 470)
+and to_char(fecha_gol, 'yyyy') = 2010
+group by jugador_gol, nombre_jug
+having count(*) = (select max(count(*))
+                        from gol
+                        where to_char(fecha_gol, 'yyyy') = 2010
+                        group by jugador_gol);
+
+
+-- 4- Saca el nombre del jugador, cuantos goles ha marcado y cuantos minutos ha jugado en todos los
+-- mundiales en el caso que no haya marcado ningún gol o no haya jugado ningún partido también debe
+-- salir indicando 0 en cada caso. Debes ordenar por numero de minutos descendentemente y por numero
+-- de goles ascendentemente usando alias para ambos campos, se llamaran goles y minutos. (2 ptos).
+
+
+select jug.nombre, count(jugador_gol) goles, (select sum(jur2.min_jugar)
+                                                            from jugador jug2, jugar jur2
+                                                            where jug2.nombre = jur2.nombre_jug(+)
+                                                            and jug2.nombre = jug.nombre
+                                                            group by jur2.nombre_jug, jug2.nombre) minutos
+from jugador jug, gol
+where jug.nombre = jugador_gol(+)
+group by jugador_gol, jug.nombre
+order by minutos desc, goles;
+
+
+-- 5- Obtén el nombre ordenado descendente de cada selección juntos con los
+-- partidos que ha ganado como local y con los partidos que ha ganado como
+-- visitante.
+
+select equip.equipo, count(*) victorias_local, (select count(*)
+                                                        from equipos equip2, partido par2
+                                                        where equip2.equipo = par2.equipo_V
+                                                        and equip.equipo = equip2.equipo
+                                                        and par2.resultado_V > par2.resultado_L
+                                                        group by equip2.equipo) victorias_visitante
+from equipos equip, partido par
+where equip.equipo = par.equipo_L
+and par.resultado_L > par.resultado_V
+group by equip.equipo
+order by equip.equipo desc;
+
+
+-- 6- Inserta 1 laboratorio y 1 federativo inventándote los datos. Para luego
+-- con este laboratorio y este federativo, inserta análisis antidoping para
+-- cada partido del Mundial, de modo que se harán el control en cada partido
+-- todos aquellos jugadores que más minutos han jugado en cada partido,
+-- quedando exentos (es decir, quitando) aquellos jugadores que ya lleven
+-- hechos más de 5 análisis.
+
+--PARA CHECKEAR
+select * from analisis ana order by ana.jugador;
+
+select ana.jugador, count(*) n_analisis
+from analisis ana
+group by ana.jugador
+order by n_analisis desc;
+
+delete analisis;
+
+
+--NO ME RESPETA EL QUE NO HAGA MÁS ANÁLISIS CUANDO YA LLEVA 5
+--DE HECHO, ESTÁ MAL LA PARTE DE ABAJO DEL MINUS
+insert into analisis(
+select ju.nombre_jug, ju.equipo_L_part, ju.equipo_V_part, ju.fecha_part, '4BC', 0123
+from jugar ju
+where ju.min_jugar = (select max(ju2.min_jugar)
+			from jugar ju2
+			where ju2.equipo_L_part = ju.equipo_L_part
+			and ju2.equipo_V_part = ju.equipo_V_part
+			and ju2.fecha_part = ju.fecha_part)
+MINUS
+select ju.nombre_jug, ju.equipo_L_part, ju.equipo_V_part, ju.fecha_part, '4BC', 0123
+from jugar ju, analisis ana
+where ju.nombre_jug = ana.jugador
+and ju.equipo_L_part = ana.equipo_L
+and ju.equipo_V_part = ana.equipo_V
+and ju.fecha_part = ana.fecha_part
+and cif = '4BC'
+group by ju.nombre_jug, ju.equipo_L_part, ju.equipo_V_part, ju.fecha_part, cif
+having count(*) > 5
+);
+
+--NO ME RESPETA EL QUE NO HAGA MÁS ANÁLISIS CUANDO YA LLEVA 5
+insert into analisis(
+select ju.nombre_jug, ju.equipo_L_part, ju.equipo_V_part, ju.fecha_part, '4BC', 0123
+from jugar ju
+where ju.min_jugar = (select max(ju2.min_jugar)
+			from jugar ju2
+			where ju2.equipo_L_part = ju.equipo_L_part
+			and ju2.equipo_V_part = ju.equipo_V_part
+			and ju2.fecha_part = ju.fecha_part)
+and ju.nombre_jug not in (select ana.jugador
+                                from analisis ana
+                                group by ana.jugador
+                                having count(*) > 5)
+);
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--STAR WARS
+
+-- 7. Temporadas que haya abarcado más de 1 película y en cuyas actuaciones haya
+-- participado personajes que haya participado en más de 2 derribos, ya sea
+-- como derribado o como el que derriba.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

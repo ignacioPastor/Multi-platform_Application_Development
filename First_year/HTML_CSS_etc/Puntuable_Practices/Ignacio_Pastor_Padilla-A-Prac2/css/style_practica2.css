@@ -1,0 +1,152 @@
+/* Ignacio Pastor Padilla - CSS relativo a la Práctica 2 Lenguaje de Marcas */
+
+
+@charset "utf-8";
+/* CSS Document*/
+
+
+* {
+	margin: 0; 
+	padding: 0;
+	
+} /* Selector universal*/
+
+body{
+	background: url("../imgs/old_map.png") repeat scroll;
+	padding-top:8px;
+	padding-bottom: 20px;
+}
+
+h1{
+	background: url("../imgs/logo.png") no-repeat;
+	padding-left: 2.1em;
+	padding-bottom:0.7em;
+}
+
+h2{
+	padding: 10px 10px 10px 10px; 
+	font-size: 1.2em;
+}
+										/* Para coger toda la página */
+#pagina{
+	width: 960px;
+	margin: 0 auto;
+}
+										/* Cabecera */
+#header{
+	background-color: #313B44;
+	font-family: courier;
+	font-size: 1.1em;
+	color: white;
+	padding-left:1.3em;
+	padding-top:0.8em;
+	border-bottom: 6px black solid;
+}
+										/* Barra Menú */
+#navcontainer{
+	font-family: courier;
+	font-size: 1.4em;
+	color: silver;
+	text-align: center;
+	background: url("../imgs/red015.jpg") repeat;
+	height: 50px;
+	padding-top:90px;
+}
+
+#navcontainer ul{
+	list-style-type:none;
+}
+
+#navcontainer ul li{
+	display: inline;
+	padding-top: 10em;
+	padding-left:4em;
+	padding-right:4em;
+}
+
+#navcontainer ul li a.active{
+	color:grey;
+}
+
+#navcontainer ul li a{ 
+	text-decoration:none;/*Quitamos las características del enlace por defecto*/
+	color: #FF6600;
+	padding-top: 8em;
+}
+
+#navcontainer ul li a:hover{ /*Estado del link cuando el ratón pasa por encima*/
+	color: white;
+	
+}
+				/* Para añadir la imagen a cada elemento del menú */
+#contenidos{
+	background: url("../imgs/book.png") no-repeat center;
+	padding-bottom:3em;
+}
+
+#videos{
+	background: url("../imgs/film.png") no-repeat center;
+	padding-bottom:3em;
+}
+
+#contacto{
+	background: url("../imgs/mail.png") no-repeat center;
+	padding-bottom:3em;
+}
+
+										/* Cuerpo de la página */
+#content{
+	font-family: Verdana;
+	font-size: 0.8em;
+	background: url("../imgs/lgrey008.jpg") repeat;
+	overflow: hidden;
+}
+
+
+
+.article{
+	width: 240px;
+	border: 1px #d3d3d3 solid; /* lightgray es #d3d3d3*/
+	background: white;
+	line-height: 1.8em;
+	padding: 5px 5px 22px 5px;
+	margin: 30px;
+	float: left;
+	height: 35em;
+}
+
+.logos_article{
+	width: 100%;
+}
+
+.article_header{
+	padding: 10px 10px 10px 10px; 
+	border-bottom: 1px solid #999999;
+	text-align: center;
+	
+}
+.article_body{
+	padding: 10px 10px 10px 10px; 
+	
+	text-align: center;
+}
+
+							/* Pie de la página */
+#footer{
+	
+	clear: left; /*Para que se coloque debajo de los elementos flotantes*/
+	color: white;
+	font-size: 0.7em;
+	background: #313B44;
+	border-top: 6px black solid;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+
+/* Enlace del pie de la página */
+.ies{
+	color:white;
+}
+

@@ -1,0 +1,49 @@
+I/O Lectura
+RAM
+ALU
+I/O Escritura
+RAM
+RAM
+ALU
+RAM
+ALU
+I/O Lectura
+I/O Lectura
+I/O Lectura
+RAM
+ALU
+ALU
+RAM
+I/O Escritura
+I/O Lectura
+RAM
+ALU
+ALU
+RAM
+I/O Escritura
+I/O Lectura
+RAM
+ALU
+ALU
+RAM
+I/O Escritura
+I/O Lectura
+RAM
+ALU
+ALU
+RAM
+I/O Escritura
+RAM
+RAM
+ALU
+ALU
+RAM
+RAM
+ALU
+ALU
+I/O Lectura
+RAM
+ALU
+ALU
+RAM
+I/O Escritura

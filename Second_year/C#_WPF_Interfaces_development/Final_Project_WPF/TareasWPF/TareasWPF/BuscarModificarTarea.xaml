@@ -1,0 +1,120 @@
+﻿<Window x:Class="TareasWPF.BuscarModificarTarea"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TareasWPF"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Title="BuscarModificarTarea" Height="738" Width="575">
+    <Window.Resources>
+
+        <CollectionViewSource  x:Key="MisTareas"  Source="{Binding}" />
+
+        <Style x:Key="style1" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Red" />
+        </Style>
+        <Style x:Key="bordeProduct" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#2100f2"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="GridTareas" Margin="10,10,10,5">
+
+        <Grid.Resources>
+            <DataTemplate x:Key="TareaTemplate">
+                <Border Style="{StaticResource bordeProduct}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110" />
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="104"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Id Tarea:"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=IdTarea}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Nombre:"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=Nombre}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Descripción:"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=Descripcion}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Fecha:"/>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=FechaAlta}"/>
+
+                        <TextBlock Grid.Column="2" Grid.Row="0" Text="Nombre Usuario:"/>
+                        <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Path=MyUsuario.Nombre}"/>
+
+                        <TextBlock Grid.Column="2" Grid.Row="1" Text="Apellidos Usuario: "/>
+                        <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Path=MyUsuario.Apellidos}"/>
+
+                        <TextBlock Grid.Column="2" Grid.Row="2" Text="Proyecto:"/>
+                        <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Path=MyProyecto.Nombre}"/>
+
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </Grid.Resources>
+        <ListView  Margin="10,10,0,344" Background="White" Width="Auto"
+                ItemsSource="{Binding Source={StaticResource MisTareas}}" x:Name="MyListview"
+                ItemTemplate="{StaticResource TareaTemplate}"
+                IsSynchronizedWithCurrentItem="True" >
+        </ListView>
+        <TextBox x:Name="tbProyecto" TabIndex="3" TextChanged="tbProyecto_TextChanged" HorizontalAlignment="Left" Height="23" Margin="92,350,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="19,352,0,0" TextWrapping="Wrap" Text="Proyecto:" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbNombreUsuario" TabIndex="1" TextChanged="tbNombreUsuario_TextChanged" HorizontalAlignment="Left" Height="23" Margin="368,350,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158"/>
+        <TextBox x:Name="tbApellidosUsuario" TabIndex="2" TextChanged="tbApellidosUsuario_TextChanged" HorizontalAlignment="Left" Height="23" Margin="368,383,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="253,352,0,0" TextWrapping="Wrap" Text="Nombre Usuario:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="253,384,0,0" TextWrapping="Wrap" Text="Apellidos Usuario" VerticalAlignment="Top"/>
+
+        <Grid DataContext="{Binding Source={StaticResource MisTareas}}" Margin="0,-45,0,-11">
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="19,432,0,0" TextWrapping="Wrap" Text="Id Tarea:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="19,456,0,0" TextWrapping="Wrap" Text="Nombre Tarea:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="19,586,0,0" TextWrapping="Wrap" Text="Descripción:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="19,476,0,0" TextWrapping="Wrap" Text="Fecha alta:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="19,496,0,0" TextWrapping="Wrap" Text="Duración:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="18,535,0,0" TextWrapping="Wrap" Text="Tipo Tarea:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="19,553,0,0" TextWrapping="Wrap" Text="Urgente:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="253,467,0,0" TextWrapping="Wrap" Text="Nombre Usuario:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="253,486,0,0" TextWrapping="Wrap" Text="Apellidos Usuario:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="253,506,0,0" TextWrapping="Wrap" Text="Nombre Proyecto:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock13" HorizontalAlignment="Left" Margin="19,515,0,0" TextWrapping="Wrap" Text="Duración real:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock31" HorizontalAlignment="Left" Margin="253,526,0,0" TextWrapping="Wrap" Text="Aviso:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock14" HorizontalAlignment="Left" Margin="253,546,0,0" TextWrapping="Wrap" Text="Cuando Avisar::" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="253,565,0,0" TextWrapping="Wrap" Text="Terminada:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock16" HorizontalAlignment="Left" Margin="23,653,0,0" TextWrapping="Wrap" Text="Comentarios:" VerticalAlignment="Top"/>
+
+        <TextBlock x:Name="tbIdTarea" HorizontalAlignment="Left" Margin="103,432,0,0" TextWrapping="Wrap" Text="{Binding Path=IdTarea}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbNombreTarea" HorizontalAlignment="Left" Margin="103,456,0,0" TextWrapping="Wrap" Text="{Binding Path=Nombre}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDescripcion" HorizontalAlignment="Left" Margin="103,586,0,0" TextWrapping="Wrap" Text="{Binding Path=Descripcion}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbFechaAlta" HorizontalAlignment="Left" Margin="103,475,0,0" TextWrapping="Wrap" Text="{Binding Path=FechaAlta}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDuracion" HorizontalAlignment="Left" Margin="103,496,0,0" TextWrapping="Wrap" Text="{Binding Path=DuracionEstimada}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbTipo" HorizontalAlignment="Left" Margin="103,535,0,0" TextWrapping="Wrap" Text="{Binding Path=Tipo}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbUrgente" HorizontalAlignment="Left" Margin="103,553,0,0" TextWrapping="Wrap" Text="{Binding Path=Urgente}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbNombreUsuarioDetalle" HorizontalAlignment="Left" Margin="359,467,0,0" TextWrapping="Wrap" Text="{Binding Path=MyUsuario.Nombre}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbApellidosUsuarioDetalle" HorizontalAlignment="Left" Margin="359,486,0,0" TextWrapping="Wrap" Text="{Binding Path=MyUsuario.Apellidos}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbNombreProyectoDetalle" HorizontalAlignment="Left" Margin="359,506,0,0" TextWrapping="Wrap" Text="{Binding Path=MyProyecto.Nombre}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbAviso" HorizontalAlignment="Left" Margin="359,529,0,0" TextWrapping="Wrap" Text="{Binding Path=Aviso}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDuracionReal" HorizontalAlignment="Left" Margin="103,515,0,0" TextWrapping="Wrap" Text="{Binding Path=DuracionReal}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbCuandoAvisar" HorizontalAlignment="Left" Margin="359,546,0,0" TextWrapping="Wrap" Text="{Binding Path=CuandoAvisar}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbTerminada" HorizontalAlignment="Left" Margin="359,565,0,0" TextWrapping="Wrap" Text="{Binding Path=Terminada}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbComentarios" HorizontalAlignment="Left" Margin="103,653,0,0" TextWrapping="Wrap" Text="{Binding Path=Comentarios}" VerticalAlignment="Top"/>
+        </Grid>
+        <Button x:Name="bEnviar" TabIndex="4" Content="Seleccionar" Click="bEnviar_Click"  HorizontalAlignment="Left" Margin="452,645,0,0" VerticalAlignment="Top" Width="75"/>
+
+
+
+
+    </Grid>
+</Window>

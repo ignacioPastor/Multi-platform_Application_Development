@@ -1,0 +1,6 @@
+C:\Users\Ignacio\Desktop\Tetris2\Tetris2\bin\Debug\Tetris2.exe.config
+C:\Users\Ignacio\Desktop\Tetris2\Tetris2\bin\Debug\Tetris2.exe
+C:\Users\Ignacio\Desktop\Tetris2\Tetris2\bin\Debug\Tetris2.pdb
+C:\Users\Ignacio\Desktop\Tetris2\Tetris2\obj\Debug\Tetris2.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\Tetris2\Tetris2\obj\Debug\Tetris2.exe
+C:\Users\Ignacio\Desktop\Tetris2\Tetris2\obj\Debug\Tetris2.pdb

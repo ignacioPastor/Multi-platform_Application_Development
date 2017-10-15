@@ -1,0 +1,49 @@
+﻿<Window x:Class="TareasWPF.RecabarDatosInforme"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TareasWPF"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Title="InformeMensual" Height="700" Width="900">
+    <Grid Margin="0,0,0,-3" Height="672" VerticalAlignment="Top">
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="56,586,0,0" TextWrapping="Wrap" Text="Id Usuario:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbIdUsuario" HorizontalAlignment="Left" Margin="129,586,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="498,586,0,0" TextWrapping="Wrap" Text="Mes:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="157,586,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbNombre" HorizontalAlignment="Left" Margin="215,586,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <Button x:Name="bUsuario" Click="bUsuario_Click" Content="Seleccionar Usuario" HorizontalAlignment="Left" Margin="299,584,0,0" VerticalAlignment="Top" Width="119"/>
+        <ComboBox x:Name="cbMeses" SelectionChanged="cbMeses_SelectionChanged" HorizontalAlignment="Left" Margin="543,584,0,0" VerticalAlignment="Top" Width="104"/>
+        <Grid x:Name="gridCalendario" ShowGridLines="False" HorizontalAlignment="Left" Height="452" Margin="61,89,0,0" VerticalAlignment="Top" Width="778" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="90"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <ComboBox x:Name="cbAnyo" SelectionChanged="cbAnyo_SelectionChanged"  HorizontalAlignment="Left" Margin="717,584,0,0" VerticalAlignment="Top" Width="77"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="677,586,0,0" TextWrapping="Wrap" Text="Año:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbLunes" HorizontalAlignment="Left" Margin="62,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbMartes" HorizontalAlignment="Left" Margin="173,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbMiercoles" HorizontalAlignment="Left" Margin="284,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbJueves" HorizontalAlignment="Left" Margin="395,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbViernes" HorizontalAlignment="Left" Margin="505,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbSabado" HorizontalAlignment="Left" Margin="616,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDomingo" HorizontalAlignment="Left" Margin="727,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

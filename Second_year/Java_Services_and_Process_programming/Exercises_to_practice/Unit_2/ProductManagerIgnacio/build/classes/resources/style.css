@@ -1,0 +1,51 @@
+
+
+/* Buttons */
+.button {
+    -fx-background-color: azure;
+    -fx-text-fill: #00008b;
+    -fx-effect: dropshadow(one-pass-box, #00008b, 5, 0.5, 0, 0);
+}
+#deleteButton {
+    -fx-background-color: lavenderblush;
+    -fx-text-fill: #8b0000;
+    -fx-effect: dropshadow(one-pass-box, #8b0000, 5, 0.5, 0, 0);
+}
+#addCategoryBtn {
+    -fx-background-color: honeydew;
+    -fx-text-fill: #006400;
+    -fx-effect: dropshadow(one-pass-box, #006400, 5, 0.5, 0, 0);
+}
+/* Default for labels */
+.label {
+    -fx-text-fill: #00008b;
+}
+/* Default for textInputs */
+.text-input {
+    -fx-border-color: #44448b;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-text-fill: #444466;
+}
+.text-input:focused {
+    -fx-border-color: #6666ab;
+    -fx-effect: dropshadow(one-pass-box, #44448b, 4, 0, 0, 0);
+    -fx-text-fill: #222244;
+}
+/* TableView header */
+.table-view .column-header {
+    -fx-background-color: steelblue;
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+}
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: normal;
+}
+/* Information label at the bottom */
+#infoLabel {
+    -fx-text-fill: #666666;
+}
+#infoLabel.error {
+    -fx-text-fill: #ee6666;
+}

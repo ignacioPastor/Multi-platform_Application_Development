@@ -1,0 +1,27 @@
+4032;AMD A10-7850k;Components;145.95
+4203;AMD Radeon R9 Fury X;Components;632.0
+2009;ASUS FM2+ Motherboard;Components;65.95
+9999;Computer mounting;Services;40.0
+1003;DVD-RW Drive;Components;23.7
+3001;Epson XP-322 Multifuntion Printer WIFI;Peripherals;55.65
+3462;GigaByte LGA-1151 Motherboard;Components;105.5
+0492;Grand Theft Auto IV PC;Peripherals;49.95
+8448;Hard Drive Seagate 1TB;Components;54.95
+0302;Intel i5-6600k;Components;259.95
+2099;Kaspersky Total Security Multi-Device;Software;27.5
+0043;Kingston DDR3 4GB module;Components;32.0
+1423;Laser Mouse;Peripherals;15.95
+3887;Logitech 60W 2.1 Speakers;Peripherals;35.9
+2031;Mechanical Keyboard;Peripherals;45.5
+0933;Microsoft Office 365 Home Premium;Software;85.95
+1000;Microsoft Office Home and Business 2013;Software;225.0
+8788;Microsoft Windows 10 Home 64Bits OEM;Software;97.5
+8977;Microsoft Windows 7 Professional 64bits;Software;138.0
+1032;NVidia GeForce GTX 970;Components;319.95
+5008;Power Supply 600W;Components;49.95
+2011;RJ45 2m UTP Cable cat. 6e;Networking;2.95
+2033;RJ45 3m FTP Cable cat. 6;Networking;5.95
+9098;Samsung SSD 480GB;Components;230.45
+1435;Samsung TFT 24" FHD Screen;Peripherals;165.75
+2044;TP-LINK T300Mbs 11n PCI-Express;Networking;14.75
+1300;TP-LINK Wireless Router;Networking;17.95

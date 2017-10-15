@@ -1,0 +1,37 @@
+
+body{
+	width: 700px;
+	margin: 10px auto;
+}
+nav{
+	margin-left: 40px;
+	color: black;
+}
+h1{
+	text-align: center;
+}
+ul li{
+	float: left;
+	display: inline;
+}
+a{
+	text-decoration: none;
+	padding: 15px 20px;
+	color: black;
+	border-radius: 5px;
+	transition: background-color 1.3s;
+}
+a:hover{
+	text-decoration: none;
+	border-radius: 5px;
+	background-color: #DDD;
+	color: black;
+}
+
+a:active{
+	text-decoration: none;
+	border-radius: 5px;
+	color: white;
+	background: #4CAF50;
+}
+

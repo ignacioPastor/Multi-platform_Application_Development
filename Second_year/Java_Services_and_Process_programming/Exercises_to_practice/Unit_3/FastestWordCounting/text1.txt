@@ -1,0 +1,286 @@
+3. Concurrent programming 
+Annex IV. Thread groups and LocalThread variables 
+
+Service and Process Programming 
+
+Arturo Bernal 
+Nacho Iborra 
+
+IES San Vicente 
+
+
+This work is licensed under the Creative Commons AttributionNonCommercial-
+ShareAlike 4.0 International License. To view 
+a copy of this license, visit 
+
+http://creativecommons.org/licenses/by-nc-sa/4.0/ 
+
+
+Table of Contents 
+
+3. Concurrent programming 
+1. Thread groups and ThreadLocal...................................................................................3 
+1.1 Thread groups.........................................................................................................3 
+
+
+1.2. Local thread variables............................................................................................4 
+Service and Process Programming – Concurrent Programming 
+
+
+1. Thread groups and ThreadLocal 
+1.1 Thread groups 
+Java lets us put some threads into a group so that we can treat this group as a single unit. 
+This way, we will be able to have some threads doing a task, and control them regardless 
+of the total number of threads in the group. 
+
+To manage groups, we have the ThreadGroup class. We can create a basic group with a 
+given name, and even a group inside another group, with its own name: 
+
+ThreadGroup g1 = new 
+ThreadGroup("Main group"); 
+ThreadGroup g2 = new 
+ThreadGroup(g1, "Additional group inside main group"); 
+
+
+To add threads to a group, we can use some of the constructors available in Thread class. 
+For instance, if we create a thread by extending Thread class, we can add it to a group 
+with this constructor (and some others, check the API for more details): 
+
+public 
+Thread(ThreadGroup group, String name); 
+
+
+If we created the thread by implementing Runnable interface, we can add it with these 
+constructors (and some others, check the API for more details): 
+
+public 
+Thread(ThreadGroup group, Runnable target); 
+public 
+Thread(ThreadGroup group, Runnable target, String name); 
+
+
+Once we have added the threads to a group, there are some useful methods inside 
+ThreadGroup class, such as: 
+
+• 
+activeCount: returns how many threads in this group (and its subgroups) are 
+currently active (not finished). 
+• 
+enumerate(Thread[] array): copies into the specified array every active thread of 
+the group (and its subgroups). 
+• 
+interrupt: interrupts all threads in the group 
+• 
+setMaxPriority / getMaxPriority: sets/gets the maximum priority of the threads in 
+the group 
+4.2.1. Example 
+The following example creates some threads from a class that implements Runnable 
+interface. These threads are supposed to generate a random number between 1 and 10, 
+sleep the number of seconds specified by this random number, and then print a message 
+in the screen. But as soon as the first thread finishes its task, the whole group is 
+interrupted. 
+
+The code for the Runnable object is: 
+
+import 
+java.util.Random; 
+import 
+java.util.concurrent.TimeUnit; 
+
+
+public 
+class 
+MyRandomMessage implements 
+Runnable 
+{ 
+
+
+Random r = new 
+Random (System.currentTimeMillis()); 
+
+
+Service and Process Programming – Concurrent Programming 
+
+
+@Override 
+
+
+public 
+void 
+run() 
+
+
+{ 
+
+
+int 
+time = r.nextInt(10) + 1; 
+
+
+try 
+
+
+{ 
+
+
+TimeUnit.SECONDS.sleep(time); 
+
+
+System.out.println("Thread waited " + time + " seconds and finished."); 
+
+
+} catch 
+(Exception e) {} 
+} 
+} 
+
+
+Then, our main program would be like this: 
+
+public 
+static 
+void 
+main(String[] args) 
+
+
+{ 
+
+
+ThreadGroup g = new 
+ThreadGroup("Random messages"); 
+
+
+MyRandomMessage m = new 
+MyRandomMessage(); 
+
+
+Thread t1 = new 
+Thread(g, m); 
+
+
+Thread t2 = new 
+Thread(g, m); 
+
+
+Thread t3 = new 
+Thread(g, m); 
+
+
+t1.start(); 
+
+
+t2.start(); 
+
+
+t3.start(); 
+
+
+while 
+(g.activeCount() == 3) 
+
+
+{ 
+
+
+try 
+
+
+{ 
+
+
+Thread.sleep(100); 
+
+
+} catch 
+(Exception e) {} 
+
+
+} 
+
+
+g.interrupt(); 
+} 
+
+
+As soon as one thread finishes, activeCount method will return a number lower than 3, and 
+main thread will finish its loop and interrupt all the threads. If the other threads are still 
+waiting for its time to expire, they will be interrupted, an exception will be thrown and they 
+will not print their finish message. 
+
+1.2. ThreadLocal variables 
+We have seen that, if we use the same object in different threads (a Runnable object or 
+any other object), they all share this object's data. But sometimes we will need to have an 
+attribute that is not shared among threads. To do this, we can use the ThreadLocal class, 
+that lets us specify a data type to create an attribute of this type, and create multiple 
+values of this attribute, each one assigned to a different thread. 
+
+For instance, if we want our threads to have their own creation date, we will do something 
+like this: 
+
+public 
+class 
+MyRunnableClass implements 
+Runnable 
+
+
+{ 
+
+
+private 
+static 
+ThreadLocal<Date> creationDate = new 
+ThreadLocal<Date>() 
+
+
+{ 
+
+
+protected 
+Date initialValue() 
+{ 
+return 
+new 
+Date(); 
+} 
+} 
+} 
+
+
+Service and Process Programming – Concurrent Programming 
+
+
+If we want to get the value of this attribute for each thread, we will call its get method, and 
+if we want to assign a new value, we will call its set method. The initialValue method in 
+the code above is executed when the attribute has no value and the thread is trying to get 
+it. There is also a remove method that we can use to remove the value of this attribute 
+from current thread. 
+
+Then, we can have a run method like this in our MyRunnableClass class: 
+
+@Override 
+public 
+void 
+run() 
+{ 
+
+
+System.out.println("This thread was created on " + creationDate.get()); 
+System.out.println("Updating creation date..."); 
+creationDate.set(new 
+Date()); 
+System.out.println("Now the creation date is " + creationDate.get()); 
+System.out.println("Removing value..."); 
+creationDate.remove(); 
+System.out.println("Now the creation date is " + creationDate.get()); 
+
+
+} 
+
+
+The code above will show three different dates for the same thread, one for each call to 
+get, since we set a new value between the first and the second call, and we remove the 
+value after this second call. 
+
+Service and Process Programming – Concurrent Programming 
+
+

@@ -1,0 +1,29 @@
+i. Nombre de los pintores:
+//pintor/nombre/text()
+
+ii. Fecha de creación de los cuadros:
+//cuadro/@fecha
+
+iii.Título de los cuadros pintados antes de 1700:
+//cuadro[@fecha < 1700]/@titulo
+
+iv.Nombre de los pintores españoles:
+//pintor[nacionalidad="España"]/nombreCompleto
+
+v. Nombre de los pintores que vivieron más de 50 años:
+//pintor[(number(fallecido)-number(nacido))>50]/nombreCompleto
+
+vi. Ciudades en los que hay cuadros de Velázquez:
+//museo[@id=(//cuadro[@autor="Velazquez"]/@museo)]/ciudad/text()
+
+vii.Fecha de nacimiento del pintor de La maja desnuda:
+//pintor[@id=(//cuadro[@titulo="La maja desnuda"]/@autor)]/nacido
+
+viii.Nacionalidad de los pintores expuestos en museos de París:
+//pintor[@id=(//cuadro[@museo=(//museo[ciudad="París"]/@id)]/@autor)]/nacionalidad
+
+
+
+
+
+

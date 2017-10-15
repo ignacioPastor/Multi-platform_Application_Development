@@ -1,0 +1,7 @@
+C:\Users\Ignacio\Desktop\ExamenProgramacion\Procesos\Procesos\bin\Debug\Procesos.exe.config
+C:\Users\Ignacio\Desktop\ExamenProgramacion\Procesos\Procesos\bin\Debug\procesos.txt
+C:\Users\Ignacio\Desktop\ExamenProgramacion\Procesos\Procesos\bin\Debug\Procesos.exe
+C:\Users\Ignacio\Desktop\ExamenProgramacion\Procesos\Procesos\bin\Debug\Procesos.pdb
+C:\Users\Ignacio\Desktop\ExamenProgramacion\Procesos\Procesos\obj\Debug\Procesos.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\ExamenProgramacion\Procesos\Procesos\obj\Debug\Procesos.exe
+C:\Users\Ignacio\Desktop\ExamenProgramacion\Procesos\Procesos\obj\Debug\Procesos.pdb

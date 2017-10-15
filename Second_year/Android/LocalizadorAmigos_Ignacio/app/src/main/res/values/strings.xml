@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">LocalizAmigos</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Mejoras futuras</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_mapa">Mapa</string>
+    <string name="title_activity_nueva_cuenta">Crear cuenta</string>
+    <string name="menu_navigation_header">Encuentra a tus amigos</string>
+
+    <string-array name="cancion">
+        <item>Por verte sonreir</item>
+        <item>Born to Lose</item>
+        <item>Tendrías que haberla visto bailar</item>
+    </string-array>
+    <string-array name="codigocancion">
+        <item>PVS</item>
+        <item>BTL</item>
+        <item>TVB</item>
+    </string-array>
+</resources>

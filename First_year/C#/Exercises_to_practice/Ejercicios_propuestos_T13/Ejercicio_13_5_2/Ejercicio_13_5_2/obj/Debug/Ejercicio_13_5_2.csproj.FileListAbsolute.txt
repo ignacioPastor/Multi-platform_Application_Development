@@ -1,0 +1,6 @@
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Ejercicio_13_5_2\Ejercicio_13_5_2\bin\Debug\Ejercicio_13_5_2.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Ejercicio_13_5_2\Ejercicio_13_5_2\obj\Debug\Ejercicio_13_5_2.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Ejercicio_13_5_2\Ejercicio_13_5_2\bin\Debug\Ejercicio_13_5_2.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Ejercicio_13_5_2\Ejercicio_13_5_2\bin\Debug\Ejercicio_13_5_2.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Ejercicio_13_5_2\Ejercicio_13_5_2\obj\Debug\Ejercicio_13_5_2.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\Ejercicio_13_5_2\Ejercicio_13_5_2\obj\Debug\Ejercicio_13_5_2.pdb

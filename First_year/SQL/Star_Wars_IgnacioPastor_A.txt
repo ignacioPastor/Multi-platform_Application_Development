@@ -1,0 +1,261 @@
+--Star_Wars_IgnacioPastor_A
+
+
+--------------------------------------------------------------------------------------------------------
+----EJERCICIOS MODELO STAR WARS-----
+-- 1. Actores que tengan todas las vocales en su nombre
+
+select *
+from actores
+where upper(nombre) like '%A%'
+and upper(nombre) like '%E%'
+and upper(nombre) like '%I%'
+and upper(nombre) like '%O%'
+and upper(nombre) like '%U%';
+
+
+-- 2. Actores nacidos antes de 1960 y que tengan menos de 4 letras en su nombre.
+
+select *
+from actores
+where to_number(to_char(fecha_nac, 'yyyy')) < 1960
+and length(nombre) < 4;
+
+
+-- 3. Haz una vista con los Soldados con más de 5 años de experiencia, la vista debe impedir
+-- que se pueda actualizar si incumple la condición de creación. Debes comprobarlo
+
+create view soldados_veteranos
+as select *
+    from soldado
+    where anyos_exp > 5
+with check option;
+
+-- Comprobamos que da error si intentamos hacer una insert que va en contra de las condiciones de creación
+insert into soldados_veteranos
+select * from soldado where anyos_exp < 5;
+
+
+-- 4. Añade un campo a personaje que tenga un carácter alfanumérico,
+-- y actualiza este campo a S si el personaje tiene un reclutador, y N si no es así.
+
+alter table personajes add tener_reclutador varchar2(1);
+
+update personajes
+set tener_reclutador = decode(nombre_reclutador, null, 'N', 'S');
+
+
+-- 5. Elimina el campo anterior de la tabla.
+
+alter table personajes drop column tener_reclutador;
+
+
+-- 6. Vista no actualizable de las Localizaciones visitadas en la 2 temporada
+
+-- Como la vista está construida sobre dos tablas, no es actualizable.
+create view localizaciones_temporada2
+as select lo.*
+    from localizaciones lo, actuar actu
+    where actu.cod_loc = lo.cod_loc
+    and actu.temporada = 2;
+
+
+-- 7. Personajes que hayan participado en alguna película con la palabra Star Wars
+-- (no se puede usar like). También deben salir las posiciones del 5 al 10
+-- de ese título y en minúsculas
+
+-- Cojo personajes cuyo actor haya hecho el casting para la película, porque
+-- la tabla actuar solo coje personajes que han participado en capítulos de temporadas
+select per.*, lower(substr(peli.titulo,5,5))
+from personajes per, peliculas peli, hacer_casting hc
+where instr(upper(peli.titulo), 'STARS WARS') > 0
+and hc.codigo_pelicula = peli.cod_peli
+and per.nss_actor = hc.nss;
+
+
+-- 8. Cantidad y suma de todos los derribos efectuados por Rebeldes
+
+-- Aquí no me he aclarado con qué aparece en los campos "derribado"
+-- Pero vaya, es un ejercicio que se resuelve con sum decode...
+-- si gana rebelde, 1, si gana imperial 0, si "empatan, 0
+select sum(decode(derribado, nom_rebelde, 1,
+                        nom_imperial, 0, 0))
+from derribar;
+
+
+-- 9. Obtén cada personaje Rebelde y a la derecha que aparezca la palabra
+-- CONVERTIDO o NO CONVERTIDO, si no lo ha sido aún.
+
+select re.nombre_reb, decode(je.sith_convierte, null, 'NO CONVERTIDO', 'CONVERTIDO')
+from rebelde re, jedi je
+where re.nombre_reb = je.nombre_jedi(+);
+
+
+-- 10. Saca cuantos diferentes niveles de Jedi tenemos en la base de datos (nivel y cantidad)
+
+select nivel_jedi, count(*)
+from jedi
+group by nivel_jedi;
+
+
+-- 11. Obtén cuántas localizaciones tiene cada capítulo
+
+--NO ESTÁ BIEN HECHO
+select ca.num_cap, ca.num_tempo, count(*) localizaciones
+from capitulos ca, actuar ac
+where ac.capitulo = ca.num_cap
+and ac.temporada = ca.num_tempo
+group by ca.num_cap, ca.num_tempo;
+
+--CREO QUE ESTÁ BIEN HECHO
+select count(*)
+from (select capitulo, temporada, cod_loc from actuar)
+group by capitulo, temporada;
+
+
+-- 12. Saca el piloto con más derribos
+
+select per.nombre, count(*) numero_derribos
+from personajes per, derribar de
+where per.nombre = de.nom_rebelde or per.nombre = de.nom_imperial
+group by per.nombre
+having count(*) = (select max(count(*))
+                    from personajes per2, derribar de2
+                    where per2.nombre = de2.nom_rebelde or per2.nombre = de2.nom_imperial
+                    group by per2.nombre);
+
+
+-- 13. Saca cada personaje que más ha recultado
+
+select nombre_reclutador, count(*) numero_reclutamientos
+from personajes
+group by nombre_reclutador
+having count(*) = (select max(count(*))
+                        from personajes
+                        group by nombre_reclutador
+                        having nombre_reclutador is not null);
+
+
+-- 14. El problema más repetido
+
+-- El valor de problema más repetido es nulo
+select problema, count(*) numero_veces_aparece
+from actuar
+group by problema
+having count(*) = (select max(count(*))
+                        from actuar
+                        group by problema);
+
+-- El valor de problema más repetido que no es nulo es "ninguno"
+select problema, count(*) numero_veces_aparece
+from actuar
+group by problema
+having count(*) = (select max(count(*))
+                        from actuar
+                        group by problema
+                        having problema is not null);
+
+
+-- Si buscamos un problema como tal:  
+select problema, count(*) numero_veces_aparece
+from actuar
+group by problema
+having count(*) = (select max(count(*))
+                        from actuar
+                        group by problema
+                        having problema is not null
+                        and upper(problema) <> 'NINGUNO');
+
+
+-- 15. El usuario con menos comentarios
+
+select usuario, count(*) numero_comentarios
+from comentar
+group by usuario
+having count(*) = (select min(count(*))
+                        from comentar
+                        group by usuario);
+
+
+
+-- 16. Realiza una vista materializada, que empiece a actualizar a los 5 días
+-- de su creación y luego cada semana, que obtenga algún capítulo de la saga que
+-- no haya tenido comentario alguno o la que menos actores haya utilizado y
+-- quítale los capítulos con menos duración.
+
+create materialized view ejer16_star_wars
+build immediate
+refresh start with sysdate + 5 next sysdate + 7
+as (select ca.num_cap, ca.num_tempo
+from capitulos ca
+where (ca.num_cap, ca.num_tempo) not in (select co.num_cap, co.num_tempo
+                                            from comentar co)
+UNION
+select distinct ac.capitulo, ac.temporada
+from actuar ac
+group by ac.capitulo, ac.temporada, ac.nom_personaje
+having count(*) = (select min(count(*))
+                        from actuar
+                        group by capitulo, temporada, nom_personaje)
+)
+MINUS
+select num_cap, num_tempo
+from capitulos
+where duracion_cap = (select min(duracion_cap) from capitulos);
+
+
+-- 17. Obtén los personajes que hayan visitado alguna localización y si no lo han hecho también deben salir
+
+select per.nombre, actu.cod_loc
+from personajes per, actuar actu
+where per.nombre = actu.nom_personaje(+);
+
+
+-- 18. Saca localizaciones con más de 3 visitas y si hay más de una, que solo
+-- salga la que el código de localización sea menor alfabéticamente.
+
+-- NO SÉ POR QUÉ EL MIN NO ESTÁ FUNCIONANDO
+select cod_loc, count(*) numero_visitas
+from actuar
+group by cod_loc
+having count(*) > 3
+and cod_loc = (select min(cod_loc)
+                from actuar
+                group by cod_loc
+                having count(*) > 3);
+
+
+-- 19. Obtén todos los personajes que no sean jedi ni sith
+
+select nombre
+from personajes
+MINUS
+select nombre_jedi
+from jedi
+MINUS
+select nombre_sith
+from sith;
+
+
+-- 20. Obtén los fan que no hayan hecho comentarios
+-- y los personajes que salgan en más de 1 capítulo
+
+select fa.usuario nombre
+from fans fa
+where fa.usuario not in (select co.usuario
+                from comentar co)
+UNION
+select distinct actu.nom_personaje nombre
+from actuar actu
+group by actu.nom_personaje, actu.capitulo, actu.temporada
+having count(*) > 1
+order by nombre;
+
+
+
+
+
+
+
+
+

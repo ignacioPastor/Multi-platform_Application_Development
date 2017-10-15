@@ -1,0 +1,263 @@
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<!--[if IE 10]><html class="ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="es" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="curso,cursos,tutorial,tutoriales,nacho,cabanes" />
+    <meta name="description" content="Cursos, tutoriales, compiladores, fuentes, por Nacho Cabanes" />
+    <title>Programación - Por Nacho Cabanes</title>
+    <link rel="stylesheet" href="./css/foundation.min.css" />
+    <link rel="stylesheet" href="./css/foundation-n.css" />
+    <script src="./js/modernizr.js"></script>
+  </head>
+  <body>
+
+
+  <nav class="top-bar" data-topbar>
+      <div class="row">
+          <div class="large-7 columns">
+              <h1>
+                                      Programación                                </h1>
+              <h2>Por Nacho Cabanes</h2>
+          </div>
+
+        <div class="large-5 columns">
+            <section class="top-bar-section">
+              <!-- Nav. derecha -->
+              <ul class="right button-group">
+                    <li><a href="./index.php">Principal</a></li>      
+                    <li><a href="./cursos/">Cursos</a></li>
+                    <li><a href="./retos/">Retos</a></li>
+                    <li><a href="./indice/">Por lenguaje</a></li>
+              </ul>
+            </section>
+        </div>
+    </div>
+  </nav>
+
+  <!-- Fin de barra superior -->
+
+    
+  <!-- Main Page Content and Sidebar -->
+
+  <div class="row">
+
+    <!-- Page body -->
+    <div class="large-9 columns">
+
+        <h1>Programación</h1>
+
+    
+        
+  <h3>Lenguajes de programaci&oacute;n</h3>
+  
+  <p style="text-align:center;"><a href="c/">C / C++</a>
+  | <a href="csharp/">C#</a>
+  | <a href="pascal/">Pascal / Delphi</a> 
+  | <a href="java/">Java</a>
+  | <a href="basic/">Basic</a>  | 
+  
+   <a href="python/">Python</a>
+  | <a href="php/">PHP</a>
+  | <a href="sql/">SQL</a> | <a href="html/">HTML</a>
+  | <a href="javascript/">JavaScript</a>  | 
+  
+   <a href="perl/">Perl</a>
+  | <a href="asm/">Ensamblador</a>
+  | <a href="modula/">Modula-2</a>  
+  | <a href="prolog/">Prolog</a>  | 
+
+  <a href="lisp/">Lisp </a> | <a href="forth/">Forth</a>
+  | <a href="indice/">Otros lenguajes</a> <br>
+   <a href="queleng/">&iquest;Qu&eacute; lenguaje debo usar?</a><br>
+  </p>
+
+
+        
+<h3>Otros cursos de inform&aacute;tica</h3>
+
+<p style="text-align:center;">
+<a href="diccio/">Diccionario b&aacute;sico
+de inform&aacute;tica</a> | <a href="ibd/">Bases
+de datos</a> | <a href="redes/">Redes</a>
+ <br /> 
+
+ <a href="videojuegos/">Programaci&oacute;n de videojuegos</a> : 
+ <a href="videojuegos/ipj2012/">IPJ 2012</a> e 
+ <a href="videojuegos/ipj/">IPJ &quot;cl&aacute;sico&quot;</a> 
+ <br /> 
+
+<a href="retos/">Retos</a> | <a href="android/">Android</a>
+ | <a href="raspberrypi">Raspberry Pi
+ </a>
+ | 
+
+ <a href="otrosc/">Otros
+cursos</a></p>
+
+
+
+        
+<h3>Otros temas / enlaces</h3>
+
+        
+<p style="text-align:center;"><a href="utils/">Utilidades</a>
+| <a href="amstrad/">Amstrad
+CPC</a>  | 
+ <a href="cambios/">Cambios</a>&nbsp;|
+<a href="autor/">Sobre
+el autor</a></p>
+
+
+
+        <p style="text-align: center"><br />
+      <script type="text/javascript"><!--
+        google_ad_client = "pub-4298821349414973";
+        google_ad_width = 320;
+        google_ad_height = 50;
+        google_ad_format = "320x50_as";
+        google_ad_type = "text_image";
+        google_ad_channel ="";
+        google_color_border = "D1D1D1";
+        google_color_bg = "FFFFFF";
+        google_color_link = "516695";
+        google_color_url = "516695";
+        google_color_text = "000000";
+//--></script>
+      <script type="text/javascript"
+ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+      </script>
+      </p>
+        
+    </div>
+    <!-- End of page body -->
+
+
+    <!-- Sidebar -->
+    <div class="large-3 columns">
+      <p>&nbsp;</p>
+          <!-- SiteSearch Google -->
+      <form method="get" action="http://www.google.es/custom" target="_top">
+      <input name="domains"  value="www.nachocabanes.com" type="hidden">
+            <input name="sitesearch" value="www.nachocabanes.com" type="hidden">
+      <input name="client" value="pub-4298821349414973" type="hidden">
+      <input name="forid" value="1" type="hidden">
+      <input name="ie" value="ISO-8859-1" type="hidden">
+      <input name="oe" value="ISO-8859-1" type="hidden">
+      <input name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1;"  type="hidden">
+      <input name="hl" value="es" type="hidden">
+      <input class="searchfield" id="searchbox" type="text" placeholder="Buscar..." name="q">
+      </form>
+<!-- SiteSearch Google -->
+          
+      
+      <div class="panel">
+
+
+        <h5>Novedades</h5>
+                <ul class="smallfooter">
+        <li>30-May-2015: <a href="http://www.nachocabanes.com/retos/">Retos</a> -  Nuevo reto de nivel 2: 29, fila repetida en una matriz</li><li>08-Ene-2015: <a href="http://www.nachocabanes.com/retos/">Retos</a> -  Nuevo reto facilito (28), para apartado calentar para la inminente Hacker Cup de Facebook</li><li>05-Ene-2015: <a href="http://www.nachocabanes.com/logo/">Logo</a> -  Enlace a Scratch, dos tutoriales más, apariencia 2015</li><li>05-Jun-2014: <a href="http://www.nachocabanes.com/pascal/">Pascal</a> -  La versión actualizada del curso de Pascal ya habla también de ficheros binarios</li>         <li><a href="/cambios/">Cambios anteriores en la Web</a></li>
+        </ul>
+              </div>
+
+              <h5>Desde Twitter</h5>
+        <p>
+
+        <a class="twitter-timeline" href="https://twitter.com/NachoCabanes" data-widget-id="356543373206761473">Tweets por @NachoCabanes</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+        </p>
+        <p><a href="http://twitter.com/#!/nachocabanes">Leer más</a></p>
+                    <p style="text-align: center"><br />
+          <script type="text/javascript"><!--
+        google_ad_client = "pub-4298821349414973";
+        google_ad_width = 160;
+        google_ad_height = 600;
+        google_ad_format = "160x600_as";
+        google_ad_type = "text_image";
+        google_ad_channel ="";
+        google_color_border = "D1D1D1";
+        google_color_bg = "FFFFFF";
+        google_color_link = "516695";
+        google_color_url = "516695";
+        google_color_text = "000000";
+//--></script>
+      <script type="text/javascript"
+ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+      </script>
+          </p>
+            
+    </div>
+    <!-- End Sidebar -->
+  </div>
+
+  <!-- End Main Content and Sidebar -->
+
+
+  <!-- Footer -->
+
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p class="smallfooter"><a href="http://www.nachocabanes.com">www.nachocabanes.com</a><br />
+          Apartado actualizado: 10-02-2014<br />
+          176697 visitas desde el 19-07-2013</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right smallfooter">
+            <li><a href="./index.php">Principal</a></li>
+                <li><a href="./cursos/">Cursos</a></li>
+                <li><a href="./retos/">Retos</a></li>
+                <li><a href="./indice/">Por lenguaje</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+
+    
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2769231-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//nachocabanes.com/ncstats/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//nachocabanes.com/ncstats/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+  </body>
+</html>
+        

@@ -1,0 +1,29 @@
+
+*{
+	margin: 5px auto;
+}
+
+
+body{
+	width: 600px;
+	
+}
+#myForm{
+	background-color: pink;
+}
+p{
+	font-weight: bold;
+}
+.error{
+	border: 2px solid red;
+	text-align: center;
+	width: 500px;;
+}
+#myFormError{
+	border: 5px solid red;
+	color: red;
+	font-weight: bold;
+	height: 25px;
+	width: 540px;
+	font-size: 16pt;
+}

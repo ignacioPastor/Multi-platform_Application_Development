@@ -1,0 +1,35 @@
+P5, Parte 1. Ignacio Pastor Padilla
+
+Test 01: Insertar elemento al final de la lista. ArrayList: 8.55E-4 LinkedList: 4.28E-4
+Ambas instrucciones se han ejecutado correctamente
+Test 02: Insertar elemento al principio de la lista. ArrayList: 0.006414 LinkedList: 0.003848
+Ambas instrucciones se han ejecutado correctamente
+Test 03: Insertar elemento en mitad de la lista. ArrayList: 0.004277 LinkedList: 0.013257
+Ambas instrucciones se han ejecutado correctamente
+
+Test 04: Borrar elemento al final de la lista. ArrayList: 0.002566 LinkedList: 0.003421
+Ambas instrucciones se han ejecutado correctamente
+Test 05: Borrar elemento al principio de la lista. ArrayList: 0.004277 LinkedList: 0.002566
+Ambas instrucciones se han ejecutado correctamente
+Test 06: Borrar elemento en mitad de la lista. ArrayList: 0.002566 LinkedList: 0.011547
+Ambas instrucciones se han ejecutado correctamente
+
+Test 07: Borrar por su valor elemento al final de la lista. ArrayList: 0.071845 LinkedList: 0.194155
+Ambas instrucciones se han ejecutado correctamente
+Test 08: Borrar por su valor elemento al principio de la lista. ArrayList: 0.00556 LinkedList: 0.00171
+Ambas instrucciones se han ejecutado correctamente
+Test 09: Borrar por su valor elemento en mitad de la lista. ArrayList: 0.025659 LinkedList: 0.019673
+Ambas instrucciones se han ejecutado correctamente
+
+Test 10: Vaciar completamente la lista. ArrayList: 0.027369 LinkedList: 0.038916
+Ambas instrucciones se han ejecutado correctamente
+
+Test 11_1: Buscar si existe un elemento al final de la lista. ArrayList: 0.045332 LinkedList: 0.042337
+Test 11_2: Buscar si existe un elemento al principio de la lista. ArrayList: 8.55E-4 LinkedList: 8.55E-4
+Test 11_3: Buscar si existe un elemento en el medio de la lista. ArrayList: 0.021383 LinkedList: 0.020955
+
+Test 12_1: Buscar si existe un elemento en la lista implementando un algoritmo nosotros (FOR). ArrayList: 0.108197 LinkedList: 1.709334
+Test 12_2: Buscar si existe un elemento en la lista implementando un algoritmo nosotros (DO/WHILE). ArrayList: 0.079544 LinkedList: 0.613256
+Test 12_3: Buscar si existe un elemento en la lista implementando un algoritmo nosotros (WHILE). ArrayList: 0.219387 LinkedList: 1.034923
+
+Test 13: Buscar si existe un elemento en la lista implementando un algoritmo (Búsqueda Binaria). ArrayList: 0.003421 LinkedList: 0.008553

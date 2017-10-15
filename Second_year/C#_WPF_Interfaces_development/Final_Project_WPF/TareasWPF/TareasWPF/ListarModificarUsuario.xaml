@@ -1,0 +1,112 @@
+﻿<Window x:Class="TareasWPF.ListarModificarUsuario"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TareasWPF"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Title="ListarModificarUsuario" Height="700" Width="575">
+    <Window.Resources>
+        <CollectionViewSource  x:Key="MisUsuarios"  Source="{Binding}" />
+        <Style x:Key="bordeProduct" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#2100f2"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate x:Key="ProductTemplate">
+                <Border Style="{StaticResource bordeProduct}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="142"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Id Usuario:"/>
+                        <!--<TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=ProdId}"/>-->
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=IdUsuario}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Nombre:"/>
+                        <!--<TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=Title}"/>-->
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=Nombre}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Tipo de Usuario:"/>
+                        <!--<TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=Category}"/>-->
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=TipoUsuario}"/>
+
+                        <!--<TextBlock Grid.Column="0" Grid.Row="3" Text="Actor:"/>
+                        -->
+                        <!--<TextBlock Grid.Column="3" Grid.Row="3" Text="{Binding Path=Actor}"/>-->
+                        <!--
+                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=Actor}"/>-->
+
+                        <TextBlock Grid.Column="2" Grid.Row="0" Text="Usuario:"/>
+                        <!--<TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Path=Price}"/>-->
+                        <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Path=User}"/>
+
+                        <TextBlock Grid.Column="2" Grid.Row="1" Text="Apellidos: "/>
+                        <!--<TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Path=Special}"/>-->
+                        <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Path=Apellidos}"/>
+
+                        <TextBlock Grid.Column="2" Grid.Row="2" Text="Mail:"/>
+                        <!--<TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Path=CommonProdId}"/>-->
+                        <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Path=Email}"/>
+
+
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </Grid.Resources>
+        <ListView  Margin="10,10,10,357" Background="White" Width="Auto"
+                ItemsSource="{Binding Source={StaticResource MisUsuarios}}" x:Name="MyListview"
+                ItemTemplate="{StaticResource ProductTemplate}"
+                IsSynchronizedWithCurrentItem="True" >
+        </ListView>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="32,329,0,0" TextWrapping="Wrap" Text="IdBusuario" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="32,357,0,0" TextWrapping="Wrap" Text="Usuario" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="274,329,0,0" TextWrapping="Wrap" Text="Nombre" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="274,357,0,0" TextWrapping="Wrap" Text="Apellidos" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbIdUsuario" TabIndex="3" HorizontalAlignment="Left" Height="23" Margin="110,328,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" TextChanged="tbIdUsuario_TextChanged"/>
+        <TextBox x:Name="tbUsuario" TabIndex="4" HorizontalAlignment="Left" Height="23" Margin="110,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" TextChanged="tbUsuario_TextChanged"/>
+        <TextBox x:Name="tbNombre" TabIndex="1" HorizontalAlignment="Left" Height="23" Margin="348,329,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" TextChanged="tbNombre_TextChanged"/>
+        <TextBox x:Name="tbApellidos" TabIndex="2" HorizontalAlignment="Left" Height="24" Margin="348,357,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" TextChanged="tbApellidos_TextChanged"/>
+
+        <Grid DataContext="{Binding Source={StaticResource MisUsuarios}}" Margin="-10,10,10,-10">
+        <TextBlock x:Name="tbDIdUsuario" HorizontalAlignment="Left" Margin="121,423,0,0" TextWrapping="Wrap" Text="{Binding Path=IdUsuario}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDUsuario" HorizontalAlignment="Left" Margin="121,453,0,0" TextWrapping="Wrap" Text="{Binding Path=User}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDPassword" HorizontalAlignment="Left" Margin="121,483,0,0" TextWrapping="Wrap" Text="{Binding Path=Departamento}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDCod_Usuario" HorizontalAlignment="Left" Margin="121,512,0,0" TextWrapping="Wrap" Text="{Binding Path=TipoUsuario}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDEmail" HorizontalAlignment="Left" Margin="121,539,0,0" TextWrapping="Wrap" Text="{Binding Path=Email}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDNombre" HorizontalAlignment="Left" Margin="377,426,0,0" TextWrapping="Wrap" Text="{Binding Path=Nombre}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDApellidos" HorizontalAlignment="Left" Margin="377,453,0,0" TextWrapping="Wrap" Text="{Binding Path=Apellidos}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDFechaNac" HorizontalAlignment="Left" Margin="377,483,0,0" TextWrapping="Wrap" Text="{Binding Path=FechaNacimiento}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDGenero" HorizontalAlignment="Left" Margin="377,512,0,0" TextWrapping="Wrap" Text="{Binding Path=Genero}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDTelefono" HorizontalAlignment="Left" Margin="121,569,0,0" TextWrapping="Wrap" Text="{Binding Path=TelefonoTrabajo}" VerticalAlignment="Top"/>
+
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="39,420,0,0" TextWrapping="Wrap" Text="Id Usuario:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="39,450,0,0" TextWrapping="Wrap" Text="Usuario:" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="39,482,0,0" TextWrapping="Wrap" Text="Cod_Depart:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="39,512,0,0" TextWrapping="Wrap" Text="Cod_Usuario:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="39,539,0,0" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock14" HorizontalAlignment="Left" Margin="274,426,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="274,453,0,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock16" HorizontalAlignment="Left" Margin="274,483,0,0" TextWrapping="Wrap" Text="Fecha_Nac:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock17" HorizontalAlignment="Left" Margin="274,512,0,0" TextWrapping="Wrap" Text="Genero:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock22" HorizontalAlignment="Left" Margin="44,569,0,0" TextWrapping="Wrap" Text="Telf:" VerticalAlignment="Top"/>
+        </Grid>
+        <Button x:Name="bModificar" TabIndex="5" Content="Seleccionar" Click="bModificar_Click" HorizontalAlignment="Left" Margin="468,581,0,0" VerticalAlignment="Top" Width="75"/>
+    </Grid>
+</Window>

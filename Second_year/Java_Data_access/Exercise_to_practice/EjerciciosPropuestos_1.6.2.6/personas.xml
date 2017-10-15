@@ -1,0 +1,32 @@
+<personas>
+<persona id="p1">
+<nombre>Francisco Garcia</nombre>
+<e-mail>f.garcia@gmail.com</e-mail>
+<edad>23</edad>
+<ciudad>Sevilla</ciudad>
+</persona>
+<persona id="p2">
+<nombre>Ernesto Fuentes</nombre>
+<e-mail>r.fuentes@gmail.com</e-mail>
+<edad>17</edad>
+<ciudad>Valencia</ciudad>
+</persona>
+<persona id="p3">
+<nombre>Maria Fernandez</nombre>
+<e-mail>m.fernandez@gmail.com</e-mail>
+<edad>28</edad>
+<ciudad>Alicante</ciudad>
+</persona>
+<persona id="p4">
+<nombre>Carlos Ramirez</nombre>
+<e-mail>c.ramirez@gmail.com</e-mail>
+<edad>25</edad>
+<ciudad>Madrid</ciudad>
+</persona>
+<persona id="p5">
+<nombre>Carlota Martinez</nombre>
+<e-mail>c.martinez@gmail.com</e-mail>
+<edad>24</edad>
+<ciudad>Barcelona</ciudad>
+</persona>
+</personas>

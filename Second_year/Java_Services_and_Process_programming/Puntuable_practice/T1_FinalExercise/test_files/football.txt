@@ -1,0 +1,20 @@
+RMA;R. Madrid
+FCB;F.C. Barcelona
+SEV;Sevilla
+VIL;Villarreal
+ALA;Alavés
+OSA;Osasuna
+ATH;Ath. Bilbao
+ATM;At. Madrid
+SPO;Sporting
+GRA;Granada
+EIB;Eibar
+RSO;R. Sociedad
+LPA;Las Palmas
+BET;Betis
+DEP;Deportivo
+LEG;Leganés
+ESP;Espanyol
+MGA;Málaga
+VAL;Valencia
+CEL;Celta

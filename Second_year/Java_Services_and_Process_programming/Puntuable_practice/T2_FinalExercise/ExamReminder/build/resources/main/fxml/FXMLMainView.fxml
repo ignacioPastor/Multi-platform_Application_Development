@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<SplitPane dividerPositions="0.581081081081081" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="390.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examreminder.FXMLMainViewController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <TableView id="tableDate" fx:id="tableData" layoutX="82.0" layoutY="-41.0" maxWidth="1.7976931348623157E308" onMouseClicked="#onTableClick" prefHeight="196.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn id="columnSubject" fx:id="columnSubject" prefWidth="307.0" text="Subject" />
+                  <TableColumn id="columnDate" fx:id="columnDate" minWidth="0.0" prefWidth="147.0" text="Date" />
+                <TableColumn id="columnMark" fx:id="columnMark" prefWidth="122.0" text="Mark" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="189.0" prefWidth="609.0">
+         <children>
+            <VBox layoutX="233.0" layoutY="-36.0" prefHeight="196.0" prefWidth="598.0" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Label text="Subject:" />
+                        <TextField fx:id="textSubject" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="5.0">
+                     <children>
+                        <Label text="Date:" />
+                        <DatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="229.0" />
+                        <Label text="Mark:" />
+                        <TextField fx:id="textMark" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="10.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#onActionAdd" prefHeight="25.0" prefWidth="200.0" text="Add" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="buttonUpdate" disable="true" mnemonicParsing="false" onAction="#onActionUpdate" prefHeight="25.0" prefWidth="200.0" text="Update" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="buttonDelete" disable="true" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="25.0" prefWidth="153.0" text="Delete" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="10.0">
+                     <children>
+                        <Label text="Filter:" />
+                        <ChoiceBox fx:id="choiceFilter" prefHeight="25.0" prefWidth="363.0" />
+                        <Button fx:id="buttonFilter" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onActionApllyFilter" prefWidth="150.0" text="Apply Filter" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+  </items>
+</SplitPane>

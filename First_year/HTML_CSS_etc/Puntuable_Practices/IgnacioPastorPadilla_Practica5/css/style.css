@@ -1,0 +1,88 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	margin-top:200px;
+	margin-bottom:50px;
+	background: url("../img/phpimage9.png")  -1px -100px  no-repeat;
+	margin-left:400px;
+	margin-right:300px;
+}
+h1{
+	background:url("../img/imagentitulo.jpg") no-repeat;
+	color:#08033B;
+	font-family:"Lobster", "Times", serif;
+	padding-bottom:-10px;
+	margin-left:20px;
+	font-size: 1.8em;
+	font-weight: bold;
+	padding:60px 50px;
+	margin: 20px;
+}
+.formulario{
+	color: #0C0652;
+	font-family:arial;
+	margin-left:40px;
+	margin-right:30px;
+	padding-left:30px;
+	padding-top:50px;
+	padding-bottom:50px;
+}
+.link{
+	padding:5px 5px;
+}
+a{
+	color:#0E0571;
+	border:#0E0571 2px outset;
+	border-top-left-radius:10px;
+	border-bottom-right-radius:10px;
+	padding-right:4px;
+	padding-left:4px;
+	text-decoration: none;
+	font-size: 16pt;
+}
+a:hover{
+	color:#1E0ECB;
+	border:#5F53E0 2px outset;
+	border-top-left-radius:10px;
+	border-bottom-right-radius:10px;
+	padding-right:4px;
+	padding-left:4px;
+	text-decoration: none;
+	font-size: 16pt;
+}
+input{
+	font-size:15px;
+	color:#0C0652;
+	margin-left:20px;
+	font-family:cursive;
+	border:1px solid #0C0652;
+}
+input#borrar{
+	margin-left:44px;
+	}
+input#consultar{
+	margin-left:25px;
+}
+label{
+	margin-bottom:100px;
+	margin: 20px;
+}
+.boton{
+	margin-top:18px;
+	padding:5px 5px;
+	margin-left:150px;
+	color:#0C0652;
+}
+.botonModificar{
+	padding:5px 5px;
+	color:#0C0652;
+	margin-left:90px;
+}
+p{
+	color: #0C0652;
+	font-family:arial;
+	font-size:20px;
+	padding-bottom:20px;
+}

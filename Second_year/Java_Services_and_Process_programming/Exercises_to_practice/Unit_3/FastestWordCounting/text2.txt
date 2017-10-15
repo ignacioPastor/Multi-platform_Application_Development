@@ -1,0 +1,440 @@
+3. Concurrent programming 
+Annex V. ForkJoin framework 
+
+Service and Process Programming 
+
+Arturo Bernal 
+Nacho Iborra 
+
+IES San Vicente 
+
+
+This work is licensed under the Creative Commons AttributionNonCommercial-
+ShareAlike 4.0 International License. To view 
+a copy of this license, visit 
+
+http://creativecommons.org/licenses/by-nc-sa/4.0/ 
+
+
+Table of Contents 
+
+3. Concurrent programming 
+1. The Fork/Join framework...............................................................................................3 
+Service and Process Programming – Concurrent Programming 
+
+
+1. The Fork/Join framework 
+The thread executor that we have just seen was added in Java 5, and it allows us to 
+separate the thread creation and its execution. Since Java 7, we can go a step further 
+thanks to the Fork/Join framework. 
+
+With this framework, we can divide complex or big problems into smaller ones. So, this 
+framework is based on two operations: fork (divide a task into smaller tasks) and join (a 
+task waits for its subtasks to finalize). However, tasks involved in Fork/Join framework 
+have no other synchronization mechanism. 
+
+Fork/Join framework relies on two classes: ForkJoinPool 
+(it will manage the tasks and will 
+offer information about their execution) and ForkJoinTask 
+(the base class of every task 
+added to the ForkJoinPool). This class has two implemented subclasses: 
+RecursiveAction 
+(for tasks that will not return any result) and RecursiveTask 
+(for tasks 
+that will return a result). All these classes belong to java.util.concurrent package. 
+
+1.1. Example: tasks that do not return any result 
+Let's see how this framework can be used with the following example: we are going to 
+create a list of video games, with their titles and prices. Then, we are going to look for a 
+given title in the list, so that, if the list size is smaller than 5 video games, only one task will 
+be needed, but if not, a task will be created to search a subset of up to 5 video games from 
+the list. 
+
+Our VideoGame class would be like this one: 
+
+public 
+class VideoGame 
+
+{ 
+String title;
+float price; 
+
+public VideoGame(String title, float price)
+
+{ 
+this.title = title;
+this.price = price;
+
+
+} 
+
+public String getTitle()
+{ 
+return title;
+} 
+
+
+public 
+float getPrice()
+{ 
+return price;
+}
+} 
+
+Our thread or task to search in the list would be like this one: 
+
+public 
+class GameSearch extends RecursiveAction 
+{ 
+
+/* How many video games will each task be in charge of? */
+
+public 
+static 
+final 
+int 
+MAX_GAMES = 5; 
+
+/* List of video games */ 
+
+Service and Process Programming – Concurrent Programming 
+
+
+ ArrayList<VideoGame> list; 
+
+/* First index of the list to search */
+
+int 
+first; 
+
+/* Last index of the list to search */
+
+int 
+last; 
+
+/* Text to be searched in the list */
+
+String text; 
+
+public GameSearch(ArrayList<VideoGame> list, String text, int 
+first,
+int 
+last)
+{ 
+
+
+this.list = list;
+this.text = text;
+this.first = first;
+this.last = last;
+
+
+} 
+
+@Override
+
+protected 
+void compute()
+{ 
+if (last -first <= MAX_GAMES)
+search();
+
+
+else
+
+ { 
+int 
+middle = (last -first)/2;
+System.out.println("Creating 2 subtasks...");
+GameSearch s1 = new GameSearch(list, text, first, middle+1);
+GameSearch s2 = new GameSearch(list, text, middle+1, last);
+invokeAll(s1, s2);
+
+}
+} 
+
+
+public 
+void search()
+
+{ 
+for (int 
+i = first; i < last; i++)
+{ 
+
+
+try { TimeUnit.SECONDS.sleep(1); } catch (Exception e) {}
+if (list.get(i).getTitle().contains(text))
+System.out.println("Found at position " + i + ": " + 
+list.get(i).getTitle());
+}
+}
+} 
+
+Notice that, when we extend RecursiveAction class, we need to define a compute method. 
+This would be the equivalent to the run method in common threads. Inside this method, we 
+check the size of the game list. If it is smaller than 5, we just call the search method to 
+solve the problem. Otherwise, we divide the list in two parts and create two subtasks; each 
+one will be in charge of searching in one half of the list. 
+
+We can also create a list of tasks, and call the invokeAll method passing that list as a 
+parameter: 
+
+ArrayList<GameSearch> subtasks = new ArrayList<>(); 
+... 
+subtasks.add(new GameSearch(...));
+subtasks.add(new GameSearch(...));
+subtasks.add(new GameSearch(...)); 
+
+Service and Process Programming – Concurrent Programming 
+
+
+invokeAll(subtasks); 
+
+From our main program, we create the video game list, create a GameSearch task to look 
+for the word "Assassin's", and launch it in the Fork/Join pool, as we did before with thread 
+executors: 
+
+public 
+static 
+void main(String[] args)
+
+{ 
+ArrayList<VideoGame> list = new ArrayList<VideoGame>();
+list.add(new VideoGame("Assassin's Creed", 19.95f));
+list.add(new VideoGame("The last of us", 49.90f));
+list.add(new VideoGame("Fifa 14", 39.95f));
+list.add(new VideoGame("Far Cry 2", 14.95f));
+list.add(new VideoGame("Watchdogs", 59.95f));
+list.add(new VideoGame("Assassin's Creed II", 24.90f));
+list.add(new VideoGame("Far Cry 3", 39.50f));
+list.add(new VideoGame("Borderlands", 19.90f));
+
+ GameSearch v = new GameSearch(list, "Assassin's", 0, list.size());
+
+ ForkJoinPool pool = new ForkJoinPool();
+pool.execute(v); 
+
+
+do
+
+ { 
+try { Thread.sleep(100); } catch (Exception e) {}
+} while (!v.isDone());
+
+
+ pool.shutdown();
+} 
+
+Main program has to wait until task finishes (using its isDone method), before shutting 
+down. 
+
+1.2. Example: tasks that return a result 
+How could we adapt the previous example so that tasks do not print anything to the output, 
+and return a set or list of results found? We have to use a subclass of RecursiveTask 
+instead of a subclass of RecursiveAction. When we extend RecursiveTask, we have to 
+take into account that it is a parameterized class, this is, we need to provide the type of 
+result that will be returned. So our GameSearch class from previous example would look 
+like this one now (changes from previous version are shown in bold): 
+
+public 
+class GameSearch extends RecursiveTask<ArrayList<String>>
+{ 
+
+/* How many video games will each task be in charge of? */
+
+public 
+static 
+final 
+int 
+MAX_GAMES = 5; 
+
+/* List of video games */
+
+ArrayList<VideoGame> list;
+
+/* First index of the list to search */
+
+int 
+first;
+
+/* Last index of the list to search */
+
+int 
+last;
+
+/* Text to be searched in the list */
+
+String text; 
+
+public GameSearch(ArrayList<VideoGame> list, String text, int 
+first,
+int 
+last) 
+
+
+Service and Process Programming – Concurrent Programming 
+
+
+ { 
+this.list = list;
+this.text = text;
+this.first = first;
+this.last = last;
+
+
+} 
+
+@Override
+
+protected ArrayList<String> compute()
+{ 
+ArrayList<String> results = new ArrayList<String>(); 
+
+
+if (last -first <= MAX_GAMES)
+results = search();
+
+
+else
+
+ { 
+int 
+middle = (first + last)/2;
+System.out.println("Creating 2 subtasks...");
+GameSearch s1 = new GameSearch(list, text, first, middle+1);
+GameSearch s2 = new GameSearch(list, text, middle+1, last);
+invokeAll(s1, s2);
+
+try
+
+{ 
+results = s1.get();
+ArrayList<String> aux = s2.get();
+results.addAll(aux);
+
+
+} catch (Exception e) {}
+}
+return 
+results;
+
+
+} 
+
+public ArrayList<String> search()
+
+{ 
+ArrayList<String> results = new ArrayList<String>();
+for (int 
+i = first; i < last; i++)
+{ 
+
+
+try { TimeUnit.SECONDS.sleep(1); } catch (Exception e) {}
+if (list.get(i).getTitle().contains(text))
+
+results.add("Found at " + i + ": " + list.get(i).getTitle());
+}
+return 
+results;
+
+}
+} 
+
+We are going to return an ArrayList of Strings as a result, each one containing each 
+occurrence of the searched text. In search method, we just create the list of games 
+matching the text and return it. In compute method, we call the search method directly if 
+there are less than 5 games to search, or we split the work in two tasks, and join their 
+results in the try..catch block (calling to get method may throw exceptions). 
+
+Our main program will get the results after the main task has finished, and it will print them 
+to the standard output: 
+
+public 
+static 
+void main(String[] args)
+{ 
+... 
+
+/* Main method is the same until we call the shutdown method, then we needto add some lines to get and print the results */ 
+
+try
+
+{ 
+
+Service and Process Programming – Concurrent Programming 
+
+
+ ArrayList<String> results = v.get();
+for (int i = 0; i < results.size(); i++)
+System.out.println(results.get(i));
+} catch (Exception e) {
+System.out.println("Exception occurred: " + e.getMessage());
+}
+
+ pool.shutdown();
+} 
+
+Optional exercise 6 
+
+
+Create a project called ForkJoinFile. Create a text file in it, with some lines (at least 50, 
+you can copy them from any source). Use the Fork/Join framework to create tasks that will 
+check the contents of the text file (up to 10 lines for each task). The tasks must replace 
+every occurrence of the word "java" with "Java" (of course, try to add some occurrences of 
+the word "java" in the text file). At the end, main program will get the results of all the 
+subtasks (i.e., the pieces of text with the replacements done), will join them and will rewrite 
+the text file with the updated text. 
+
+1.3. Launching asynchronous subtasks 
+In the examples shown above, when we call the invokeAll method, the task that calls it 
+waits until the subtasks invoked finish their job. This is, we are using a synchronous way of 
+calling tasks and subtasks. 
+
+We can also call the subtasks in an asynchronous way (this is, the main task continues its 
+job while it launches the subtasks), by using the fork 
+and join 
+methods, instead of 
+invokeAll and other synchronous methods. So previous code of compute method could be 
+changed into an asynchronous one this way: 
+
+@Override 
+protected 
+void compute()
+{ 
+
+if (last - first <= MAX_GAMES)
+search();
+
+
+else
+
+ { 
+int middle = (first + last)/2;
+System.out.println("Creating 2 subtasks...");
+GameSearch s1 = new GameSearch(list, text, first, middle+1);
+GameSearch s2 = new GameSearch(list, text, middle+1, last);
+s1.fork();
+s2.fork();
+
+
+// At this point, this task continues running its code
+
+ ... 
+
+// Wait for the 1st subtask to finish
+
+s1.join(); 
+... 
+
+
+// Wait for the 2nd subtask to finish
+
+s2.join();
+}
+} 
+
+Service and Process Programming – Concurrent Programming 
+
+

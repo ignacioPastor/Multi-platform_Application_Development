@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE cocina SYSTEM "cocina.dtd">
+<!-- Ignacio Pastor Padilla - Practica 6 - Lenguaje de Marcas -->
+<cocina>
+	<receta dificultad="media">
+		<nombre>Huevos rellenos de jamón y gambas</nombre>
+		<tiempo cantidad="20" unidad="minutos" />
+		<ingredientes>
+			<ingrediente cantidad="8">huevos</ingrediente>
+			<ingrediente cantidad="100" unidad="gramos">gambas peladas</ingrediente>
+			<ingrediente cantidad="100" unidad="gramos">jamón serrano</ingrediente>
+			<ingrediente cantidad="50" unidad="gramos">aceitunas deshuesadas</ingrediente>
+			<ingrediente cantidad="1">pimiento morrón</ingrediente>
+			<ingrediente>sal</ingrediente>
+			<ingrediente>pimienta</ingrediente>
+			<ingrediente>mayonesa</ingrediente>
+		</ingredientes>
+		<preparacion>
+			Cocer los huevos y dejar enfriar, mezclar las yemas con las 
+			gambas hervidas, las aceitunas y el jamón picado, se sazona 
+			con sal y pimienta, se cubren con la mayonesa y se adornan 
+			con tiras de pimiento y aceitunas
+		</preparacion>
+		<comensales cantidad="4"/>
+		<autores>
+			<autor>
+				<nombreAutor>Ana</nombreAutor>
+				<primerApellido>Fernández</primerApellido>
+				<segundoApellido>Romero</segundoApellido>
+			</autor>
+		</autores>
+		<imagen ubicacion="img/ver_archivo_002.jpeg"/>
+	</receta>
+	
+	<receta dificultad="media">
+		<nombre>Pollo al limón en la olla rápida</nombre>
+		<tiempo cantidad="20" unidad="minutos"/>
+		<ingredientes>
+			<ingrediente cantidad="4">cuartos de pollo</ingrediente>
+			<ingrediente cantidad="1">hoja de laurel</ingrediente>
+			<ingrediente cantidad="1">cebolla</ingrediente>
+			<ingrediente cantidad="1/2" unidad="limón">zumo de limón</ingrediente>
+			<ingrediente>tomillo</ingrediente>
+			<ingrediente>pimienta</ingrediente>
+			<ingrediente>aceite</ingrediente>
+			<ingrediente>sal</ingrediente>
+		</ingredientes>
+		<preparacion>
+			Poner aceite y laurel, dorar un poco el pollo. Reservar y 
+			en el mismo aceite pochar la cebolla grande. Incorporar de 
+			nuevo el pollo y poner el zumo de medio limón, y dejar el 
+			limón ya exprimido dentro de la olla (para que suelte más 
+			jugo), poner medio vaso de vino y echar tomillo y un poco de 
+			sal. Tapar la olla y dejarlo unos 15 minutos
+		</preparacion>
+		<comensales cantidad="4"/>
+		<autores>
+			<autor>
+				<nombreAutor>gabe</nombreAutor>
+			</autor>
+		</autores>
+		<imagen ubicacion="img/ver_archivo_004.jpeg"/>
+	</receta>
+	
+	<receta dificultad="baja">
+		<nombre>Flan de almendras en el microondas</nombre>
+		<tiempo cantidad="15" unidad="minutos" />
+		<ingredientes>
+			<ingrediente cantidad="100" unidad="gramos">almendras crudas</ingrediente>
+			<ingrediente cantidad="4">huevos</ingrediente>
+			<ingrediente cantidad="1">bote pequeño de leche condensada</ingrediente>
+			<ingrediente>vainilla</ingrediente>
+			<ingrediente cantidad="100" unidad="gramos">azucar</ingrediente>
+			<ingrediente cantidad="1" unidad="vaso"> de agua o 1/2 litro de leche entera</ingrediente>
+		</ingredientes>
+		<preparacion>
+			Mezclaremos las yemas de huevo con la leche condensada, 
+			añadiremos las almendras y el vaso de agua o la leche entera, 
+			batiremos muy bien, recomiendo en batidora. Después de bien batido 
+			adicionaremos las claras de los huevos batidas a punto de nieve, 
+			mezclando a mano. Tendremos el molde para flan caramelizado, 
+			verteremos la crema de almendras y coceremos sin tapar en el horno
+			microondas a máxima potencia. Decorar con almendras peladas, 
+			guindas y nata montada. Según la densidad de las almendras 
+			quizá a los 10 minutos no este cuajado del todo, deberán darse 
+			en tal caso 4 ó 5 minutos más de cocción.
+		</preparacion>
+		<comensales cantidad="4"/>
+		<autores>
+			<autor>
+				<nombreAutor>Verónica</nombreAutor>
+			</autor>
+		</autores>
+		<imagen ubicacion="img/ver_archivo_005.jpeg"/>
+	</receta>
+	
+	<receta dificultad="baja">
+		<nombre>Arroz con leche</nombre>
+		<tiempo cantidad="45" unidad="minutos" />
+		<ingredientes>
+			<ingrediente cantidad="1/2" unidad="vaso">arroz</ingrediente>
+			<ingrediente cantidad="5/4" unidad="litro">leche entera</ingrediente>
+			<ingrediente cantidad="1/2" unidad="palito">canela en rama</ingrediente>
+			<ingrediente cantidad="4" unidad="trozos">corteza de limón</ingrediente>
+			<ingrediente>canela en polvo</ingrediente>
+			<ingrediente cantidad="6" unidad="cucharadas">azucar</ingrediente>
+		</ingredientes>
+		<preparacion>
+			Se pone a cocer la leche con los trocitos de corteza y la canela 
+			en rama, en otro cacharro se pone a hervir el arroz con agua unos
+			5 minutos, se saca del agua y se vuelca en la leche cuando 
+			esté cociendo, se le dá vueltas de vez en cuando durante una 
+			1/2 hora, cuando esté cocido ponerle 6 cucharadas soperas de 
+			azucar y que cueza un poco más. Se vuelca en una fuente poco 
+			profunda y se le aforrna con la canela en polvo, se puede 
+			tomar tibio o dejarlo en la nevera unas horas...
+		</preparacion>
+		<comensales cantidad="4"/>
+		<autores>
+			<autor>
+				<nombreAutor>María</nombreAutor>
+				<primerApellido>Romero</primerApellido>
+			</autor>
+		</autores>
+		<imagen ubicacion="img/ver_archivo.jpeg"/>
+	</receta>
+	
+	<receta dificultad="media">
+		<nombre>Sardinas al horno</nombre>
+		<tiempo cantidad="20" unidad="minutos"/>
+		<ingredientes>
+			<ingrediente>Sardinas grandes</ingrediente>
+			<ingrediente cantidad="2">Tomates maduros</ingrediente>
+			<ingrediente cantidad="1">Cebolleta</ingrediente>
+			<ingrediente cantidad="2" unidad="diente">Ajo</ingrediente>
+			<ingrediente>Vino blanco</ingrediente>
+			<ingrediente>Aceite</ingrediente>
+			<ingrediente>Pimienta</ingrediente>
+			<ingrediente>Sal</ingrediente>
+			<ingrediente>Perejil</ingrediente>
+		</ingredientes>
+		<preparacion>
+			Limpiar las sardinas y colocarlas en una bandeja para horno con 
+			los tomates partidos en trozos y la cebolla en rodajas finas, 
+			picar los ajos y el perejil y echarlo por encima así como un 
+			chorrito de aceite y otro de vino, salpimentar y poner en el 
+			horno unos 20 minutos a 180º.
+		</preparacion>
+		<comensales cantidad="4"/>
+		<autores>
+			<autor>
+				<nombreAutor>Ana</nombreAutor>
+				<primerApellido>Fernández</primerApellido>
+				<segundoApellido>Romero</segundoApellido>
+			</autor>
+		</autores>
+		<imagen ubicacion="img/ver_archivo_003.jpeg"/>
+	</receta>
+	
+</cocina>

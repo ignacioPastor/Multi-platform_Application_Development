@@ -1,0 +1,45 @@
+-- Ignacio Pastor Padilla
+-- Acceso a Datos 2º DAM Semipresencial
+
+-- Obtiene el almacén y el valor medio de este de las cajas 
+-- de cada almacén que se pase como parámetro.
+
+DROP FUNCTION IF EXISTS ValorMedioAlmacen(INTEGER);
+
+CREATE OR REPLACE FUNCTION ValorMedioAlmacen(INTEGER)
+RETURNS SETOF cajas AS
+$$
+DECLARE
+	idAlmacen ALIAS FOR $1;
+	rec cajas;
+BEGIN
+	FOR rec IN
+		SELECT almacen, AVG(valor) 
+			FROM CAJAS 
+			WHERE almacen=idAlmacen 
+			GROUP BY almacen 
+			ORDER BY almacen
+	LOOP
+		RETURN NEXT rec;
+	END LOOP;
+	RETURN;
+END;
+$$
+LANGUAGE plpgsql;
+
+----------------------------------------------------------
+
+-- Obtiene el valor medio de todas las cajas existentes en la tabla cajas
+
+DROP FUNCTION IF EXISTS ValorMedio();
+
+CREATE OR REPLACE FUNCTION ValorMedio() 
+RETURNS NUMERIC AS $$ 
+DECLARE 
+	media NUMERIC(100,2); 
+BEGIN 
+	SELECT avg(valor) INTO media FROM cajas; 
+	RETURN media; 
+END; 
+$$ 
+LANGUAGE plpgsql;

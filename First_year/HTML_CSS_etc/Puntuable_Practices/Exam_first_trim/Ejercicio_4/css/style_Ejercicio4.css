@@ -1,0 +1,42 @@
+
+body{
+	width: 500px;
+	margin: 10px auto;
+}
+
+caption{
+	caption-side: bottom;
+	color: #191970;
+	background-color: #EFEFFF;
+	font-style: italic;
+	font-weight: bold;
+}
+table{
+	font-family: Verdana;
+	background-color: #EFEFFF;
+	/* border-color: #FF0000; */
+	border: 2px solid #FF0000;
+	width: 100%;
+	table-layout: auto;
+	border-spacing: 7px;
+	text-align: center;
+	/* padding: 2px; */
+}
+
+#primeraFila{
+	color: #FFF;
+	background-color: #0077AA;
+}
+#segundaFila{
+	color: #191970;
+	background-color: #EAECEE;
+	font-weight: bold;
+}
+#terceraFila{
+	color: #333377;
+	background-color: #FFFFFF;
+}
+#terceraFila td{
+	border: 1px solid #191970;
+	padding: 5px 3px;
+}

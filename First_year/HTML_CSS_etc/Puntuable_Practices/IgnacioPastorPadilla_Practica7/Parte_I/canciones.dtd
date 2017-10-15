@@ -1,0 +1,10 @@
+<!ELEMENT canciones (cancion)*>
+<!ELEMENT cancion (ubicacion, artistas, album, anyo, comentario*)>
+<!ATTLIST cancion genero (pop | rock | jazz) #IMPLIED>
+<!ATTLIST cancion titulo ID #REQUIRED>
+<!ELEMENT ubicacion (#PCDATA)>
+<!ELEMENT artistas (artista)+>
+<!ELEMENT artista (#PCDATA)>
+<!ELEMENT album (#PCDATA)>
+<!ELEMENT anyo (#PCDATA)>
+<!ELEMENT comentario (#PCDATA)>

@@ -1,0 +1,1029 @@
+3. Concurrent programming 
+Annex IV. Atomic variables and concurrent collections 
+examples 
+
+Service and Process Programming 
+
+Arturo Bernal 
+Nacho Iborra 
+
+IES San Vicente 
+
+
+This work is licensed under the Creative Commons AttributionNonCommercial-
+ShareAlike 4.0 International License. To view 
+a copy of this license, visit 
+
+http://creativecommons.org/licenses/by-nc-sa/4.0/ 
+
+
+Index of contents 
+
+3. Concurrent programming..........................................................................1 
+
+
+1.Atomic variables..............................................................................................................3 
+
+
+1.1.Problems that may arise.........................................................................................3 
+1.2.Solving it with synchronize......................................................................................5 
+1.3.Using Lock...............................................................................................................6 
+1.4.Using Atomic...........................................................................................................7 
+1.5.AtomicReference.....................................................................................................8 
+
+
+2.Concurrent collections..................................................................................................12 
+
+
+2.1.Concurrent vs Synchronized.................................................................................12 
+2.2.Update an internal object......................................................................................13 
+
+
+Service and Process Programming 2. 
+
+
+
+1. Atomic variables 
+In this section we'll see how to solve some problems associated with single values 
+(primitive and object), how to write (update its value) them and read safely when many 
+threads are accessing at the same time. 
+
+1.1. Problems that may arise 
+Let's suppose that we have a class to manage a variable (integer) and some methods to 
+modify it and corresponding getters/setters. 
+
+public 
+class 
+SimpleInteger { 
+int 
+num; 
+
+
+public 
+SimpleInteger(int 
+num) { 
+this.num = num; 
+} 
+
+
+public 
+int 
+getNum() { 
+return 
+num; 
+} 
+
+
+public 
+void 
+setNum(int 
+num) { 
+this.num = num; 
+} 
+
+
+public 
+void 
+increment() { 
+num++; 
+} 
+
+
+public 
+void 
+decrement() { 
+num--; 
+} 
+
+
+public 
+void 
+addValue(int 
+val) { 
+num += num; 
+} 
+} 
+
+
+Now, let's create some threads that modify the values of that number by calling the 
+available increment and decrement methods (we'll manage them with an Executor): 
+
+public 
+static 
+SimpleInteger simpleInt 
+= new 
+SimpleInteger(0); 
+
+
+public 
+static 
+void 
+main(String[] args) { 
+
+
+ThreadPoolExecutor executor = 
+(ThreadPoolExecutor)Executors.newCachedThreadPool(); 
+
+
+for(int 
+i = 0; i < 10000; i++) { 
+executor.execute(() -> simpleInt.increment()); 
+
+
+Service and Process Programming 3. 
+
+
+} 
+
+
+executor.shutdown(); 
+
+
+while(!executor.isTerminated()) { 
+
+
+try 
+{ 
+
+
+Thread.sleep(100); 
+
+
+} catch 
+(InterruptedException e) {} 
+
+
+} 
+
+
+System.out.println("Expected: 10000, Result: " + simpleInt.getNum()); 
+} 
+
+
+What happens when we execute this code? 
+
+Expected: 10000, Result: 9954 
+Expected: 10000, Result: 9924 
+
+We can see that there's a problem. 10,000 threads incrementing each one the same 
+variable should give us always 10,000, but we get a different result each time and none is 
+correct. Here is why: 
+
+• 
+Lets examine this operation: num++ 
+• 
+For the compiler, this increment is translated like this . num = num + 1 
+• 
+There are three operations taking place here (imagine num current value is 5): 
+. 
+Variable substitution: num = 5 + 1 
+. 
+Adding operation: num = 6 
+. 
+Assigning the new value to num: num . 6 
+If this thread (when current value is 5) stops just after doing the first or second step, the 
+next thread accessing that variable won't see the value update and will see that's still 5. 
+This second thread will then increment 5 and assign 6 to the variable num. When the first 
+thread wakes up, it will continue from the last step before stopping, so it will assign 6 
+like the other thread (one increment has been lost!!). 
+
+
+Service and Process Programming 4. 
+
+
+
+1.2. Solving it with synchronize 
+A synchronized block or method only allows to enter one thread at a time. If a thread 
+wants to enter while another is inside, it will be stopped and wait until the thread inside the 
+block or method exits. 
+
+A synchronized block or method uses an object as a lock, meaning that other threads 
+trying to access a block or method with the same lock, will be blocked. You can use 
+different locks for different operations. It's recommended that you usually use the object 
+you're going to read/modify as the lock. 
+
+We can use it in different ways: 
+
+• 
+Outside the class method (in main method for example): 
+executor.execute(() -> { 
+synchronized(simpleInt){ 
+simpleInt.increment(); 
+} 
+}); 
+
+
+• 
+Inside the objects methods (use it in all methods that modify, read a variable that 
+more than 1 thread can access): 
+public 
+void 
+increment() { 
+synchronized(this){ 
+num++; 
+} 
+} 
+
+
+• 
+In the method declaration (same effect as before but locks all method to 1 thread 
+and may not be the best solution always) 
+public 
+synchronized 
+void 
+increment() { 
+num++; 
+} 
+
+
+Use only one solution from above!!!. Now, it works properly and produces . 10,000 as 
+the result. 
+
+
+Service and Process Programming 
+5. 
+
+
+
+1.3. Using Lock 
+The Lock interface provides a mechanism very similar to the synchronized blocks or 
+methods. It's an special object designed to lock a section of code. As it happens with 
+synchronized, when you use the same object in different places, if one gets locked, all of 
+them get locked and keep other threads from entering. 
+
+public 
+class 
+SimpleInteger { 
+int 
+num; 
+Lock lock; 
+
+
+public 
+SimpleInteger(int 
+num) { 
+this.num = num; 
+lock = new 
+ReentrantLock(); 
+
+
+} 
+
+
+... 
+
+
+public 
+void 
+increment() { 
+lock.lock(); 
+num++; 
+
+
+lock.unlock(); 
+} 
+... 
+
+
+} 
+
+
+There's a more advanced version (ReadWriteLock) to allow multiple threads to enter and 
+read a value but block them (only allow 1) when there's a modification. 
+
+• 
+If a thread is writing. All other threads are blocked (readers and writers) 
+• 
+If a thread is reading, another thread can enter and read at the same time, but a 
+writer will be blocked. 
+• 
+Writers have preference. If a writer is stopped and waiting, readers will be stopped 
+until that writer enters and finishes. If a reader and a writer are waiting, the writer 
+will enter first when the section is unlocked. 
+public 
+class 
+SimpleInteger { 
+int 
+num; 
+ReadWriteLock lock; 
+
+
+public 
+SimpleInteger(int 
+num) { 
+this.num = num; 
+lock = new 
+ReentrantReadWriteLock(); 
+
+
+} 
+... 
+
+
+public 
+int 
+getNum() { 
+
+
+lock.readLock().lock(); 
+int 
+localReturn = num; 
+lock.readLock().unlock(); 
+
+
+return 
+localReturn; 
+} 
+
+
+public 
+void 
+increment() { 
+lock.writeLock().lock(); 
+num++; 
+lock.writeLock().unlock(); 
+
+
+Service and Process Programming 
+6. 
+
+
+} 
+
+
+} 
+
+You can use also Conditions with Locks that allow you to do some advanced things, like 
+implementing the Consumer/Producer problem's solution (equivalent to calling wait() 
+inside synchronized). 
+
+https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/Condition.html 
+
+1.4. Using Atomic 
+There's some predefined classes in Java like AtomicInteger, AtomicLong or 
+AtomicBoolean that implement concurrency mechanisms to be thread-safe. Use this 
+classes when a variable gets accessed and updated by many threads, and you won't 
+need to implement synchronization yourself (all operations are atomic). 
+
+public 
+class 
+SimpleInteger { 
+AtomicInteger num; 
+
+
+public 
+SimpleInteger(int 
+num) { 
+this.num = new 
+AtomicInteger(num); 
+} 
+
+
+public 
+int 
+getNum() { 
+int 
+localReturn = num.get(); 
+
+
+return 
+localReturn; 
+} 
+
+
+public 
+void 
+setNum(int 
+num) { 
+this.num.set(num); 
+} 
+
+
+public 
+void 
+increment() { 
+num.incrementAndGet(); 
+} 
+
+
+public 
+void 
+decrement() { 
+num.decrementAndGet(); 
+} 
+
+
+public 
+void 
+addValue(int 
+val) { 
+num.addAndGet(val); 
+} 
+} 
+
+
+Service and Process Programming 7. 
+
+
+
+1.5. AtomicReference 
+For other data types (Double or any other object that is not Integer, Long or Boolean) you 
+can use the AtomicReference class. If you're unsure how to use it properly, then 
+synchronize yourself the code, but if you understand how it works it will make your life 
+easier. 
+
+Suppose we have this BankAccount class: 
+
+public 
+class 
+BankAccount { 
+double 
+moneyannualInterest;
+; 
+final 
+double 
+
+
+public 
+BankAccount(double 
+money, double 
+annualInterest) { 
+this.money = money; 
+this.annualInterest = annualInterest; 
+
+
+} 
+
+
+public 
+void 
+nextYear() { 
+money = money * (1 + (annualInterest / 100)); 
+} 
+
+
+public 
+void 
+addMoney(double 
+add) { 
+money += add; 
+} 
+
+
+public 
+double 
+getMoney() { 
+return 
+money; 
+} 
+} 
+
+
+If not using any synchronization mechanism… Fail!: 
+
+public 
+static 
+BankAccount account 
+= new 
+BankAccount(0, 5); 
+
+
+public 
+static 
+void 
+main(String[] args) { 
+
+
+ThreadPoolExecutor executor = 
+(ThreadPoolExecutor)Executors.newCachedThreadPool(); 
+
+
+for(int 
+i = 0; i < 10000; i++) { 
+executor.execute(() -> account.addMoney(1);); 
+} 
+
+
+executor.shutdown(); 
+while(!executor.isTerminated()) { 
+try 
+{ 
+Thread.sleep(100); 
+
+
+} catch 
+(InterruptedException e) {} 
+} 
+System.out.println("Expected: 10000, Result: " + account.getMoney()); 
+
+
+} 
+
+
+Expected: 10000, Result: 9891.0 
+
+
+Service and Process Programming 8. 
+
+
+If we want to update an object of this class atomically (until an update operation hasn't 
+finished no other thread can do anything with this object), we can use one of the solutions 
+we saw earlier or an AtomicReference: 
+
+AtomicReference for money . AtomicReference<Double> 
+
+Before Java 8 
+
+public 
+class 
+BankAccount { 
+AtomicReference<Double >money; 
+final 
+double 
+annualInterest; 
+
+
+public 
+BankAccount(double 
+money, double 
+annualInterest) { 
+this.money = new 
+AtomicReference<>(money); 
+this.annualInterest = annualInterest; 
+
+
+} 
+
+
+public 
+void 
+nextYear() { 
+Double currentVal, newVal; 
+do 
+{ 
+
+
+currentVal = new 
+Double(money.get()); 
+newVal = currentVal * (1 + (annualInterest / 100)); 
+} while(!money.compareAndSet(currentVal, newVal)); 
+} 
+
+
+public 
+void 
+addMoney(double 
+add) { 
+Double currentVal; 
+do 
+{ 
+
+
+currentVal = money.get(); 
+} while(!money.compareAndSet(currentVal, currentVal + add)); 
+} 
+
+
+public 
+double 
+getMoney() { 
+return 
+money.get(); 
+} 
+} 
+
+
+Only the AtomicReference methods are thread-safe!. When we call get() to receive the 
+current value and update it, while updating this thread can be stopped and another thread 
+could store a new value inside the AtomicReference!. 
+
+Before Java 8 you had to store the current value in a auxiliary variable, create a new 
+object with updated values and update it, then store the new value. The 
+compareAndSet(expectedVal, newVal) method checks if the object that we received 
+when we called get(), is still the same. If it's not the same, we have to repeat the operation 
+because the operation is not longer valid (there's a new value). 
+
+Java 8 to the rescue! 
+
+There's some new methods in AtomicReference class since Java 8 that use functional 
+interfaces (and lambda expressions), and allows to update the object inside atomically, so 
+we won't have to worry about an operation not being valid because another thread has 
+updated the object between our get and set operations. 
+
+Service and Process Programming 9. 
+
+
+
+public 
+class 
+BankAccount { 
+AtomicReference<Double >money; 
+final 
+double 
+annualInterest; 
+
+
+public 
+BankAccount(double 
+money, double 
+annualInterest) { 
+this.money = new 
+AtomicReference<>(money); 
+this.annualInterest = annualInterest; 
+
+
+} 
+
+
+public 
+void 
+nextYear() { 
+money.accumulateAndGet((annualInterest / 100), 
+(currentVal, interestToAdd) -> 
+currentVal * (1 + interestToAdd)); 
+} 
+
+
+public 
+void 
+addMoney(double 
+add) { 
+money.accumulateAndGet(add, (currentVal, valToAdd) -> 
+currentVal + valToAdd); 
+} 
+
+
+public 
+double 
+getMoney() { 
+return 
+money.get(); 
+} 
+} 
+
+
+You also could use this (for example in addMoney method): 
+
+money.updateAndGet((currentVal) -> currentVal + add); 
+
+
+What happens if the object is more complex than Double? 
+
+If you use an AtomicReference<BankAccount> in the main method instead of an 
+AtomicReference<Double> inside BankAccount, then you'll have to make sure that all 
+methods modifying any attribute, should be called inside AtomicReference methods. 
+
+We go back to this: 
+
+public 
+class 
+BankAccount { 
+double 
+moneyannualInterest;
+; 
+final 
+double 
+
+
+public 
+BankAccount(double 
+money, double 
+annualInterest) { 
+this.money = money; 
+this.annualInterest = annualInterest; 
+
+
+} 
+
+
+public 
+void 
+nextYear() { 
+money = money * (1 + (annualInterest / 100)); 
+} 
+
+
+public 
+void 
+addMoney(double 
+add) { 
+money += add; 
+} 
+
+
+public 
+double 
+getMoney() { 
+return 
+money; 
+} 
+} 
+
+
+Service and Process Programming 10. 
+
+
+Main method (atomic operations with a BankAccount object): 
+
+public 
+static 
+AtomicReference<BankAccount> account 
+= 
+new 
+AtomicReference<>(new 
+BankAccount(0, 5)); 
+
+
+public 
+static 
+void 
+main(String[] args) { 
+
+
+ThreadPoolExecutor executor = 
+(ThreadPoolExecutor)Executors.newCachedThreadPool(); 
+
+
+for(int 
+i = 0; i < 10000; i++) { 
+executor.execute(() -> { 
+account.updateAndGet((bac) -> { 
+return 
+new 
+BankAccount(bac.getMoney()+1, 5); 
+}); 
+}); 
+} 
+
+
+executor.shutdown(); 
+while(!executor.isTerminated()) { 
+try 
+{ 
+Thread.sleep(100); 
+
+
+} catch 
+(InterruptedException e) {} 
+} 
+System.out.println("Expected: 10000, Result: "+account.get().getMoney()); 
+
+
+} 
+
+
+Note that the updateAndGet method needs to return a new object. You can't use the 
+same object. You must generate a copy with updated values. That's because it allows all 
+threads to enter at the same time (better performance) and internally uses the 
+compareAndSet method to check if the object has been modified by other thread in the 
+middle of the operation (and repeat it if that happens). If we reuse the same object and 
+update the attribute Java will think that has not changed (same memory reference). 
+
+
+This problem doesn't happen with simple classes like Double or String, because the 
+compiler generates new objects when updating their values. 
+
+Conclusion: At the end it seems better to use synchronized methods (or blocks) when 
+using a custom class, or use Atomic variables only for simple objects like Integer, Double 
+or String for that class' attributes. But maybe AtomicReference is not the best solution for 
+managing a complex object. 
+
+Service and Process Programming 11. 
+
+
+2. Concurrent collections 
+With collections, to lock the entire object with a synchronized block when you want to add, 
+remove or replace a position is not usually a good idea. For that purposes, synchronized 
+and concurrent collections exists in Java. Those collections already implement 
+synchronization. 
+
+Synchronized collections are generated from the static class Collections. Those collections 
+synchronize the access to the list (every method except iterators), blocking the entire list to 
+only one thread at a time as you can check here. 
+
+List<String> list = new 
+ArrayList<>(); 
+List<String> syncList = Collections.synchronizedList(list); 
+
+
+Concurrent collections allow more threads to make a modification at the same time if it 
+happens in different positions (more performance and parallelism). There is no 
+ConcurrentList, but there is a ConcurrentHashMap or a ConcurrentLinkedDeque for 
+example. 
+
+ConcurrentHashMap<String, Integer> concHash = new 
+ConcurrentHashMap<>(); 
+
+
+ConcurrentLinkedDeque<Integer> concDeque = new 
+ConcurrentLinkedDeque<>(); 
+
+
+2.1. Concurrent vs Synchronized 
+All operations that require just calling a method on the concurrent or synchronized 
+collection are atomic. This means: 
+
+• 
+Calling a method on a synchronized collection blocks the entire collection object. 
+• 
+Calling a method on a concurrent collection usually only blocks the position or key 
+(hashmap) or uses volatile nodes (linked deque, we're not going to explain how 
+volatile works here). In conclusion, these collections reach more performance than 
+synchronized when working with many threads. 
+These methods usually include methods that modify the nodes of the collection, but not 
+the internal objects (with some exceptions introduced in java 8 as we'll see). Operations 
+that include calling more than 1 method on that collection are usually not thread safe 
+unless you block those operations manually. 
+
+When you generate a concurrent collection, observable collection or the majority of 
+collections using other collection as the base in the constructor, elements from the original 
+collection are added to the new collection iterating over it (Iterator). 
+
+When using synchronized collections, iterating over those collections is not thread safe, so 
+you'll need to implement it manually: 
+
+List<String> l = Collections.synchronizedList(new 
+ArrayList<>()); 
+
+
+synchronized 
+(l) { 
+
+
+Iterator i = l.iterator(); // Must be in synchronized block 
+
+
+while 
+(i.hasNext()) { 
+
+
+// Do something 
+
+
+} 
+} 
+
+
+Service and Process Programming 
+12. 
+
+
+That problem doesn't happen with concurrent collections or blocking queues. Their 
+iterators are safe but don't guarantee that if another thread changes an element while 
+iterating, current thread will see that modification immediately. 
+
+Another thing is performance. As said earlier, concurrent collections usually get more 
+performance from heavy multi-threading environments because they only block one 
+node and not the entire list. 
+
+2.2. Update an internal object 
+When you want to modify an internal object of the collection, if you do it by getting the 
+object and then make some modification to its properties, you'll need to synchronize that 
+operation (or the object's methods). 
+
+No synchronization 
+
+public 
+static 
+ConcurrentHashMap<Integer, BankAccount> concHash 
+= new 
+ConcurrentHashMap<>(); 
+
+
+public 
+static 
+void 
+main(String[] args) { 
+concHash.put(0, new 
+BankAccount(0, 5)); 
+concHash.put(1, new 
+BankAccount(0, 5)); 
+concHash.put(2, new 
+BankAccount(0, 5)); 
+
+
+ThreadPoolExecutor executor = 
+(ThreadPoolExecutor)Executors.newCachedThreadPool(); 
+
+
+for(int 
+i = 0; i < 10000; i++) { 
+
+
+executor.execute(() -> { 
+concHash.get(0).addMoney(1); 
+concHash.get(1).addMoney(1); 
+concHash.get(2).addMoney(1); 
+
+
+}); 
+} 
+
+
+executor.shutdown(); 
+while(!executor.isTerminated()) { 
+try 
+{ 
+Thread.sleep(100); 
+} catch 
+(InterruptedException e) {} 
+} 
+
+
+System.out.println("Expected (0): 10000, Result: " + concHash.get(0).getMoney()); 
+System.out.println("Expected (1): 10000, Result: " + concHash.get(1).getMoney()); 
+System.out.println("Expected (2): 10000, Result: " + concHash.get(2).getMoney()); 
+
+
+} 
+
+
+Execution: 
+
+Expected (0): 10000, Result: 9940.0 
+Expected (1): 10000, Result: 9964.0 
+Expected (2): 10000, Result: 9970.0 
+
+
+Service and Process Programming 13. 
+
+
+
+The get(key) method call is thread-safe, but once you get the object, the 
+addMoney(money) call is not safe. 
+
+• 
+One solution would be to synchronize the method addMoney in this case. 
+public 
+synchronized 
+void 
+addMoney(double 
+add) { 
+money += add; 
+} 
+
+
+• 
+Other solution would be synchronization outside the class using the object: 
+BankAccount temp; 
+temp = concHash.get(0); 
+synchronized(temp) { 
+
+
+temp.addMoney(1); 
+} 
+
+
+• 
+And other solution would be using compute, computeIfAbsent, 
+computeIfPresent methods. All code inside those methods is executed in an 
+atomic way, so only one thread can enter it at the same time. 
+concHash.compute(0, (key, value) -> { 
+value.addMoney(1); 
+return 
+value; 
+
+
+}); 
+
+
+If you use a compute function you'll have to keep in mind that it expects the object at the 
+current position to be replaced, but you can modify the object and return the same object. 
+In case you wanted to replace an object using data from the current value, then you must 
+use compute, because using get, doing dome calculations, and then using put to replace 
+that object is not thread safe (operations must be atomic). 
+
+You don’t need to create a new object in this case as it happened with updateAndGetmethod, because only one thread could be executing this code at the same time (there's 
+no checking if another thread has changed the object before because there's no need to). 
+
+With compute you can also check if an object does not exist for a key and create it: 
+
+for(int 
+j = 0; j < 3; j++) { 
+concHash.compute(j, (key, value) -> { 
+if(value == null) { // No value yet, create one 
+return 
+new 
+BankAccount(1, 5); 
+
+
+} else 
+{ 
+value.addMoney(1); 
+return 
+value; 
+
+
+} 
+}); 
+} 
+
+
+For safety, use synchronized in the object's methods (maybe it's also being updated by 
+another thread at the same time from outside the collection…). 
+
+Service and Process Programming 
+14. 
+
+
+

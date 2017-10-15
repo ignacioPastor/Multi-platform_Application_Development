@@ -1,0 +1,147 @@
+--Mundial_IgnacioPastorPadilla_A
+
+
+-- 1. Jugadores que hayan jugado partidos y si no lo han hecho que salgan también,
+-- debe salir el nombre, los equipos que se enfrentaron y el resultado
+
+select ju.nombre, jgr.equipo_L_part equipo_local, jgr.equipo_V_part equipo_visitante,
+    par.resultado_L goles_local, par.resultado_V goles_visitante
+from jugador ju, jugar jgr, partido par
+where ju.nombre = jgr.nombre_jug
+and ju.equipo_jugador = jgr.equipo_L_part
+    or ju.equipo_jugador = jgr.equipo_V_part
+and par.equipo_L = jgr.equipo_L_part
+and par.equipo_V = jgr.equipo_V_part
+and par.fecha = jgr.fecha_part;
+
+
+-- 2. El gol más tempranero en cualquier mundial,
+-- saca el minuto, el jugador, y el partido donde se produjo
+
+select *
+from gol
+where minuto = (select min(minuto) from gol);
+
+
+-- 3. Saca los delanteros de los equipos que hagan de local
+-- que hayan empatado partidos, quitando duplicados.
+
+--Si tenemos en cuenta delanteros como posición habitual
+select distinct ju.nombre
+from jugador ju
+where ju.puesto_hab = 'DL'
+and ju.equipo_jugador in (select par.equipo_V
+                                from partido par
+                                where par.resultado_L = par.resultado_V);
+
+-- Si tenemos en cuenta el que hayan jugado de delanteros en esos partidos
+select distinct ju.nombre
+from jugador ju, jugar jgr
+where jgr.puesto_jugar = 'DL'
+and ju.nombre = jgr.nombre_jug
+and ju.equipo_jugador in (select par.equipo_V
+                                from partido par
+                                where par.resultado_L = par.resultado_V
+                                and jgr.equipo_L_part = par.equipo_L
+                                and jgr.equipo_V_part = par.equipo_V
+                                and jgr.fecha_part = par.fecha);
+
+
+-- 4. Saca todos los jugadores que han jugado en un puesto no habitual al suyo.
+
+select ju.nombre
+from jugador ju, jugar jgr
+where ju.nombre = jgr.nombre_jug
+and ju.puesto_hab <> jgr.puesto_jugar;
+
+
+-- 5. Saca el nombre del jugador que haya marcado el gol más tempranero
+-- y el árbitro mayor alfabéticamente
+
+select jugador_gol
+from gol
+where minuto = (select min(minuto)
+                    from gol)
+UNION
+select nombre
+from arbitro
+where nombre = (select min(nombre) from arbitro);
+
+
+-- 6. Muestra la cantidad de goles, la selección a la que pertenece 
+-- y el máximo goleador de todas las primeras partes de los partidos
+
+select ju.nombre, ju.equipo_jugador, count(*)
+from jugador ju, gol
+where gol.jugador_gol = ju.nombre
+and gol.minuto < 46
+group by ju.nombre, ju.equipo_jugador
+having count(*) = (select max(count(*))
+                        from jugador ju2, gol gol2
+                        where gol2.jugador_gol = ju2.nombre
+                        and gol2.minuto < 46
+                        group by ju2.nombre);
+
+
+-- 7. Muestra los equipos que hayan ganado partidos, sacando duplicados
+
+select eq.equipo
+from equipos eq, partido par
+where eq.equipo = par.equipo_L
+and par.resultado_L > par.resultado_V
+UNION ALL
+select eq.equipo
+from equipos eq, partido par
+where eq.equipo = par.equipo_V
+and par.resultado_V > par.resultado_L;
+
+
+-- 8. Jugadores que hayan metido algún gol y hayan jugado menos de 3 partidos
+-- o que no hayan marcado ningún gol pero hayan jugado más de 5 partidos
+
+(
+select jugador_gol
+from gol
+INTERSECT
+select nombre_jug
+from jugar
+group by nombre_jug
+having count(*) < 3
+)
+UNION
+(
+select nombre_jug
+from jugar
+group by nombre_jug
+having count(*) > 5
+MINUS
+select jugador_gol
+from gol
+);
+
+
+-- 9. Una vista con el resultado que menos se haya dado
+
+create view result_menos_visto
+as select par.resultado_L, par.resultado_V, count(*) num_veces_visto
+    from partido par
+    group by par.resultado_L, par.resultado_V
+    having count(*) = (select min(count(*))
+                        from partido par2
+                        group by par2.resultado_L, par2.resultado_V);
+
+
+-- 10. Cuál es el resultado que más veces se ha dado en los Mundiales
+-- siempre que haya habido más de tres goles
+
+select par.resultado_L, par.resultado_V
+from partido par
+group by par.resultado_L, par.resultado_V
+having count(*) = (select max(count(*))
+                    from partido par2
+                    where (par2.equipo_L, par2.equipo_V, par2.fecha) in (select equipo_L_gol, equipo_V_gol, fecha_gol
+                                                                               from gol
+                                                                               group by equipo_L_gol, equipo_V_gol, fecha_gol
+                                                                               having count(*) > 3)
+                    group by par2.resultado_L, par2.resultado_V);
+

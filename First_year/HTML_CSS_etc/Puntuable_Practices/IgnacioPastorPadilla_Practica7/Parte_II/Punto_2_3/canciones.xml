@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE canciones SYSTEM "canciones.dtd">
+
+<canciones>
+	<cancion titulo="Voy_hacia_el_mar" genero="rock">
+		<ubicacion>musica/LosZigarros/VoyHaciaElMar.mp3</ubicacion>
+		<artistas>
+			<artista>Los Zigarros</artista>
+		</artistas>
+		<album>Los Zigarros</album>
+		<anyo>2013</anyo>
+		<comentario>Rock ochentero</comentario>
+	</cancion>
+	
+	<cancion titulo="Come_together" genero="rock">
+		<ubicacion>musica/TheBeatles/AbbeyRoad/ComeTogether.mp3</ubicacion>
+		<artistas>
+			<artista>The Beatles</artista>
+		</artistas>
+		<album>Abbey Road</album>
+		<anyo>1969</anyo>
+		<comentario>Da buen rollo mientras estudias LM</comentario>
+		<comentario>Cuenta con una versión remasterizada de gran calidad</comentario>
+	</cancion>
+	
+	<cancion titulo="De_que_me_sirve_llorar" genero="pop">
+		<ubicacion>musica/OBK/DeQueMeSirveLlorar.mp3</ubicacion>
+		<artistas>
+			<artista>OBK</artista>
+		</artistas>
+		<album>Llámalo sueño</album>
+		<anyo>1991</anyo>
+	</cancion>
+	
+	<cancion titulo="All_the_things_you_are" genero="jazz">
+		<ubicacion>musica/jazz/AllTheThingsYouAre.mp3</ubicacion>
+		<artistas>
+			<artista>Ron Carter</artista>
+			<artista>Cedar Walton</artista>
+		</artistas>
+		<album>Walton, Carter and DeJohnette</album>
+		<anyo>1986</anyo>
+	</cancion>
+	
+	<cancion titulo="Otro_suenyo">
+		<ubicacion>musica/edhellen/Aletheia_I/OtroSueño.mp3</ubicacion>
+		<artistas>
+			<artista>Edhellen</artista>
+		</artistas>
+		<album>Aletheia I. Los pasos perdidos</album>
+		<anyo>2016</anyo>
+		<comentario>Banda alicantina chachi</comentario>
+	</cancion>
+
+</canciones>

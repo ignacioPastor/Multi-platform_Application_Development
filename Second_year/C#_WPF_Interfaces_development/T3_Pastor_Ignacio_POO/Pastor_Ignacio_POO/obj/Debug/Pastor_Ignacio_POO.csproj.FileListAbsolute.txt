@@ -1,0 +1,12 @@
+C:\Users\Ignacio\Desktop\Pastor_Ignacio_POO\Pastor_Ignacio_POO\bin\Debug\Pastor_Ignacio_POO.exe.config
+C:\Users\Ignacio\Desktop\Pastor_Ignacio_POO\Pastor_Ignacio_POO\bin\Debug\Pastor_Ignacio_POO.exe
+C:\Users\Ignacio\Desktop\Pastor_Ignacio_POO\Pastor_Ignacio_POO\bin\Debug\Pastor_Ignacio_POO.pdb
+C:\Users\Ignacio\Desktop\Pastor_Ignacio_POO\Pastor_Ignacio_POO\obj\Debug\Pastor_Ignacio_POO.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\Pastor_Ignacio_POO\Pastor_Ignacio_POO\obj\Debug\Pastor_Ignacio_POO.exe
+C:\Users\Ignacio\Desktop\Pastor_Ignacio_POO\Pastor_Ignacio_POO\obj\Debug\Pastor_Ignacio_POO.pdb
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_3\Practica\Pastor_Ignacio_POO\Pastor_Ignacio_POO\bin\Debug\Pastor_Ignacio_POO.exe.config
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_3\Practica\Pastor_Ignacio_POO\Pastor_Ignacio_POO\obj\Debug\Pastor_Ignacio_POO.exe
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_3\Practica\Pastor_Ignacio_POO\Pastor_Ignacio_POO\obj\Debug\Pastor_Ignacio_POO.pdb
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_3\Practica\Pastor_Ignacio_POO\Pastor_Ignacio_POO\bin\Debug\Pastor_Ignacio_POO.exe
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_3\Practica\Pastor_Ignacio_POO\Pastor_Ignacio_POO\bin\Debug\Pastor_Ignacio_POO.pdb
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_3\Practica\Pastor_Ignacio_POO\Pastor_Ignacio_POO\obj\Debug\Pastor_Ignacio_POO.csprojResolveAssemblyReference.cache

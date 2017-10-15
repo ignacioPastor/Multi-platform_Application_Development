@@ -1,0 +1,210 @@
+﻿<Window x:Class="Pastor_Ignacio_DellStore2WPF.AltaModificacionProducto"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CapaControlador;assembly=CapaControlador"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Title="AltaModificacionProducto" Height="257" Width="568">
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Margin" Value="5,0,5,0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,2,40,2" />
+
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" Width="20" Height="20" CornerRadius="10"
+                                    ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white">
+                                </TextBlock>
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!--Ponemos también el tooltip en el campo-->
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={RelativeSource Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <!--Para el ToolTip de los errores-->
+        <!--<Style x:Key="textStyleTextBox" TargetType="TextBox">
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="MaxLength" Value="40" />
+            <Setter Property="Width" Value="392" />
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={RelativeSource Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>-->
+        <!--<Para efectos visuales de notificación de errores>-->
+        <!--
+        <ControlTemplate x:Key="validationTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="adorno" Foreground="Red" FontSize="20" Text="*"/>
+                <Border BorderBrush="Red" BorderThickness="3">
+                    <AdornedElementPlaceholder/>
+                </Border>
+                
+            </StackPanel>
+        </ControlTemplate>-->
+
+    </Window.Resources>
+    <!--<Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Save"
+                        CanExecute="SaveCanExecute"
+                        Executed="SaveExecuted" />
+    </Window.CommandBindings>-->
+    <!--<Grid.CommandBindings>
+        <CommandBinding Command="tryFinalizar" CanExecute="AddCustomer_CanExecute" Executed="AddCustomer_Executed" />
+    </Grid.CommandBindings>-->
+
+    <Grid x:Name="myGridProduct"  >
+        <Grid.CommandBindings>
+            <CommandBinding Command="New" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed" />
+        </Grid.CommandBindings>
+
+        <!--<TextBox x:Name="tbTitle" HorizontalAlignment="Left" Height="23" Margin="130,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Text="{Binding UpdateSourceTrigger=LostFocus, Path=Title,
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" Validation.Error="Validation_Error"/>-->
+        <TextBox x:Name="tbTitle" HorizontalAlignment="Left" Height="23" Margin="96,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"
+            Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="Title" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:NotNullValidation/>
+                        <local:StringValidation_Length50/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <!--<TextBox x:Name="tbActor" HorizontalAlignment="Left" Height="23" Margin="130,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Text="{Binding UpdateSourceTrigger=LostFocus, Path=Actor,
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" Validation.Error="Validation_Error"/>-->
+        <TextBox x:Name="tbActor" HorizontalAlignment="Left" Height="23" Margin="96,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"
+            Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="Actor" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:NotNullValidation/>
+                        <local:StringValidation_Length50/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <!--<TextBox x:Name="tbPrice" HorizontalAlignment="Left" Height="23" Margin="130,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Text="{Binding UpdateSourceTrigger=LostFocus, Path=Price,
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" Validation.Error="Validation_Error"/>-->
+        <TextBox x:Name="tbPrice" HorizontalAlignment="Left" Height="23" Margin="434,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="92"
+            Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="Price" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:NotNullValidation/>
+                        <local:DecimalValidation_2Decimals/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <!--<TextBox x:Name="tbProdId" HorizontalAlignment="Left" Height="23" Margin="397,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Text="{Binding UpdateSourceTrigger=LostFocus, Path=ProdId,
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" Validation.Error="Validation_Error"/>-->
+        <TextBlock x:Name="tbProdId" HorizontalAlignment="Left" Height="23" Margin="434,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="92"
+            Validation.Error="Validation_Error" ToolTip="La asignación de este valor se realiza de forma automática" >
+            <TextBlock.Text>
+                <Binding Path="ProdId" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <!--<Binding.ValidationRules>
+                        <local:NotNullValidation/>
+                        <local:IntegerValidation/>
+                        <ExceptionValidationRule/>
+                        -->
+                    <!--Esto debería coger si duplica la pk, cuidado por si la tabla del dataset no sabe la pk-->
+                    <!--
+                    </Binding.ValidationRules>-->
+                </Binding>
+            </TextBlock.Text>
+        </TextBlock>
+
+        <!--<TextBox x:Name="tbCommon" HorizontalAlignment="Left" Height="23" Margin="397,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Text="{Binding UpdateSourceTrigger=LostFocus, Path=CommonProdId,
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" Validation.Error="Validation_Error"/>-->
+        <TextBox x:Name="tbCommon" HorizontalAlignment="Left" Height="23" Margin="434,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="92"
+             Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="CommonProdId" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:NotNullValidation/>
+                        <local:IntegerValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <!--<TextBox x:Name="tbSpecial" HorizontalAlignment="Left" Height="23" Margin="397,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Text="{Binding UpdateSourceTrigger=LostFocus, Path=Special,
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" Validation.Error="Validation_Error"/>-->
+        <TextBox x:Name="tbSpecial" HorizontalAlignment="Left" Height="23" Margin="244,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="59"
+            Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="Special" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:SpecialValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <!--<TextBox x:Name="tbCategorias" HorizontalAlignment="Left" Height="23" Margin="130,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Text="{Binding UpdateSourceTrigger=LostFocus, Path=Category,
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" Validation.Error="Validation_Error"/>-->
+        <TextBox x:Name="tbCategorias" HorizontalAlignment="Left" Height="23" Margin="96,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68"
+            Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="Category" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:NotNullValidation/>
+                        <local:IntegerValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="26,26,0,0" TextWrapping="Wrap" Text="Título:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="26,66,0,0" TextWrapping="Wrap" Text="Actor:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="26,106,0,0" TextWrapping="Wrap" Text="Categoría:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="322,109,0,0" TextWrapping="Wrap" Text="Precio:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock4" ToolTip="La asignación de este valor se realiza de forma automática" HorizontalAlignment="Left" Margin="322,25,0,0" TextWrapping="Wrap" Text="Id Producto:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="322,65,0,0" TextWrapping="Wrap" Text="Common Prod Id:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="182,109,0,0" TextWrapping="Wrap" Text="Special:" VerticalAlignment="Top"/>
+        <Button x:Name="bFinalizar" Content="Finalizar" HorizontalAlignment="Left" Margin="244,157,0,0" VerticalAlignment="Top" Width="75" Command="New"/>
+        <TextBlock x:Name="tbInfoAuto" ToolTip="La asignación de este valor se realiza de forma automática" HorizontalAlignment="Left" Margin="434,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="52" Height="18"/>
+        <!--<TextBlock x:Name="tbInfo" HorizontalAlignment="Left" Margin="78,10,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top"/>-->
+
+        <StatusBar Margin="0,189,0,0">
+            <TextBlock x:Name="tbStatusInfo" Text="" Margin="5,2,2,2"/>
+        </StatusBar>
+    </Grid>
+</Window>

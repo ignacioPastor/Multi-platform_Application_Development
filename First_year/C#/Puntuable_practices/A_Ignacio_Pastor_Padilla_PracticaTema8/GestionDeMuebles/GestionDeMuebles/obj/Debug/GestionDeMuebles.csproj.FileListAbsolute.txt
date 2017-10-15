@@ -1,0 +1,3 @@
+C:\Users\Ignacio\Desktop\DAM\Programacion\previo 3er trimestre\Tema 8\practica8\A_Ignacio_Pastor_Padilla_PracticaTema8\GestionDeMuebles\GestionDeMuebles\bin\Debug\GestionDeMuebles.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\previo 3er trimestre\Tema 8\practica8\A_Ignacio_Pastor_Padilla_PracticaTema8\GestionDeMuebles\GestionDeMuebles\obj\Debug\GestionDeMuebles.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\previo 3er trimestre\Tema 8\practica8\A_Ignacio_Pastor_Padilla_PracticaTema8\GestionDeMuebles\GestionDeMuebles\obj\Debug\GestionDeMuebles.pdb

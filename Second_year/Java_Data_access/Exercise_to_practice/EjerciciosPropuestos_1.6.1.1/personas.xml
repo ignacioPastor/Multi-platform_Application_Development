@@ -1,0 +1,27 @@
+<personas>
+	<persona id="p1">
+		<nombre>Francisco Garcia</nombre>
+		<mail>f.garcia@gmail.com</mail>
+		<edad>23</edad>
+	</persona>
+	<persona id="p2">
+		<nombre>Ernesto Fuentes</nombre>
+		<mail>r.fuentes@gmail.com</mail>
+		<edad>17</edad>
+	</persona>
+	<persona id="p3">
+		<nombre>Maria Fernandez</nombre>
+		<mail>m.fernandez@gmail.com</mail>
+		<edad>28</edad>	
+	</persona>
+	<persona id="p4">
+		<nombre>Carlos Ramirez</nombre>
+		<mail>c.ramirez@gmail.com</mail>
+		<edad>25</edad>	
+	</persona>
+	<persona id="p5">
+		<nombre>Carlota Martinez</nombre>
+		<mail>c.martinez@gmail.com</mail>
+		<edad>24</edad>	
+	</persona>
+</personas>

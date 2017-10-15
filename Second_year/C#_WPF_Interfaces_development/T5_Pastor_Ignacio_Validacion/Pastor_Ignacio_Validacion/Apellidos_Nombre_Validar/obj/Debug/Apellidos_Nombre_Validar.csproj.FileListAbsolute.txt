@@ -1,0 +1,18 @@
+C:\Users\Antonio\Desktop\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\bin\Debug\Apellidos_Nombre_Validar.exe.config
+C:\Users\Antonio\Desktop\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\bin\Debug\Apellidos_Nombre_Validar.exe
+C:\Users\Antonio\Desktop\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\bin\Debug\Apellidos_Nombre_Validar.pdb
+C:\Users\Antonio\Desktop\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.csprojResolveAssemblyReference.cache
+C:\Users\Antonio\Desktop\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.Form1.resources
+C:\Users\Antonio\Desktop\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.Properties.Resources.resources
+C:\Users\Antonio\Desktop\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.csproj.GenerateResource.Cache
+C:\Users\Antonio\Desktop\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.exe
+C:\Users\Antonio\Desktop\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.pdb
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_5\Practica\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\bin\Debug\Apellidos_Nombre_Validar.exe.config
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_5\Practica\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.exe
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_5\Practica\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.pdb
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_5\Practica\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\bin\Debug\Apellidos_Nombre_Validar.exe
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_5\Practica\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\bin\Debug\Apellidos_Nombre_Validar.pdb
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_5\Practica\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_5\Practica\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.Form1.resources
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_5\Practica\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.Properties.Resources.resources
+C:\Users\Ignacio\Desktop\DAM\Desarrollo de Interfaces\Tema_5\Practica\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\Apellidos_Nombre_Validar\obj\Debug\Apellidos_Nombre_Validar.csproj.GenerateResource.Cache

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Datos de Usuario">
+        <CheckBoxPreference
+            android:key="opcionSonido"
+            android:title="Sonido"
+            android:summary="Activa o desactiva el sonido" />
+        <EditTextPreference
+            android:key="opcionAlias"
+            android:title="Alias"
+            android:summary="Muestra el alias del usuario"
+            android:dialogTitle="Introduce un alias" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Datos de Paises">
+        <ListPreference
+            android:key="cancion"
+            android:title="Canción"
+            android:summary="Canción para reproducir"
+            android:dialogTitle="Elige una canción"
+            android:entries="@array/cancion"
+            android:entryValues="@array/codigocancion" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

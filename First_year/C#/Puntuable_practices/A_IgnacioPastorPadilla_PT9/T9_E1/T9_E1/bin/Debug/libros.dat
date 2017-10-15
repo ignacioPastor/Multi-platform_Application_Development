@@ -1,0 +1,41 @@
+<SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<SOAP-ENV:Body>
+<SOAP-ENC:Array SOAP-ENC:arrayType="a1:Libro[5]" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/T9_E1/T9_E1%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<item href="#ref-3"/>
+<item href="#ref-4"/>
+<item href="#ref-5"/>
+<item href="#ref-6"/>
+<item href="#ref-7"/>
+</SOAP-ENC:Array>
+<a1:Libro id="ref-3" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/T9_E1/T9_E1%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<isbn id="ref-8">001</isbn>
+<titulo id="ref-9">Primer libro</titulo>
+<autor id="ref-10">Señor uno</autor>
+<precio>1.1</precio>
+</a1:Libro>
+<a1:Libro id="ref-4" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/T9_E1/T9_E1%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<isbn id="ref-11">002</isbn>
+<titulo id="ref-12">Segundo libro</titulo>
+<autor id="ref-13">Señor dos</autor>
+<precio>2.2</precio>
+</a1:Libro>
+<a1:Libro id="ref-5" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/T9_E1/T9_E1%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<isbn id="ref-14">003</isbn>
+<titulo id="ref-15">Tercer libro</titulo>
+<autor id="ref-16">Señor tres</autor>
+<precio>3.3</precio>
+</a1:Libro>
+<a1:Libro id="ref-6" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/T9_E1/T9_E1%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<isbn id="ref-17">004</isbn>
+<titulo id="ref-18">Cuarto libro</titulo>
+<autor id="ref-19">Señor cuatro</autor>
+<precio>4.4</precio>
+</a1:Libro>
+<a1:Libro id="ref-7" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/T9_E1/T9_E1%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<isbn id="ref-20">005</isbn>
+<titulo id="ref-21">Quinto libro</titulo>
+<autor id="ref-22">Señor quinto</autor>
+<precio>5.5</precio>
+</a1:Libro>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

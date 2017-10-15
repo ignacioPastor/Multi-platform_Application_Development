@@ -1,0 +1,10 @@
+Linea normal
+linea 09/11/2009 con otras cosas
+a ver si lee bien
+quizas si, quizas no
+el caso es que aquí hay 12/04/1001
+y ultima linea normal
+ 9 8 7
+2
+prueba1 2/12/1234
+prueba2 2/2/1234

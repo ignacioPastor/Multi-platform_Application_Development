@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+	<head>
+		<meta charset="utf-8">
+		<title>Ejercicio 2</title>
+		<meta name="description" content="HTML5, CSS3">
+		<meta name="author" content="Ignacio Pastor">
+		<link rel="stylesheet" href="css/style_Ejercicio2.css" media="screen" type="text/css">
+	</head>
+	<body>
+		<h1>iDESWEB</h1>
+		<h2>Formulario de registro</h2>
+		<form method="post" action="mailto:ignacio.past@gmail.com" enctype="text/plain">
+			<fieldset>
+				<legend>¿QUIÉN ERES?</legend>
+				<p><label for="nombre">Nombre</label></p>
+				<input name="nombre" id="nombre" type="text"/>
+				<p><label for="apellidos">Apellidos</label></p>
+				<input name="nombre" id="apellidos" type="text"/>
+				<p><label for="mail">Correo electrónico</label></p>
+				<input name="mail" id="mail" type="text"/>
+				<p><label>Fecha de nacimiento</label></p>
+				<select name="dia">
+					<option selected disabled hidden>Dia</option>
+					<option value="uno">1</option><option value="dos">2</option><option value="tres">3</option><option value="cuatro">4</option>
+					<option value="cinco">5</option><option value="etcDia">...</option>
+				</select>
+				<select name="mes">
+					<option selected disabled hidden>Mes</option>
+					<option value="enero">Enero</option><option value="febrero">Febrero</option><option value="marzo">Marzo</option>
+					<option value="abril">Abril</option><option value="etcMes">...</option>
+				</select>
+				<select name="anyo">
+					<option selected disabled hidden>Año</option>
+					<option value="ochonueve">1989</option><option value="nuevecero">1990</option><option value="nueveuno">1991</option>
+					<option value="nuevedos">1992</option><option value="etcAnyo">...</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<legend>¿DE DÓNDE ERES?</legend>
+				<p><label for="ciudad">Ciudad</label></p>
+				<input name="ciudad" id="ciudad" type="text"/>
+				<p><label for="postal">Código postal</label></p>
+				<input name="postal" id="postal" type="text"/>
+				<p><label>País</label></p>
+				<select>
+					<option selected disabled hidden>País</option>
+					<option value="espanya">España</option><option value="dinamarca">Dinamarca</option><option value="irlanda">Irlanda</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<legend>¿CÓMO QUIERES INICIAR SESICÓN?</legend>
+				<p><label for="usuario">Nombre de usuario</label></p>
+				<input id="usuario" type="text"/>
+				<p><label for="pass">Contraseña</label></p>
+				<input id="pass" type="password"/>
+				<p><label for="pass2">Vuelve a escribir la contraseña</label></p>
+				<input id="pass2" type="password"/>
+			</fieldset>
+			<fieldset>
+				<legend>CONDICIONES DE REGISTRO</legend>
+				<div>
+					<p><label>Deseo recibir ofertas de IDESWEB</label></p>
+					<input type="radio" name="frecuencia" value="c1" id="r1"/><label for="r1">Una vez al día</label>
+					<input type="radio" name="frecuencia" value="c2" id="r2"/><label for="r2">Una vez a la semana</label>
+					<input type="radio" name="frecuencia" value="c3" id="r3"/><label for="r3">Una vez al mes</label>
+				</div>
+				<input type="checkbox" name="declaracion" id="declaracionEtiq"/> <label for="declaracionEtiq">Acepto el 
+					acuerdo de servicios, la declaracion de privacidad y la declaración de uso de cookies</label>
+			</fieldset>
+			<input id="boton" type="submit" name="bEnviar" value="Crear cuenta"/>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,18 @@
+BAR;Barcelona
+RMA;Real Madrid
+VAL;Valencia Basket
+GCA;Gran Canaria
+UNI;Unicaja
+BIL;Bilbao Basket
+EST;Estudiantes
+GBC;Guipuzcoa Basket
+MAN;Manresa
+JOV;Joventut
+CAI;CAI Zaragoza
+TEN;Iberostar Tenerife
+BAS;Laboral Kutxa Baskonia
+FUE;Montakit Fuenlabrada
+AND;Morabanc Andorra
+BET;Real Betis
+OBR;Rio Natura Monbus Obradoiro
+MUR;UCAM Murcia

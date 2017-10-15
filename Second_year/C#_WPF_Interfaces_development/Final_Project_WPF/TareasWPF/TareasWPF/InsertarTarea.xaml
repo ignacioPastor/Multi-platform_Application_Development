@@ -1,0 +1,189 @@
+﻿<Window x:Class="TareasWPF.InsertarTarea"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:local="clr-namespace:CapaNegocio;assembly=CapaNegocio"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Title="InsertarTarea" Height="536" Width="1000">
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Margin" Value="5,0,5,0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,2,40,2" />
+
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" Width="20" Height="20" CornerRadius="10"
+                                    ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white">
+                                </TextBlock>
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!--Ponemos también el tooltip en el campo-->
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={RelativeSource Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+    
+    <Grid x:Name="MyGridTareas" Height="501" VerticalAlignment="Top">
+        <Grid.CommandBindings>
+            <CommandBinding Command="New" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed" />
+        </Grid.CommandBindings>
+        
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="54,74,0,0" TextWrapping="Wrap" Text="Nombre Tarea:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="53,108,0,0" TextWrapping="Wrap" Text="Descripción:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="54,147,0,0" TextWrapping="Wrap" Text="Fecha Alta:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="54,181,0,0" TextWrapping="Wrap" Text="Duración:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="23,32,0,0" TextWrapping="Wrap" Text="Datos Tarea" VerticalAlignment="Top" RenderTransformOrigin="0.246,0.338"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="283,181,0,0" TextWrapping="Wrap" Text="(min)" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="357,74,0,0" TextWrapping="Wrap" Text="Tipo Tarea:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="357,107,0,0" TextWrapping="Wrap" Text="Urgente:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="357,147,0,0" TextWrapping="Wrap" Text="Duración real:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="357,180,0,0" TextWrapping="Wrap" Text="Terminada:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="532,145,0,0" TextWrapping="Wrap" Text="(min)" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="627,74,0,0" TextWrapping="Wrap" Text="Aviso:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="627,108,0,0" TextWrapping="Wrap" Text="Cuando Avisar:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock13" HorizontalAlignment="Left" Margin="627,147,0,0" TextWrapping="Wrap" Text="Comentarios:" VerticalAlignment="Top"/>
+        <!--<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="184" Margin="10,48,0,0" VerticalAlignment="Top" Width="962"/>-->
+
+        <TextBox x:Name="tbNombreTarea" HorizontalAlignment="Left" Height="23" Margin="158,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152"
+            Validation.Error="Validation_Error">
+        <TextBox.Text>
+            <Binding Path="Nombre" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                <Binding.ValidationRules>
+                        <local:NotNullValidation/>
+                        <local:StringValidation_Length60/>
+                    </Binding.ValidationRules>
+            </Binding>
+        </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="tbDescripcion" HorizontalAlignment="Left" Height="23" Margin="158,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152"
+            Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="Descripcion" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:StringValidation_Length255/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <wpfTool:DateTimePicker x:Name="dpFechaAlta" HorizontalAlignment="Left" Margin="158,143,0,0" VerticalAlignment="Top" Width="152" Format="Custom" FormatString="dd/MM/yyyy hh:mm"
+            Validation.Error="Validation_Error">
+            <wpfTool:DateTimePicker.Value>
+                <Binding Path="FechaAlta" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:DateValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </wpfTool:DateTimePicker.Value>
+            </wpfTool:DateTimePicker>
+        <TextBox x:Name="tbDuracion" HorizontalAlignment="Left" Height="23" Margin="158,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+            Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="DuracionEstimada" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:NotNullValidation/>
+                        <local:IntegerValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <!--<ComboBox x:Name="cbTipoTarea" HorizontalAlignment="Left" Margin="458,74,0,0" VerticalAlignment="Top" Width="110" SelectedValue="{Binding Path=Tipo, Mode=TwoWay}"/>-->
+        <ComboBox x:Name="cbTipoTarea" HorizontalAlignment="Left" Margin="458,74,0,0" VerticalAlignment="Top" Width="110"
+                  Validation.Error="Validation_Error">
+            <ComboBox.SelectedValue>
+                <Binding Path="Tipo" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:ComboBoxValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </ComboBox.SelectedValue>
+        </ComboBox>
+            <TextBox x:Name="tbDuracionReal" HorizontalAlignment="Left" Height="23" Margin="458,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63"
+            Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="DuracionReal" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:IntegerNullValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <CheckBox x:Name="chbUrgente" IsChecked="{Binding Path=Urgente, Mode=TwoWay}" Content="Sí" HorizontalAlignment="Left"  Margin="458,108,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chbTerminada" IsChecked="{Binding Path=Terminada, Mode=TwoWay }" Content="Sí" HorizontalAlignment="Left" Margin="458,181,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chbAviso" Click="chbAviso_Click" IsChecked="{Binding Path=Aviso, Mode=TwoWay}" Content="Sí" HorizontalAlignment="Left" Margin="735,74,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.647,0.861"/>
+        <wpfTool:DateTimePicker x:Name="dpCUandoAvisar" HorizontalAlignment="Left" Margin="735,104,0,0" VerticalAlignment="Top" Width="160" Format="Custom" FormatString="dd/MM/yyyy hh:mm"
+            Validation.Error="Validation_Error">
+            <wpfTool:DateTimePicker.Value>
+                <Binding Path="CuandoAvisar" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus"/>
+            </wpfTool:DateTimePicker.Value>
+        </wpfTool:DateTimePicker>
+        <TextBox x:Name="tbComentarios" HorizontalAlignment="Left" Height="71" Margin="735,144,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="218"
+            Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="Comentarios" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:StringValidation_Length255/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBlock x:Name="tbNombreUsuario" HorizontalAlignment="Left" Margin="168,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top"
+            Validation.Error="Validation_Error">
+            <TextBlock.Text>
+                <Binding Path="MyUsuario.Nombre" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <!--<local:NotNullValidation/>-->
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBlock.Text>
+        </TextBlock>
+        <TextBlock x:Name="tbApellidosUsuario" HorizontalAlignment="Left" Margin="168,325,0,0" TextWrapping="Wrap" Text="{Binding Path=MyUsuario.Apellidos, Mode=TwoWay}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbIdUsuario" HorizontalAlignment="Left" Margin="413,292,0,0" TextWrapping="Wrap" Text="{Binding Path=MyUsuario.IdUsuario, Mode=OneWay}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDepartamento" HorizontalAlignment="Left" Margin="413,325,0,0" TextWrapping="Wrap" Text="{Binding Path=MyUsuario.Departamento, Mode=TwoWay}" VerticalAlignment="Top"/>
+
+        <TextBlock x:Name="tbDatosUsuario" HorizontalAlignment="Left" Margin="23,259,0,0" TextWrapping="Wrap" Text="Datos Usuario" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="53,292,0,0" TextWrapping="Wrap" Text="Nombre Usuario:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock17" HorizontalAlignment="Left" Margin="53,325,0,0" TextWrapping="Wrap" Text="Apellidos Usuario:" VerticalAlignment="Top"/>
+        <Button x:Name="bSeleccionarUsuario" Click="bSeleccionarUsuario_Click" Content="Seleccionar Usuario" HorizontalAlignment="Left" Margin="209,368,0,0" VerticalAlignment="Top" Width="116"/>
+        <TextBlock x:Name="textBlock16" HorizontalAlignment="Left" Margin="312,292,0,0" TextWrapping="Wrap" Text="Id Usuario:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock18" HorizontalAlignment="Left" Margin="312,325,0,0" TextWrapping="Wrap" Text="Departamento:" VerticalAlignment="Top"/>
+        <Border x:Name="bUsuario" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="129" Margin="10,280,0,0" VerticalAlignment="Top" Width="558"/>
+
+        <TextBlock x:Name="tbDatosProyecto" HorizontalAlignment="Left" Margin="598,259,0,0" TextWrapping="Wrap" Text="Datos Proyecto" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock20" HorizontalAlignment="Left" Margin="627,292,0,0" TextWrapping="Wrap" Text="Nombre Proyecto:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock21" HorizontalAlignment="Left" Margin="627,328,0,0" TextWrapping="Wrap" Text="Descripción:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbNombreProyecto" HorizontalAlignment="Left" Margin="735,292,0,0" TextWrapping="Wrap" Text="{Binding Path=MyProyecto.Nombre, Mode=TwoWay}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbDescripcionProyecto" HorizontalAlignment="Left" Margin="735,328,0,0" TextWrapping="Wrap" Text="{Binding Path=MyProyecto.Descripcion, Mode=TwoWay}" VerticalAlignment="Top"/>
+        <Button x:Name="bSeleccionarProyecto" Click="bSeleccionarProyecto_Click" Content="Seleccionar Proyecto" HorizontalAlignment="Left" Margin="740,368,0,0" VerticalAlignment="Top" Width="123"/>
+        <Border x:Name="bProyecto" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="129" Margin="584,280,0,0" VerticalAlignment="Top" Width="388"/>
+
+        <Button x:Name="bEnviar" Content="Enviar" HorizontalAlignment="Left" Margin="788,465,0,0" VerticalAlignment="Top" Width="75" Command="New"/>
+        <TextBlock x:Name="tbErrorUsuario" HorizontalAlignment="Left" Margin="102,253,0,0" TextWrapping="Wrap" Text="!" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbErrorProyecto" HorizontalAlignment="Left" Margin="684,253,0,0" TextWrapping="Wrap" Text="!" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbErrorComboTipo" HorizontalAlignment="Left" Margin="573,69,0,0" TextWrapping="Wrap" Text="!" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

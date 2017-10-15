@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="214.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my3counter.FXMLDocumentController">
+   <children>
+      <Button fx:id="b110" mnemonicParsing="false" onAction="#onAction_B110" text="From 1 to 10" />
+      <Label id="l110" fx:id="l110" text="-" />
+      <Button id="b15" fx:id="b15" mnemonicParsing="false" onAction="#onAction_B15" text="From 1 to 5" />
+      <Label id="l15" fx:id="l15" text="-" />
+      <Button id="b101" fx:id="b101" mnemonicParsing="false" onAction="#onAction_B101" text="From 10 to 1" />
+      <Label id="l101" fx:id="l101" text="-" />
+   </children>
+</VBox>

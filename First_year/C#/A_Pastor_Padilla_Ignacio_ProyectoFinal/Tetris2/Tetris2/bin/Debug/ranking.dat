@@ -1,0 +1,42 @@
+<SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<SOAP-ENV:Body>
+<SOAP-ENC:Array SOAP-ENC:arrayType="a1:Ranking[6]" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Tetris2/Tetris2%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<item href="#ref-3"/>
+<item href="#ref-4"/>
+<item href="#ref-5"/>
+<item href="#ref-6"/>
+<item href="#ref-7"/>
+<item href="#ref-8"/>
+</SOAP-ENC:Array>
+<a1:Ranking id="ref-3" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Tetris2/Tetris2%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<nombre id="ref-9">IgHartoDeTetris</nombre>
+<puntuacion>47</puntuacion>
+<fecha>2016-06-21T10:22:45.1003947+02:00</fecha>
+</a1:Ranking>
+<a1:Ranking id="ref-4" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Tetris2/Tetris2%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<nombre id="ref-10">Friesgo</nombre>
+<puntuacion>40</puntuacion>
+<fecha>2016-06-21T10:00:19.1721683+02:00</fecha>
+</a1:Ranking>
+<a1:Ranking id="ref-5" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Tetris2/Tetris2%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<nombre id="ref-11">IgnacioFinal</nombre>
+<puntuacion>21</puntuacion>
+<fecha>2016-06-20T22:28:35.2623373+02:00</fecha>
+</a1:Ranking>
+<a1:Ranking id="ref-6" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Tetris2/Tetris2%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<nombre id="ref-12">Ignacio2</nombre>
+<puntuacion>11</puntuacion>
+<fecha>2016-06-20T22:13:49.2823648+02:00</fecha>
+</a1:Ranking>
+<a1:Ranking id="ref-7" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Tetris2/Tetris2%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<nombre id="ref-13">Vacío</nombre>
+<puntuacion>0</puntuacion>
+<fecha>0001-01-01T00:00:00.0000000+01:00</fecha>
+</a1:Ranking>
+<a1:Ranking id="ref-8" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Tetris2/Tetris2%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
+<nombre id="ref-14">ga</nombre>
+<puntuacion>0</puntuacion>
+<fecha>2016-06-22T19:11:12.1163064+02:00</fecha>
+</a1:Ranking>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

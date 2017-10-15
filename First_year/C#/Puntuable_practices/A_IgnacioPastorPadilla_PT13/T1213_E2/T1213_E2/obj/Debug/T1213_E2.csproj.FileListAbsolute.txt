@@ -1,0 +1,12 @@
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\T1213_E2\T1213_E2\bin\Debug\T1213_E2.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\T1213_E2\T1213_E2\bin\Debug\T1213_E2.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\T1213_E2\T1213_E2\bin\Debug\T1213_E2.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\T1213_E2\T1213_E2\obj\Debug\T1213_E2.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\T1213_E2\T1213_E2\obj\Debug\T1213_E2.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\Ejercicios_propuestos\T1213_E2\T1213_E2\obj\Debug\T1213_E2.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\A_IgnacioPastorPadilla_PT13\T1213_E2\T1213_E2\bin\Debug\T1213_E2.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\A_IgnacioPastorPadilla_PT13\T1213_E2\T1213_E2\obj\Debug\T1213_E2.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\A_IgnacioPastorPadilla_PT13\T1213_E2\T1213_E2\obj\Debug\T1213_E2.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\A_IgnacioPastorPadilla_PT13\T1213_E2\T1213_E2\bin\Debug\T1213_E2.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\A_IgnacioPastorPadilla_PT13\T1213_E2\T1213_E2\bin\Debug\T1213_E2.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_13\A_IgnacioPastorPadilla_PT13\T1213_E2\T1213_E2\obj\Debug\T1213_E2.csprojResolveAssemblyReference.cache

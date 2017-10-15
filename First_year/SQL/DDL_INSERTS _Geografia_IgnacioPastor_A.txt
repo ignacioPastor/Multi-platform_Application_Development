@@ -1,0 +1,1203 @@
+-- Geografia Española_Ignacio_Pastor_A
+
+--DDL
+
+/*  Así sería con las constraint, pero para poder cargar los datos
+se necesita que no haya fk, por lo que las cargaré al final. Esto es
+así porque todas las tablas se cruzan, y al cargar datos en la primera
+ya se necesitan datos de las demás
+
+create table localidades(
+	id_localidad number(5) not null,
+	nombre varchar2(50),
+	poblacion number(8),
+	n_provincia number(2),
+constraint pk_localidades primary key (id_localidad),
+constraint fk_localidades_provincias foreign key (n_provincia)
+	references provincias (n_provincia)
+);
+
+create table comunidades(
+	id_comunidad number(2) not null,
+	nombre varchar2(50),
+	id_capital number(5) not null,
+constraint pk_comunidades primary key (id_comunidad),
+constraint uk_comunidades_nomb unique (nombre),
+constraint uk_comunidades_capi unique (id_capital),
+constraint fk_comunidades_localidades foreign key (id_capital)
+	references localidades (id_localidad)
+);
+
+create table provincias(
+	n_provincia number(2) not null,
+	nombre varchar2(25) not null,
+	superficie number(5),
+	id_capital number(5) not null,
+	id_comunidad number(2),
+constraint pk_provincias primary key (n_provincia),
+constraint uk_provincias_nombre unique (nombre),
+constraint uk_provincias_capi unique (id_capital),
+constraint fk_provincias_localidades foreign key (id_capital)
+	references localidades (id_localidad),
+constraint fk_provincias_comunidades foreign key (id_comunidad)
+	references comunidades (id_comunidad)
+);
+*/
+
+-- TABLAS PARA CARGAR LOS DATOS CORRECTAMENTE
+--(sin fk, las cuales se añaden al final de las inserts)
+
+create table localidades(
+	id_localidad number(5) not null,
+	nombre varchar2(50),
+	poblacion number(8),
+	n_provincia number(2),
+constraint pk_localidades primary key (id_localidad)
+);
+
+create table comunidades(
+	id_comunidad number(2) not null,
+	nombre varchar2(50),
+	id_capital number(5) not null,
+constraint pk_comunidades primary key (id_comunidad),
+constraint uk_comunidades_nomb unique (nombre),
+constraint uk_comunidades_capi unique (id_capital)
+);
+
+create table provincias(
+	n_provincia number(2) not null,
+	nombre varchar2(25) not null,
+	superficie number(5),
+	id_capital number(5) not null,
+	id_comunidad number(2),
+constraint pk_provincias primary key (n_provincia),
+constraint uk_provincias_nombre unique (nombre),
+constraint uk_provincias_capi unique (id_capital)
+);
+
+-- INSERTS. COMUNIDADES, PROVINCIAS, DOS LOCALIDADES Y SUPERFICIE INVENTADA
+
+--COMUNIDADES-----------------------------------------------------------------------------
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(01, 'Andalucía', 41091);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(02, 'Aragón', 50297);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(03, 'Asturias, Principado de', 33044);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(04, 'Baleares, Islas', 07040);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(05, 'Canarias', 35016);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(06, 'Cantabria', 39075);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(07, 'Castilla y León', 47186);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(08, 'Castilla - La Mancha', 45168);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(09, 'Cataluña', 08019);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(10, 'Comunitat Valenciana', 46250);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(11, 'Extremadura', 06083);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(12, 'Galicia', 15078);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(13, 'Madrid, Comunidad de', 28079);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(14, 'Murcia, Región de', 30030);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(15, 'Navarra, Comunidad Foral de', 31201);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(16, 'País Vasco', 01059);
+
+insert into comunidades
+(id_comunidad, nombre, id_capital)
+values
+(17, 'Rioja, La', 26089);
+
+
+--PROVINCIAS--------------------------------------------------------------------------------------
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(01, 'Álava', 3037, 01059, 16);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(02, 'Albacete', 14926, 02003, 08);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(03, 'Alicante', 5817, 03014, 10);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(04, 'Almería', 8775, 04013, 01);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(05, 'Ávila', 8050, 05019, 07);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(06, 'Badajoz', 21766, 06015, 11);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(07, 'Balears, Illes', 4991, 07040, 04);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(08, 'Barcelona', 7733, 08019, 09);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(09, 'Burgos', 14022, 09059, 07);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(10, 'Cáceres', 19868, 10037, 11);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(11, 'Cádiz', 7440, 11012, 01);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(12, 'Castellón', 6636, 12040, 10);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(13, 'Ciudad Real', 19813, 13034, 08);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(14, 'Córdoba', 13771, 14021, 01);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(15, 'Coruña, A', 7950, 15030, 12);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(16, 'Cuenca', 17140, 16078, 08);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(17, 'Girona', 5909, 17079, 09);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(18, 'Granada', 12646, 18087, 01);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(19, 'Guadalajara', 12214, 19130, 08);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(20, 'Gipuzkoa', 1997, 20069, 16);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(21, 'Huelva', 10127, 21041, 01);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(22, 'Huesca', 15636, 22125, 02);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(23, 'Jaén', 13496, 23050, 01);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(24, 'León', 15580, 24089, 07);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(25, 'Lleida', 12172, 25120, 09);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(26, 'Rioja, La', 5045, 26089, 17);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(27, 'Lugo', 9856, 27028, 12);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(28, 'Madrid', 8027, 28079, 13);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(29, 'Málaga', 7306, 29067, 01);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(30, 'Murcia', 11313, 30030, 14);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(31, 'Navarra', 10391, 31201, 15);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(32, 'Ourense', 7273, 32054, 12);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(33, 'Asturias', 10603, 33044, 03);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(34, 'Palencia', 8052, 34120, 07);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(35, 'Palmas, Las', 4065, 35016, 05);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(36, 'Pontevedra', 4494, 36038, 12);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(37, 'Salamanca', 12349, 37274, 07);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(38, 'Santa Cruz de Tenerife', 3381, 38038, 05);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(39, 'Cantabria', 5321, 39075, 06);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(40, 'Segovia', 6920, 40194, 07);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(41, 'Sevilla', 14036, 41091, 01);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(42, 'Soria', 10306, 42173, 07);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(43, 'Tarragona', 6302, 43148, 09);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(44, 'Teruel', 14809, 44216, 02);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(45, 'Toledo', 15369, 45168, 09);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(46, 'Valencia', 10807, 46250, 10);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(47, 'Valladolid', 8110, 47186, 07);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(48, 'Bizkaia', 2217, 48020, 16);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(49, 'Zamora', 10561, 49275, 07);
+
+insert into provincias
+(n_provincia, nombre, superficie, id_capital, id_comunidad)
+values
+(50, 'Zaragoza', 17274, 50297, 02);
+
+
+--LOCALIDADES------------------------------------------------------------------------------------
+
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(01006, 'Armiñón', 244, 01);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(01901, 'Iruña de Ocaña', 3172, 01);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(01059, 'Vitoria', 243918, 01);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(02001, 'Abengibre', 782, 02);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(02009, 'Almansa', 24837, 02);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(02003, 'Albacete', 172121, 02);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(03122, 'San Vicente del Raspeig', 54531, 03);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(03132, 'Torremanzanas', 802, 03);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(03014, 'Alicante', 328648, 03);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(04044, 'Fines', 2203, 04);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(04086, 'Sorbas', 2689, 04);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(04013, 'Almería', 194203, 04);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(05034, 'Blasconuño de Matacabras', 16, 05);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(05041, 'Burgohondo', 1241, 05);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(05019, 'Ávila', 58358, 05);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(06010, 'Almendral', 1312, 06);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(06081, 'Medina de las Torres', 1287, 06);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(06015, 'Badajoz', 149892, 06);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(06083, 'Mérida', 58971, 06);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(07013, 'Campos', 8759, 07);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(07029, 'Lloseta', 5493, 07);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(07040, 'Palma', 400578, 07);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(08080, 'Fígols', 49, 08);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(08100, 'Gurb', 2344, 08);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(08019, 'Barcelona', 1604555, 08);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(09124, 'Espinosa de los Monteros', 2106, 09);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(09381, 'Tinieblas de la Sierra', 40, 09);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(09059, 'Burgos', 177100, 09);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(10039, 'Cadalso', 483, 10);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(10155, 'Riolobos', 1310, 10);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(10037, 'Cáceres', 95617, 10);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(11022, 'La Línea de la Concepción', 64704, 11);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(11027, 'El Puerto de Santa María', 88068, 11);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(11012, 'Cádiz', 120468, 11);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(12084, 'Onda', 25362, 12);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(12113, 'Toga', 118, 12);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(12040, 'Castellón de la Plana', 171669, 12);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(13007, 'Alcolea de Calatrava', 1513, 13);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(13039, 'Daimiel', 18647, 13);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(13034, 'Ciudad Real', 74427, 13);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(14064, 'Valsequillo', 405, 14);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(14015, 'Carcabuey', 2738, 14);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(14021, 'Córdoba', 327362, 14);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(15054, 'Narón', 38285, 15);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(15093, 'Zas', 5295, 15);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(15030, 'Coruña, A', 243870, 15);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(15078, 'Santiago de Compostela', 95612, 15);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(16027, 'Barajas de Melo', 935, 16);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(16102, 'Honrubia', 1650, 16);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(16078, 'Cuenca', 55428, 16);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(17032, 'Cadaqués', 2806, 17);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(17039, 'Camprodon', 2516, 17);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(17079, 'Girona', 97586, 17);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(18140, 'Motril', 60870, 18);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(18158, 'Pinos Puente', 10718, 18);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(18087, 'Granada', 235800, 18);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(19013, 'Alcoroches', 159, 19);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(19021, 'Almoguera', 1422, 19);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(19130, 'Guadalajara', 83391, 19);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(20903, 'Astigarraga', 4999, 20);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(20042, 'Ibarra', 4269, 20);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(20069, 'San Sebastián', 186095, 20);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(21031, 'Encinasola', 1582, 21);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(21079, 'Zufre', 940, 21);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(21041, 'Huelva', 146318, 21);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(22054, 'Benasque', 2149, 22);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(22084, 'Castejón de Sos', 733, 22);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(22125, 'Huesca', 52239, 22);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(23017, 'Cabra del Santo Cristo', 1968, 23);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(23006, 'Arjona', 5732, 23);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(23050, 'Jaén', 115395, 23);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(24008, 'Astorga', 11633, 24);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(24170, 'Torre del Bierzo', 2352, 24);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(24089, 'León', 127817, 24);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(25014, 'Alfés', 329, 25);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(25055, 'Biosca', 228, 25);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(25120, 'Lleida', 138542, 25);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(26031, 'Bobadilla', 128, 26);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(26095, 'Matute', 146, 26);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(26089, 'Logroño', 313615, 26);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(27011, 'Castroverde', 3148, 27);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(27046, 'Pol', 1913, 27);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(27028, 'Lugo', 98134, 27);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(28010, 'Alpedrete', 14005, 28);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(28113, 'Pinto', 47594, 28);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(28079, 'Madrid', 3141991, 28);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(29007, 'Alhaurín de la Torre', 38067, 29);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(29048, 'Cuevas del Becerro', 1704, 29);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(29067, 'Málaga', 569130, 29);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(30013, 'Calasparra', 10661, 30);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(30031, 'Ojós', 562, 30);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(30030, 'Murcia', 439889, 30);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(31007, 'Adiós', 183, 31);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(31184, 'Oco', 66, 31);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(31201, 'Pamplona', 195853, 31);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(32020, 'Cartelle', 3773, 32);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(32046, 'Melón', 1533, 32);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(32054, 'Ourense', 106231, 32);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(33050, 'Ponga', 655, 33);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(33012, 'Cangas de Onís', 6498, 33);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(33044, 'Oviedo', 221870, 33);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(34182, 'Torquemada', 1059, 34);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(34242, 'Villodrigo', 135, 34);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(34120, 'Palencia', 79595, 34);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(35007, 'Betancuria', 713, 35);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(35011, 'Ingenio', 30258, 35);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(35016, 'Palmas de Gran Canaria, Las', 379766, 35);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(36024, 'Lalín', 21127, 36);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(36033, 'Mos', 14942, 36);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(36038, 'Pontevedra', 82539, 36);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(37002, 'Agallas', 157, 37);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(37015, 'Aldea del Obispo', 333, 37);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(37274, 'Salamanca', 146438, 37);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(38015, 'Garachico', 5086, 38);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(38017, 'Granadilla de Abona', 43608, 38);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(38038, 'Santa Cruz de Tenerife', 203811, 38);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(39008, 'El Astillero', 18282, 39);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(39028, 'Entrambasaguas', 3795, 39);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(39075, 'Santander', 173957, 39);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(40017, 'Anaya', 136, 40);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(40057, 'Coca', 2063, 40);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(40194, 'Segovia', 52728, 40);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(41030, 'Castilleja del Campo', 653, 41);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(41072, 'Pedrera', 5339, 41);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(41091, 'Sevilla', 693878, 41);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(42023, 'Alpanseque', 84, 42);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(42078, 'Duruelo de la Sierra', 1322, 42);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(42173, 'Soria', 39168, 42);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(43123, 'Reus', 104835, 43);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(43032, 'Bot', 727, 43);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(43148, 'Tarragona', 131255, 43);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(44075, 'Celadas', 406, 44);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(44238, 'Utrillas', 3238, 44);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(44216, 'Teruel', 35590, 44);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(45143, 'Quismondo', 1594, 45);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(45145, 'Recas', 4246, 45);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(45168, 'Toledo', 83226, 45);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(46249, 'Utiel', 12053, 46);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(46195, 'Piles', 2664, 46);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(46250, 'Valencia', 786189, 46);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(47020, 'Bobadilla del Campo', 313, 47);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(47085, 'Medina del Campo', 21556, 47);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(47186, 'Valladolid', 303905, 47);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(48901, 'Derio', 5940, 48);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(48906, 'Forua', 956, 48);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(48020, 'Bilbao', 345141, 48);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(49009, 'Andavías', 447, 49);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(49150, 'Peque', 175, 49);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(49275, 'Zamora', 63831, 49);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(50053, 'Boquiñeni', 923, 50);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(50902, 'Marracos', 104, 50);
+
+insert into localidades
+(id_localidad, nombre, poblacion, n_provincia)
+values
+(50297, 'Zaragoza', 664953, 50);
+
+
+----------------------------------------------------------------------------------------------
+--INTRODUCIMOS LAS FK
+
+alter table comunidades add
+constraint fk_comunidades_localidades foreign key (id_capital)
+	references localidades (id_localidad);
+
+alter table localidades add
+constraint fk_localidades_provincias foreign key (n_provincia)
+	references provincias (n_provincia);
+
+alter table provincias add
+constraint fk_provincias_localidades foreign key (id_capital)
+	references localidades (id_localidad);
+
+alter table provincias add
+constraint fk_provincias_comunidades foreign key (id_comunidad)
+	references comunidades (id_comunidad);
+

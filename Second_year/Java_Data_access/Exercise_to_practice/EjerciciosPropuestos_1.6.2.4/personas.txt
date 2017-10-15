@@ -1,0 +1,6 @@
+"nombre","e-mail","edad"
+"Francisco Garcia","f.garcia@gmail.com",23
+"Ernesto Fuentes","r.fuentes@gmail.com",17
+"Maria Fernandez","m.fernandez@gmail.com",28
+"Carlos Ramirez","c.ramirez@gmail.com",25
+"Carlota Martinez","c.martinez@gmail.com",24

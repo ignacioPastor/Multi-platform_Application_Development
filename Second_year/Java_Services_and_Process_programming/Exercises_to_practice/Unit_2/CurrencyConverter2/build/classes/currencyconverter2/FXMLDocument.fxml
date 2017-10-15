@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="97.0" prefWidth="207.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="currencyconverter2.FXMLDocumentController">
+   <top>
+      <MenuBar id="Currency" fx:id="mCurrency" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Currency">
+            <items>
+                <RadioMenuItem fx:id="eu" mnemonicParsing="false" selected="true" text="EUR &gt; USD">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="tg" />
+                    </toggleGroup>
+                </RadioMenuItem>
+                <RadioMenuItem fx:id="eg" mnemonicParsing="false" text="EUR &gt; GBP" toggleGroup="$tg" />
+                <RadioMenuItem fx:id="ue" mnemonicParsing="false" text="USD &gt; EUR" toggleGroup="$tg" />
+                <RadioMenuItem fx:id="ug" mnemonicParsing="false" text="USD &gt; GBP" toggleGroup="$tg" />
+                <RadioMenuItem fx:id="ge" mnemonicParsing="false" text="GBP &gt; EUR" toggleGroup="$tg" />
+                <RadioMenuItem fx:id="gu" mnemonicParsing="false" text="GBP &gt; USD" toggleGroup="$tg" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TextField fx:id="textUsuario" onKeyReleased="#onKeyReleased_User" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <Label fx:id="labelResultado" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

@@ -1,0 +1,6 @@
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\Ejercicios_propuestos\Ejercicio_9_3_1b\Ejercicio_9_3_1b\bin\Debug\Ejercicio_9_3_1b.exe.config
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\Ejercicios_propuestos\Ejercicio_9_3_1b\Ejercicio_9_3_1b\bin\Debug\Ejercicio_9_3_1b.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\Ejercicios_propuestos\Ejercicio_9_3_1b\Ejercicio_9_3_1b\bin\Debug\Ejercicio_9_3_1b.pdb
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\Ejercicios_propuestos\Ejercicio_9_3_1b\Ejercicio_9_3_1b\obj\Debug\Ejercicio_9_3_1b.csprojResolveAssemblyReference.cache
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\Ejercicios_propuestos\Ejercicio_9_3_1b\Ejercicio_9_3_1b\obj\Debug\Ejercicio_9_3_1b.exe
+C:\Users\Ignacio\Desktop\DAM\Programacion\tema_09\Ejercicios_propuestos\Ejercicio_9_3_1b\Ejercicio_9_3_1b\obj\Debug\Ejercicio_9_3_1b.pdb
